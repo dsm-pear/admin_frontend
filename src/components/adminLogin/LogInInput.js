@@ -7,12 +7,6 @@ const Input = (props) => {
     return (
         <div style={{display: "flex"}} >
             <S.Input placeholder={ text } type={ type }/>
-            <img
-                src={ Check }
-                width="26px"
-                height="26px"
-                alt="check"
-            />
         </div>
     )
 }
