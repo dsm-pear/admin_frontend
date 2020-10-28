@@ -1,0 +1,1 @@
+export { default as LogInImg } from './logInImg.svg';
