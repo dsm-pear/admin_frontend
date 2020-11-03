@@ -12,40 +12,40 @@ const Question = () => {
                 <S.Scontents>
                     <div>
                         <Line 
-                            title = "문의사항 드립니다"
-                            date = "2020.10.28"
-                            email = "rlagPwns@rlagPwns"
-                            contents = "그냥 드려봤어요"
+                            title="문의사항 드립니다"
+                            date="2020.10.28"
+                            email="rlagPwns@rlagPwns"
+                            contents="그냥 드려봤어요"
                         />
                         <Line 
-                            title = "문의사항 드립니다"
-                            date = "2020.10.28"
-                            email = "rlagPwns@rlagPwns"
-                            contents = "그냥 드려봤어요"
+                            title="문의사항 드립니다"
+                            date="2020.10.28"
+                            email="rlagPwns@rlagPwns"
+                            contents="그냥 드려봤어요"
                         />
                         <Line 
-                            title = "문의사항 드립니다"
-                            date = "2020.10.28"
-                            email = "rlagPwns@rlagPwns"
-                            contents = "그냥 드려봤어요"
+                            title="문의사항 드립니다"
+                            date="2020.10.28"
+                            email="rlagPwns@rlagPwns"
+                            contents="그냥 드려봤어요"
                         />
                         <Line 
-                            title = "문의사항 드립니다"
-                            date = "2020.10.28"
-                            email = "rlagPwns@rlagPwns"
-                            contents = "그냥 드려봤어요"
+                            title="문의사항 드립니다"
+                            date="2020.10.28"
+                            email="rlagPwns@rlagPwns"
+                            contents="그냥 드려봤어요"
                         />
                         <Line 
-                            title = "문의사항 드립니다"
-                            date = "2020.10.28"
-                            email = "rlagPwns@rlagPwns"
-                            contents = "그냥 드려봤어요"
+                            title="문의사항 드립니다"
+                            date="2020.10.28"
+                            email="rlagPwns@rlagPwns"
+                            contents="그냥 드려봤어요"
                         />
                         <Line 
-                            title = "문의사항 드립니다"
-                            date = "2020.10.28"
-                            email = "rlagPwns@rlagPwns"
-                            contents = "그냥 드려봤어요"
+                            title="문의사항 드립니다"
+                            date="2020.10.28"
+                            email="rlagPwns@rlagPwns"
+                            contents="그냥 드려봤어요"
                         />
                     </div>
                     <S.More>더보기</S.More>
