@@ -2,8 +2,7 @@ import React, {useState, } from 'react';
 import * as S from './style';
 import { Share } from '../../assets';
 
-const Line = (props) => {
-    const { title, contents, date, email } = props;
+const Line = ({ title, contents, date, email }) => {
     const [ isOpened, setIsOpened ] = useState(false)
     const handleClick = () => {
         setIsOpened(!isOpened);
