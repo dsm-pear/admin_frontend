@@ -60,7 +60,6 @@ export const LineBox = style.div `
     display: flex;
     margin: 0 auto;
     margin-top: 15px;
-    position: relative;
     z-index: 1;
     & > img {
         width: 24px;
@@ -72,13 +71,16 @@ export const LineBox = style.div `
 export const Qtitle = style.div `
     font-size: 13px;
     cursor: default;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;
 export const QDate = style.div `
     font-size: 12px;
     letter-spacing: 1.8px;
     cursor: default;
-    position: absolute;
-    right: 38px;
+    margin-left: 10px;
 `;
 export const BQBox = style.div `
     width: 706px;
