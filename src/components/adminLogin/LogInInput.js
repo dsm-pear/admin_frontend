@@ -1,8 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-const Input = (props) => {
-    const { text, type } = props;
+const Input = ({ text, type }) => {
     return (
         <div style={{display: "flex"}} >
             <S.Input placeholder={ text } type={ type }/>
