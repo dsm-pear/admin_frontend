@@ -7,7 +7,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path='/admin' component={AdminRouter} />
+          <Route path='/' component={ AdminRouter } />
         </Switch>
       </Router>
     </>
