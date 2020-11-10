@@ -5,7 +5,8 @@ export const Flex = style.div `
     margin-left: 6%
 `;
 export const Size = style.div `
-    width: 752px;
+    width: 52.22vw;
+    min-width: 752px;
     height: 56px;
     background-color: white;
     display: flex;
@@ -22,7 +23,7 @@ export const Pear = style.div `
     & > span {
         font-weight: bold;
     }
-    margin-right: 6.5%;
+    margin-right: 7%;
 `;
 export const Circle = style.div `
     width: 146px;
