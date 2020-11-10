@@ -49,7 +49,6 @@ const Question = () => {
                             contents="그냥 드려봤어요"
                         />
                     </div>
-                    <S.More>더보기</S.More>
                 </S.Scontents>
             </S.Contents>
         </S.Background>
