@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as S from './style';
 import Header from '../header/Header';
-import { Upload, Img, Link } from '../../assets';
+import { Upload, Img, LinkImg } from '../../assets';
 
 const NoticeWirte = () => {
     return (
@@ -11,16 +12,16 @@ const NoticeWirte = () => {
                 <div>
                     <S.Notice>공지사항</S.Notice>
                     <S.LWrite>쓰기 /</S.LWrite>
-                    <S.LWatch>보기</S.LWatch>
+                    <Link to='/notice'><S.LWatch>보기</S.LWatch></Link>
                 </div>
                 <div>
-                    <S.Title placeholder="제목을 입력해주세요." />
+                    <S.Title placeholder="제목을 입력해주세요."/>
                     <S.ContentsBox>
                         <div>
                             <S.ContentsTitle>내용입력</S.ContentsTitle>
                             <div>
                                 <S.Add>
-                                    <img  src={ Link } alt="파일첨부"/>
+                                    <img  src={ LinkImg } alt="파일첨부"/>
                                     파일첨부
                                 </S.Add>
                                 <S.Add>

@@ -11,7 +11,7 @@ export const Background = style.div `
     position: relative;
     overflow: hidden;
     min-width: 1280px;
-    & > div:first-child {
+    > div:first-child {
         margin-top: 28px;
         margin-bottom: 25px;
     }
@@ -25,24 +25,37 @@ export const WhiteBox = style.div `
     margin: 0 auto;
     box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.16);
     border: 1px solid #858585;
-    & > div:first-child {
+    > div:first-child {
         display: flex;
         margin: 46px 0 23px 63px;
     }
-    & > div:last-child {
+    > div:last-child {
         width: 75.26vw;
         min-width: 1084px;
         margin-left: 73px;
     }
 `;
 export const LWhiteBox = style(WhiteBox)`
-    & > div:last-child {
+    > div:first-child {
+        display: flex;
+        margin: 5.60vh 0 23px 7.67vh;
+    }
+    > div:nth-child(2) {
         width: 75.27vw;
         margin-left: 73px;
-        & > ul {
+        > ul {
             margin-top: 18px;
             margin-left: -34px;
         }
+    }
+    > div:last-child {
+        width: 19.51vw;
+        min-width: 281px;
+        height: 19px;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        margin-top: 3%;
     }
 `;
 export const LWrite = style.div `
@@ -56,6 +69,7 @@ export const LWatch = style.div `
     margin-left: 10px;
     margin-top: 10px;
     cursor: pointer;
+    color: black;
 `;
 export const Title = style.input `
     width: 100%;
@@ -73,12 +87,12 @@ export const ContentsBox = style.div `
     height: 465px;
     background-color: white;
     border: 1px solid #858585;
-    & > div:first-child {
+    > div:first-child {
         display: flex;
         margin: 23px 0 23px 27px;
         justify-content: space-between;
     }
-    & div:first-child > div:last-child {
+    > div:first-child > div:last-child {
         display: flex;
         margin-right: 20px;
     }
@@ -107,7 +121,7 @@ export const Add = style.div `
     display: flex;
     align-items: center;
     justify-content: center;
-    & > img {
+    > img {
         margin-right: 2px;
         width: 15px;
         height: 14px;
@@ -116,16 +130,16 @@ export const Add = style.div `
 export const Upload = style.div `
     width: 109px;
     height: 33px;
-    background-color: #DCDCE3;
+    background-color: #1919B1;
     float: right;
-    clear: both;
+    color: white;
     margin: 10px 20px 0 0;
     font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    & > img {
+    > img {
         margin-right: 10px;
     }
 `;
@@ -139,6 +153,7 @@ export const Write = style.div `
     font-size: 22px;
     cursor: pointer;
     margin-top: 10px;
+    color: black;
 `;
 export const Watch = style.div `
     font-size: 30px;
@@ -159,29 +174,51 @@ export const NoticeTitle = style.div `
     background: linear-gradient(#592dd6, #716dec);
     display: flex;
     align-items: center;
-    & > div:first-child {
+    > div:first-child {
         color: white;
         font-size: 19px;
         font-weight: bold;
         margin-left: 32px;
         width: 85%;
     }
-    & > div:last-child {
+    > div:last-child {
         color: white;
         font-size: 14px;
         margin-right: 75px;
         width: 39px;
     }
 `;
+export const Count = style.div `
+    width: 14.44px;
+    min-width: 208px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    cursor: pointer;
+    > div:first-child {
+        font-size: 18px;
+        font-weight: bold;
+    }
+`;
+export const Turn = style.span `
+    height: 100%;
+    font-size: 15px;
+    margin: 0 32px;
+    cursor: pointer;
+`;
 /* Line */
 export const Line = style.li `
     width: 75.27vw;
     min-width: 1084px;
-    height: 44px;
+    height: 5.35vh;
+    min-height: 44px;
     border-bottom: 1px solid #707070;
     display: flex;
     align-items: center;
     cursor: pointer;
+    color: black;
 `;
 export const LineTitle = style.div `
     font-size: 14px;
@@ -190,4 +227,4 @@ export const LineTitle = style.div `
 `;
 export const LineDate = style.div `
     font-size: 11px;
-`
+`;
