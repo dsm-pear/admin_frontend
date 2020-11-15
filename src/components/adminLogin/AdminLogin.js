@@ -13,12 +13,12 @@ const AdminLogin = () => {
                     </S.Img>
                     <S.Inputs>
                         <Input
-                            text = "아이디를 입력하시오"
-                            type = "text"
+                            text="아이디를 입력하시오"
+                            type="text"
                         />
                         <Input 
-                            text = "비밀번호를 입력하시오"
-                            type = "password"
+                            text="비밀번호를 입력하시오"
+                            type="password"
                         />
                     </S.Inputs>
                     <S.LogInButton>LOGIN</S.LogInButton>
