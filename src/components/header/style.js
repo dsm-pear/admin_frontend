@@ -20,7 +20,9 @@ export const Category = style.div `
     &:hover {
         color: #1919B1;
     }
-    color: ${({boolean}) => boolean ? '#1919B1' : 'black'};
+    > a {
+        color: black;
+    }
 `;
 export const Pear = style.div `
     font-size: 22px;
