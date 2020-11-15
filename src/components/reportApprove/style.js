@@ -10,7 +10,7 @@ export const Background = style.div `
     position: relative;
     overflow: hidden;
     min-width: 1280px;
-    & > div:first-child {
+    > div:first-child {
         margin-top: 28px;
         margin-bottom: 25px;
     }
@@ -46,15 +46,12 @@ export const SmallBox = style.div `
     margin: 15px 0 0 97px;
     box-sizing: border-box;
     padding-top: 30px;
-    & > div:first-child {
+    > div:first-child {
         width: 73vw;
         min-width: 1028px;
         margin: 0 0 71px 30px;
         height: 52.61vh;
         overflow: auto;
-        &::-webkit-scrollbar-thumb {
-            background-color: rgba(83, 83, 225, 0.23);
-        }
     }
 `;
 
@@ -71,10 +68,10 @@ export const ReportLine = style.div `
     margin-bottom: 15px;
     align-items: center;
     cursor: pointer;
-    & > div:first-child {
+    > div:first-child {
         margin-left: 42px;
     }
-    & > div:nth-child(2) {
+    > div:nth-child(2) {
         margin-left: 38px;
     }
 `;
@@ -82,4 +79,5 @@ export const Note = style.div `
     font-size: 13px;
     margin-right: 12px;
     letter-spacing: 3px;
+    color: black;
 `;
