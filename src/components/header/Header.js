@@ -10,22 +10,22 @@ const Header = () => {
             </S.Pear>
             <S.Size>
                 <S.Category>
-                    <NavLink to='/approve' activeStyle={{color: '#1919B1'}}>
+                    <NavLink to='/approve' activeClassName='color'>
                         보고서 승인
                     </NavLink>
                 </S.Category>
                 <S.Category>
-                    <NavLink to='/report' activeStyle={{color: '#1919B1'}}>
+                    <NavLink to='/report' activeClassName='color'>
                         보고서 보기
                     </NavLink>
                 </S.Category>
                 <S.Category>
-                    <NavLink to='/notice-write' activeStyle={{color: '#1919B1'}}>
+                    <NavLink to='/notice-write' activeClassName='color'>
                         공지사항
                     </NavLink>
                 </S.Category>
                 <S.Category>
-                    <NavLink to='/question' activeStyle={{color: '#1919B1'}}>
+                    <NavLink to='/question' activeClassName='color'>
                         문의사항
                     </NavLink>
                 </S.Category>

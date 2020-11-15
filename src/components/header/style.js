@@ -13,6 +13,9 @@ export const Size = style.div `
     justify-content: space-around;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     align-items: center;
+    .color {
+        color: #1919B1;
+    }
 `;
 export const Category = style.div `
     font-size: 22px;
