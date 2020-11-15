@@ -3,7 +3,7 @@ import * as S from './style';
 import { Share } from '../../assets';
 
 const Line = ({ title, contents, date, email }) => {
-    const [ isOpened, setIsOpened ] = useState(false)
+    const [ isOpened, setIsOpened ] = useState(false);
     const handleClick = () => {
         setIsOpened(!isOpened);
     }
@@ -22,6 +22,7 @@ const Line = ({ title, contents, date, email }) => {
                             <S.Line />
                             <S.Note>{ contents }</S.Note>
                         </div>
+                        <S.DeleteBtn>완료</S.DeleteBtn>
                     </S.SQBox>
                 </S.BQBox>
             }

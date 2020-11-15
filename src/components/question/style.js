@@ -9,7 +9,7 @@ export const Background = style.div `
     background-image: url(${ BackgroundImg1 });
     position: relative;
     overflow: hidden;
-    & > div:first-child {
+    > div:first-child {
         margin-top: 28px;
         margin-bottom: 25px;
     }
@@ -38,7 +38,7 @@ export const Scontents = style.div `
     margin: 0 auto;
     margin-top: 25px;
     position: relative;
-    & > div:first-child {
+    > div:first-child {
         padding-top: 10px;
         width: 71.38vw;
         min-width: 1028px; 
@@ -58,7 +58,7 @@ export const LineBox = style.div `
     margin: 0 auto;
     margin-top: 15px;
     z-index: 1;
-    & > img {
+    > img {
         width: 24px;
         height: 23px;
         margin-left: 48px;
@@ -98,7 +98,7 @@ export const SQBox = style.div `
     background-color: white;
     border-radius: 20px;
     margin: 0 auto;
-    & > div {
+    > div {
         margin: 0 33px;
     }
 `;
@@ -115,4 +115,15 @@ export const Line = style.div `
     height: 0;
     border-top: 1px solid #707070;
     margin: 7px 0 13px 0;
+`;
+export const DeleteBtn = style.button `
+    width: 33px;
+    height: 17px;
+    font-size: 10px;
+    float: right;
+    border: none;
+    background-color: #1919B1;
+    color: white;
+    cursor: pointer;
+    margin: 30px 38px 0 0;
 `;

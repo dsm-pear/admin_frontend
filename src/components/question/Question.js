@@ -12,17 +12,16 @@ const Question = () => {
                 <S.Scontents>
                     <div>
                         <Line 
-                            title="문의사항 드립니다 그 제 잘못은 아닌것같은데 제 잘못 같기도 하고 아니 아무튼
-                                   모르겠으니까 문의사항 드리는거에요 아니 일단은 해결해주세요"
+                            title="승인되었다는 이메일을 받았는데 게시글에 올라가있지 않습니다."
                             date="2020.10.28"
                             email="rlagPwns@rlagPwns"
-                            contents="그냥 드려봤어요"
+                            contents="이메일이 잘못 온 건지 저만 안 보이는 건지 모르겠습니다."
                         />
                         <Line 
-                            title="문의사항 드립니다"
+                            title="마이페이지에 보고서가 안 보여요"
                             date="2020.10.28"
                             email="rlagPwns@rlagPwns"
-                            contents="그냥 드려봤어요"
+                            contents="어제까지만 해도 잘 보였는데 오늘 갑자기 사라졌어요"
                         />
                         <Line 
                             title="문의사항 드립니다"
