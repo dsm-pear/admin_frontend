@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="26" viewBox="0 0 27 26">
+  <defs>
+    <clipPath id="clip-path">
+      <ellipse id="타원_66" data-name="타원 66" cx="13.5" cy="13" rx="13.5" ry="13" transform="translate(0 -0.415)" fill="gray" opacity="0.52"/>
+    </clipPath>
+  </defs>
+  <g id="마스크_그룹_48" data-name="마스크 그룹 48" transform="translate(0 0.415)" clip-path="url(#clip-path)">
+    <g id="user" transform="translate(0.459 -0.041)">
+      <g id="그룹_292" data-name="그룹 292">
+        <path id="패스_473" data-name="패스 473" d="M13.141,0A13.141,13.141,0,1,0,26.283,13.141,13.141,13.141,0,0,0,13.141,0Zm.04,19.341H7.488c0-4.105,3.605-4.1,4.405-5.178l.092-.489a3.924,3.924,0,0,1-1.918-3.549c0-2.116,1.377-3.832,3.074-3.832s3.074,1.716,3.074,3.832a3.937,3.937,0,0,1-1.888,3.536l.1.556c.878,1.021,4.363,1.088,4.363,5.124Z" transform="translate(0)"/>
+      </g>
+    </g>
+  </g>
+</svg>
