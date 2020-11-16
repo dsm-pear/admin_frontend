@@ -74,8 +74,8 @@ const DetailApprove = () => {
                     <S.Preview>미리보기</S.Preview>
                 </S.Flie>
                 <S.Btn>
-                    <S.disApproveBtn onClick={onDisapproveClick} color={isDisapproveClick}>승인거부</S.disApproveBtn>
-                    <S.approveBtn onClick={onApproveClick} color={isApproveClick}>승인</S.approveBtn>
+                    <S.DisApproveBtn onClick={onDisapproveClick} color={isDisapproveClick}>승인거부</S.DisApproveBtn>
+                    <S.ApproveBtn onClick={onApproveClick} color={isApproveClick}>승인</S.ApproveBtn>
                 </S.Btn>
                 {isDisapproveClick &&
                     <S.Comment>

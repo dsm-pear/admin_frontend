@@ -186,7 +186,7 @@ export const Preview = style.button `
     font-size: 10px;
     cursor: pointer;
 `;
-export const approveBtn = style.button `
+export const ApproveBtn = style.button `
     width: 82px;
     height: 100%;
     background-color: ${({color}) => color === true ? '#1919B1' : '#EDEDEF'};
@@ -202,7 +202,7 @@ export const approveBtn = style.button `
         color: white;
     }
 `;
-export const disApproveBtn = style(approveBtn) `
+export const DisApproveBtn = style(ApproveBtn) `
     background-color: ${({color}) => color === true ? '#1919B1' : '#EDEDEF'};
     color: ${({color}) => color === true ? 'white' : 'black'};
     margin-right: 3.12%;
