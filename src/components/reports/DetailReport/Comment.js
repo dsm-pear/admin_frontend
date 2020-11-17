@@ -3,7 +3,7 @@ import * as S from './style';
 import DeleteComment from './DeleteComment';
 import { Profile } from '../../../assets';
 
-const Comment = ({name, text, date}) => {
+const Comment = ({name, text, date, setData}) => {
     const [isClick, setIsClick] = useState(false);
     const onClick = e => {
         setIsClick(true);
@@ -16,7 +16,7 @@ const Comment = ({name, text, date}) => {
             <div>{date}</div>
             <S.DeleteBtn className='DeleteBtn' onClick={onClick}>삭제</S.DeleteBtn>
             {isClick &&
-                <DeleteComment setIsClick={setIsClick} />
+                <DeleteComment setIsClick={setIsClick} setData={setData} />
             }
         </S.Comment>
     )
