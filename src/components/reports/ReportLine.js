@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import * as S from './style';
 
 const ReportLine = ({ title, name, date }) => {
@@ -9,9 +10,11 @@ const ReportLine = ({ title, name, date }) => {
     return (
         <S.Line>
             <S.CheckBox onClick={onClick} boolean={isCheck}/>
-            <div>{ title }</div>
-            <div>{ name }</div>
-            <div>{ date }</div>
+            <Link to='/report/view-report'>
+                <div>{ title }</div>
+                <div>{ name }</div>
+                <div>{ date }</div>
+            </Link>
         </S.Line>
     )
 }
