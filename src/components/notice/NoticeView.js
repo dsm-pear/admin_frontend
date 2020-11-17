@@ -30,7 +30,7 @@ const NoticeView = () => {
                             title="제출 오류 관련"
                             date="1919.19.19"
                         />
-                        <NoticeLine 
+                        <NoticeLine
                             title="공지사항 테스트입니다."
                             date="1818.18.18"
                         />
