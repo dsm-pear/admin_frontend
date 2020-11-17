@@ -190,12 +190,13 @@ export const Preview = style.button `
 /* 댓글 */
 export const CommentTitle = style.div `
     font-size: 18px;
-    margin: 1.22vh 0 1.22vh 44px;
+    margin: 3vh 0 2vh 44px;
 `;
 export const CommentBox = style.div `
     width: 80.55vw;
     min-width: 1160px;
-    height: 149px;
+    height: 18.14vh;
+    min-height: 149px;
     border-radius: 20px;
     margin: 0 auto;
     background-color: rgba(136, 136, 136, 0.06);
