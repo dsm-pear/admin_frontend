@@ -73,7 +73,6 @@ const DetailReport = () => {
                                 name={data.name}
                                 text={data.text}
                                 date={data.date}
-                                setData={setData}
                             />
                         )
                     })}
