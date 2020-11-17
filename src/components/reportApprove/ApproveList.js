@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './style';
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import ReportLine from './ReportLine';
 
 const ApproveList = () => {
+    const dummyData = [{
+        number: '01.',
+        title: '탐책',
+        team: '217호',
+        date: '2020.11.14',
+    }, {
+        number: '02.',
+        title: '보고서 제목',
+        team: '팀이름',
+        date: '2020.20.20',
+    }, {
+        number: '03.',
+        title: '보고서 제목',
+        team: '팀이름',
+        date: '2020.20.20',
+    }]
+    const [data, setData] = useState(dummyData);
     return (
         <S.Background>
             <Header />
@@ -12,68 +29,18 @@ const ApproveList = () => {
                 <S.Title>승인대기 보고서</S.Title>
                 <S.SmallBox>
                     <div>
-                        <Link to='/approve/view-approve-report'>
-                            <ReportLine 
-                                number='01.'
-                                title='탐책'
-                                team='217호'
-                                date='2020.11.14'
-                            />
-                        </Link>
-                        <ReportLine 
-                            number='02.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='03.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='04.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='05.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='06.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='07.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='08.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='09.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
-                        <ReportLine 
-                            number='10.'
-                            title='보고서 제목'
-                            team='팀이름'
-                            date='2020.20.20'
-                        />
+                        {data.map(data => {
+                            return (
+                                <Link to='/approve/view-approve-report'>
+                                    <ReportLine 
+                                        number={data.number}
+                                        title={data.title}
+                                        team={data.team}
+                                        date={data.date}
+                                    />
+                                </Link>
+                            )
+                        })}
                     </div>
                 </S.SmallBox>
             </S.WhiteBox>
