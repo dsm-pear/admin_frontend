@@ -33,6 +33,7 @@ const ApproveList = () => {
                             return (
                                 <Link to='/approve/view-approve-report'>
                                     <ReportLine 
+                                        key={data.id}
                                         number={data.number}
                                         title={data.title}
                                         team={data.team}
