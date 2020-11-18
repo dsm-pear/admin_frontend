@@ -22,6 +22,7 @@ const ApproveList = () => {
         date: '2020.20.20',
     }]
     const [data] = useState(dummyData);
+  
     return (
         <S.Background>
             <Header />

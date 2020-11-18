@@ -46,7 +46,8 @@ export const LogInButton = style.button `
     height: 52px;
     font-size: 22px;
     font-weight: bold;
-    background-color: #EBEBEB;
+    background-color: #0795FF;
+    color: white;
     border-radius: 100px;
     border: none;
     margin: 0 auto;
