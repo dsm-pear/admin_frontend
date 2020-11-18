@@ -60,7 +60,6 @@ const ViewReport = () => {
         date: "2020.11.14"
     }]
     const [data] = useState(dummyData);
-
     return (
         <S.Background>
             <Header />
@@ -94,9 +93,11 @@ const ViewReport = () => {
                 <S.Download>다운로드</S.Download>
                 <S.TitleBox>
                     <div>선택</div>
-                    <div>제목</div>
-                    <div>작성자</div>
-                    <div>작성일</div>
+                    <div>
+                        <div>제목</div>
+                        <div>작성자</div>
+                        <div>작성일</div>
+                    </div>
                 </S.TitleBox>
                 <S.Lines>
                     {data.map(data => {

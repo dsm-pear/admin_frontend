@@ -19,7 +19,6 @@ const DetailReport = () => {
         date: '2020.11.15 01:55'
     }]
     const [data] = useState(dummyData);
-
     return(
         <S.Background>
             <Header />

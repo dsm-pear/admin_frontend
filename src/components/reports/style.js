@@ -167,13 +167,20 @@ export const TitleBox = style.div `
     display: flex;
     align-items: center;
     > div:first-child {
+        width: 112px;
         margin-left: 27px;
-        margin-right: 84px;
     }
     > div:nth-child(2) {
-        width: 51%;
+        width: calc(100% - 139px);
+        display: flex;
     }
-    > div:nth-child(3) {
+    > div > div:first-child {
+        width: 59.5%;
+    }
+    > div > div:nth-child(2) {
+        width: 21.5%;
+    }
+    > div > div:nth-child(3) {
         width: 19%;
     }
 `;
@@ -223,16 +230,19 @@ export const Line = style.li `
     > a {
         display: flex;
         color: black;
-        width: 100%;
+        width: calc(100% - 139px);
     }
     > a > div:first-child {
-        width: 57.5%;
+        width: 59.5%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
     > a > div:nth-child(2) {
-        width: 20%;
+        width: 21.5%;
+    }
+    > a > div:last-child {
+        width: 19%;
     }
 `;
 
