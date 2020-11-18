@@ -15,7 +15,7 @@ const ModalApprove = ({setIsApproveClick}) => {
                     <div>승인하시겠습니까?</div>
                     <div>
                         <S.Cancle onClick={onClick}>취소</S.Cancle>
-                        <S.True>확인</S.True>
+                        <S.True onClick={onClick}>확인</S.True>
                     </div>
                 </S.ModalBox>
             </div>
