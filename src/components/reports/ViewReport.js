@@ -59,7 +59,8 @@ const ViewReport = () => {
         name: "작성자",
         date: "2020.11.14"
     }]
-    const [data, setData] = useState(dummyData);
+    const [data, setData] = useState('');
+    setData(dummyData);
     return (
         <S.Background>
             <Header />
