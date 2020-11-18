@@ -1,12 +1,12 @@
 import React from 'react';
 import * as S from './style';
 
-const DeleteComment = ({setIsClick}) => {
+const DeleteComment = ({setIsModalOpen}) => {
     const onClick = e => {
-        setIsClick(false);
+        setIsModalOpen(false);
     }
     const onBtnClick = e => {
-        setIsClick(false);
+        setIsModalOpen(false);
     }
     return (
         <S.ModalBackground>

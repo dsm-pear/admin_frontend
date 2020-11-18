@@ -4,9 +4,9 @@ import DeleteComment from './DeleteComment';
 import { Profile } from '../../../assets';
 
 const Comment = ({name, text, date, setData}) => {
-    const [isClick, setIsClick] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const onClick = e => {
-        setIsClick(true);
+        setIsModalOpen(true);
     }
     return (
         <S.Comment>
@@ -15,8 +15,8 @@ const Comment = ({name, text, date, setData}) => {
             <div>{text}</div>
             <div>{date}</div>
             <S.DeleteBtn className='DeleteBtn' onClick={onClick}>삭제</S.DeleteBtn>
-            {isClick &&
-                <DeleteComment setIsClick={setIsClick} setData={setData} />
+            {isModalOpen &&
+                <DeleteComment setIsModalOpen={setIsModalOpen} setData={setData} />
             }
         </S.Comment>
     )
