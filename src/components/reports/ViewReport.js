@@ -30,36 +30,40 @@ const ViewReport = () => {
             setIsFourthClick(!isFourthClick);
         }
     }
-    const dummyData = [{
-        title: "탐책",
-        name: "217호",
-        date: "2020.11.14"
-    }, {
-        title: "보고서 제목",
-        name: "작성자",
-        date: "2020.11.14"
-    }, {
-        title: "보고서 제목",
-        name: "작성자",
-        date: "2020.11.14"
-    }, {
-        title: "보고서 제목",
-        name: "작성자",
-        date: "2020.11.14"
-    }, {
-        title: "보고서 관리 시스템",
-        name: "페어",
-        date: "2020.11.14"
-    }, {
-        title: "보고서 제목",
-        name: "작성자",
-        date: "2020.11.14"
-    }, {
-        title: "보고서 제목",
-        name: "작성자",
-        date: "2020.11.14"
-    }]
-    const [data] = useState(dummyData);
+    const dummyData = {
+        "count": "2",
+	    "total_pages": "1",
+	    "results": [{
+            title: "탐책",
+            name: "217호",
+            date: "2020.11.14"
+        }, {
+            title: "보고서 제목",
+            name: "작성자",
+            date: "2020.11.14"
+        }, {
+            title: "보고서 제목",
+            name: "작성자",
+            date: "2020.11.14"
+        }, {
+            title: "보고서 제목",
+            name: "작성자",
+            date: "2020.11.14"
+        }, {
+            title: "보고서 관리 시스템",
+            name: "페어",
+            date: "2020.11.14"
+        }, {
+            title: "보고서 제목",
+            name: "작성자",
+            date: "2020.11.14"
+        }, {
+            title: "보고서 제목",
+            name: "작성자",
+            date: "2020.11.14"
+        }]
+    }
+    const [data] = useState(dummyData.results);
     return (
         <S.Background>
             <Header />
@@ -102,11 +106,12 @@ const ViewReport = () => {
                 <S.Lines>
                     {data.map(data => {
                         return (
-                                <ReportLine 
-                                    title={data.title}
-                                    name={data.name}
-                                    date={data.date}
-                                />
+                            <ReportLine 
+                                title={data.title}
+                                name={data.name}
+                                date={data.date}
+                                key={data.id}
+                            />
                         )
                     })}
                 </S.Lines>

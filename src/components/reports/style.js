@@ -36,12 +36,12 @@ export const WhiteBox = style.div `
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     }
     > div:last-child {
-        width: 19.51vw;
+        width: 100%;
         min-width: 281px;
         height: 19px;
         display: flex;
         align-items: center;
-        margin: 0 auto;
+        justify-content: center;
         margin-top: 2%;
     }
 `;
@@ -202,7 +202,7 @@ export const Count = style.div `
     justify-content: space-between;
     font-size: 16px;
     cursor: pointer;
-    > div:first-child {
+    > div > div:first-child {
         font-size: 18px;
         font-weight: bold;
     }
