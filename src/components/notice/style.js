@@ -1,7 +1,7 @@
 import style from 'styled-components';
 import { BackgroundImg1 } from '../../assets';
 
-/* 보고서 작성 */
+/* 공지사항 작성 */
 export const Background = style.div `
     width: 100%;
     height: 100vh;
@@ -146,9 +146,9 @@ export const Upload = style.div `
 export const Addflie = style.div `
     font-size: 13px;
     margin: 16px 30px 0 25px;
-`
+`;
 
-/* 보고서 보기 */
+/* 공지사항 보기 */
 export const Write = style.div `
     font-size: 22px;
     cursor: pointer;

@@ -126,6 +126,9 @@ export const Modify = style.button `
     margin-right: 19px;
     margin-top: 20px;
     cursor: pointer;
+    > a {
+        color: black;
+    }
 `;
 export const Delete = style(Modify) `
     background-color: #1919B1;
@@ -194,4 +197,131 @@ export const True = style.button `
 export const Cancle = style(True) `
     background-color: rgba(17, 17, 17, 0.14);
     color: rgba(0, 0, 0, 0.43);
+`;
+
+/* 공지사항 수정 */
+export const MBackground = style.div `
+    width: 100%;
+    height: 100vh;
+    background-size: 100% 100vh;
+    background-repeat: no-repeat;
+    background-image: url(${ BackgroundImg1 });
+    position: relative;
+    overflow: hidden;
+    min-width: 1280px;
+    > div:first-child {
+        margin-top: 28px;
+        margin-bottom: 25px;
+    }
+`;
+export const MWhiteBox = style.div `
+    width: 86vw;
+    min-width: 1244px;
+    height: 82vh;
+    min-height: 672px;
+    background-color: white;
+    margin: 0 auto;
+    box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.16);
+    border: 1px solid #858585;
+    > div:first-child {
+        display: flex;
+        margin: 46px 0 23px 63px;
+    }
+    > div:last-child {
+        width: 75.26vw;
+        min-width: 1084px;
+        margin-left: 73px;
+    }
+`;
+export const MLWrite = style.div `
+    font-size: 30px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    color: #5D6BC9;
+`;
+export const MNotice = style.div `
+    font-size: 30px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    color: #5D6BC9;
+    margin: 0 10px;
+`;
+export const MTitle = style.input `
+    width: 100%;
+    height: 47px;
+    font-size: 14px;
+    background-color: white;
+    border: 1px solid #858585;
+    display: flex;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    box-sizing: border-box;
+`;
+export const MContentsBox = style.div `
+    width: 100%;
+    height: 465px;
+    background-color: white;
+    border: 1px solid #858585;
+    > div:first-child {
+        display: flex;
+        margin: 23px 0 23px 27px;
+        justify-content: space-between;
+    }
+    > div:first-child > div:last-child {
+        display: flex;
+        margin-right: 20px;
+    }
+`;
+export const MContentsTitle = style.div `
+    font-size: 14px;
+    color: #2E2E2E;
+`;
+export const MContents = style.textarea `
+    width: 72.08vw;
+    min-width: 1038px;
+    height: 296px;
+    resize: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.05);
+    display: block;
+    margin: 0 auto;
+`;
+export const MAdd = style.div `
+    width: 77px;
+    height: 22px;
+    background-color: #e1e1e1;
+    opacity: 0.58;
+    font-size: 9px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > img {
+        margin-right: 2px;
+        width: 15px;
+        height: 14px;
+    }
+`;
+export const MUpload = style.div `
+    width: 109px;
+    height: 33px;
+    background-color: #1919B1;
+    float: right;
+    color: white;
+    margin: 10px 20px 0 0;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    > img {
+        margin-right: 10px;
+    }
+`;
+export const MAddflie = style.div `
+    font-size: 13px;
+    margin: 16px 30px 0 25px;
+    display: flex;
+    > div {
+        margin-left: 25px;
+        color: rgba(3, 1, 0, 0.45);
+    }
 `;

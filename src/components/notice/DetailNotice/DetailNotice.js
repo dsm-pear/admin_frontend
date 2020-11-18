@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
+import { Link } from 'react-router-dom';
 import { Download } from '../../../assets';
 import DeleteNotice from './DeleteNotice';
 
@@ -35,9 +36,13 @@ const DetailNotice = () => {
                 </S.Flie>
                 <S.Delete onClick={DeleteBtn}>삭제</S.Delete>
                 {isClick &&
-                    <DeleteNotice click={setIsClick}/>
+                    <DeleteNotice setIsClick={setIsClick}/>
                 }
-                <S.Modify>수정</S.Modify>
+                <S.Modify>
+                    <Link to='/notice/modify'>
+                        수정
+                    </Link>
+                </S.Modify>
             </S.WhiteBox>
         </S.Background>
     )
