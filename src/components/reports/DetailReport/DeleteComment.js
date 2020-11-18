@@ -1,9 +1,12 @@
 import React from 'react';
 import * as S from './style';
 
-const DeleteComment = ({setIsClick}) => {
+const DeleteComment = ({setIsModalOpen}) => {
     const onClick = e => {
-        setIsClick(false);
+        setIsModalOpen(false);
+    }
+    const onBtnClick = e => {
+        setIsModalOpen(false);
     }
     return (
         <S.ModalBackground>
@@ -15,7 +18,7 @@ const DeleteComment = ({setIsClick}) => {
                     <div>댓글을 삭제하시겠습니까?</div>
                     <div>
                         <S.Cancle onClick={onClick}>취소</S.Cancle>
-                        <S.True>확인</S.True>
+                        <S.True onClick={onBtnClick}>확인</S.True>
                     </div>
                 </S.ModalBox>
             </div>

@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
 import Comment from './Comment';
 import { Download } from '../../../assets';
 
 const DetailReport = () => {
+    const dummyData = [{
+        name: '김혜준',
+        text: '이런 기능들이 구현된 웹 사이트라니 너무 멋있네요!',
+        date: '2020.11.15 01:48'
+    }, {
+        name: '김혜준',
+        text: '참신한 아이디어에 박수를 칩니다',
+        date: '2020.11.15 01:53'
+    }, {
+        name: '김혜준',
+        text: '보고서를 깔끔하게 잘 작성하셨네요!',
+        date: '2020.11.15 01:55'
+    }]
+    const [data, setData] = useState(dummyData);
     return(
         <S.Background>
             <Header />
@@ -53,21 +67,15 @@ const DetailReport = () => {
                 </S.Flie>
                 <S.CommentTitle>댓글</S.CommentTitle>
                 <S.CommentBox>
-                    <Comment 
-                        name='김혜준'
-                        text='이런 기능들이 구현된 웹 사이트라니 너무 멋있네요!'
-                        date='2020.11.15 01:48'
-                    />
-                    <Comment 
-                        name='김혜준'
-                        text='참신한 아이디어에 박수를 칩니다'
-                        date='2020.11.15 01:53'
-                    />
-                    <Comment 
-                        name='김혜준'
-                        text='보고서를 깔끔하게 잘 작성하셨네요!'
-                        date='2020.11.15 01:55'
-                    />
+                    {data.map(data => {
+                        return (
+                            <Comment 
+                                name={data.name}
+                                text={data.text}
+                                date={data.date}
+                            />
+                        )
+                    })}
                 </S.CommentBox>
             </S.WhiteBox>
         </S.Background>

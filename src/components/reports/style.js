@@ -220,14 +220,19 @@ export const Line = style.li `
     font-size: 15px;
     cursor: pointer;
     color: black;
-    > div:nth-child(2) {
-        width: 52.5%;
+    > a {
+        display: flex;
+        color: black;
+        width: 100%;
+    }
+    > a > div:first-child {
+        width: 57.5%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    > div:nth-child(3) {
-        width: 18%;
+    > a > div:nth-child(2) {
+        width: 20%;
     }
 `;
 
@@ -236,7 +241,7 @@ export const CheckBox = style.button `
     height: 22px;
     border: 1px solid #707070;
     margin-left: 27px;
-    margin-right: 84px;
+    margin-right: 90px;
     outline: none;
     cursor: pointer;
     background-color: ${({boolean}) => boolean ? '#5D38DA' : 'white'}

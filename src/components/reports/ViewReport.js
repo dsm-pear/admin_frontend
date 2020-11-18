@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as S from './style';
 import Header from '../header/Header';
 import ReportLine from './ReportLine';
@@ -31,6 +30,36 @@ const ViewReport = () => {
             setIsFourthClick(!isFourthClick);
         }
     }
+    const dummyData = [{
+        title: "탐책",
+        name: "217호",
+        date: "2020.11.14"
+    }, {
+        title: "보고서 제목",
+        name: "작성자",
+        date: "2020.11.14"
+    }, {
+        title: "보고서 제목",
+        name: "작성자",
+        date: "2020.11.14"
+    }, {
+        title: "보고서 제목",
+        name: "작성자",
+        date: "2020.11.14"
+    }, {
+        title: "보고서 관리 시스템",
+        name: "페어",
+        date: "2020.11.14"
+    }, {
+        title: "보고서 제목",
+        name: "작성자",
+        date: "2020.11.14"
+    }, {
+        title: "보고서 제목",
+        name: "작성자",
+        date: "2020.11.14"
+    }]
+    const [data, setData] = useState(dummyData);
     return (
         <S.Background>
             <Header />
@@ -69,52 +98,24 @@ const ViewReport = () => {
                     <div>작성일</div>
                 </S.TitleBox>
                 <S.Lines>
-                    <Link to='/report/view-report'>
-                        <ReportLine 
-                            title="탐책"
-                            name="217호"
-                            date="2020.11.14"
-                        />
-                    </Link>
-                    <ReportLine 
-                        title="보고서 제목"
-                        name="작성자"
-                        date="2020.20.20"
-                    />
-                    <ReportLine 
-                        title="보고서 제목"
-                        name="작성자"
-                        date="2020.20.20"
-                    />
-                    <ReportLine 
-                        title="보고서 제목"
-                        name="작성자"
-                        date="2020.20.20"
-                    />
-                    <ReportLine 
-                        title="보고서 제목"
-                        name="작성자"
-                        date="2020.20.20"
-                    />
-                    <ReportLine 
-                        title="보고서 제목"
-                        name="작성자"
-                        date="2020.20.20"
-                    />
-                    <ReportLine 
-                        title="보고서 제목"
-                        name="작성자"
-                        date="2020.20.20"
-                    />
+                    {data.map(data => {
+                        return (
+                                <ReportLine 
+                                    title={data.title}
+                                    name={data.name}
+                                    date={data.date}
+                                />
+                        )
+                    })}
                 </S.Lines>
                 <div>
                     <S.Turn>◀︎</S.Turn>
                     <S.Count>
-                        <div>1</div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div>4</div>
-                        <div>5</div>
+                        <div data-id='1'>1</div>
+                        <div data-id='2'>2</div>
+                        <div data-id='3'>3</div>
+                        <div data-id='4'>4</div>
+                        <div data-id='5'>5</div>
                     </S.Count>
                     <S.Turn>▶︎</S.Turn>
                 </div>
