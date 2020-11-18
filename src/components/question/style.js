@@ -9,14 +9,15 @@ export const Background = style.div `
     background-image: url(${ BackgroundImg1 });
     position: relative;
     overflow: hidden;
-    & > div:first-child {
+    > div:first-child {
         margin-top: 28px;
         margin-bottom: 25px;
     }
 `;
 export const Contents = style.div `
-    width: 1282px;
-    height: 661px;
+    width: 86vw;
+    min-width: 1244px;
+    height: 82vh;
     background-color: white;
     box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.16);
     margin: 0 auto;
@@ -24,36 +25,32 @@ export const Contents = style.div `
 export const Title = style.div `
     font-size: 22px;
     text-align: center;
-    padding-top: 23px;
+    padding-top: 1.6%;
     cursor: default;
 `;
 export const Scontents = style.div `
-    width: 1028px;
-    height: 520px;
+    width: 71.38vw;
+    min-width: 1028px;
+    height: 63.33vh;
     background-color: #FBFBFB;
     border-radius: 15px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     margin: 0 auto;
     margin-top: 25px;
     position: relative;
-    & > div:first-child {
+    > div:first-child {
         padding-top: 10px;
-        width: 1028px;
-        height: 470px;
+        width: 71.38vw;
+        min-width: 1028px; 
+        height: 57.24vh;
         overflow: auto;
     }
 `;
-export const More = style.div `
-    font-size: 18px;
-    text-align: center;
-    cursor: pointer;
-    margin-top: 34px;
-    display: none;
-`
 // Line Style
 export const LineBox = style.div `
-    width: 707px;
-    height: 50px;
+    width: 49.09vw;
+    min-width: 707px;
+    height: 6.09vh;
     border-radius: 20px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     align-items: center;
@@ -61,7 +58,7 @@ export const LineBox = style.div `
     margin: 0 auto;
     margin-top: 15px;
     z-index: 1;
-    & > img {
+    > img {
         width: 24px;
         height: 23px;
         margin-left: 48px;
@@ -83,7 +80,8 @@ export const QDate = style.div `
     margin-left: 10px;
 `;
 export const BQBox = style.div `
-    width: 706px;
+    width: 49.02vw;
+    min-width: 706px;
     height: 162px;
     background-color: #e2e2e2;
     opacity: 0.83;
@@ -94,12 +92,13 @@ export const BQBox = style.div `
     box-shadow: 0 10px 6px 0 rgba(0, 0, 0, 0.16);
 `;
 export const SQBox = style.div `
-    width: 664px;
+    width: 46.11vw;
+    min-width: 664px;
     height: 129px;
     background-color: white;
     border-radius: 20px;
     margin: 0 auto;
-    & > div {
+    > div {
         margin: 0 33px;
     }
 `;
@@ -111,8 +110,20 @@ export const Note = style.div `
     font-size: 11px;
 `;
 export const Line = style.div `
-    width: 590px;
+    width: 40.97vw;
+    min-width: 591px;
     height: 0;
     border-top: 1px solid #707070;
     margin: 7px 0 13px 0;
+`;
+export const DeleteBtn = style.button `
+    width: 33px;
+    height: 17px;
+    font-size: 10px;
+    float: right;
+    border: none;
+    background-color: #1919B1;
+    color: white;
+    cursor: pointer;
+    margin: 30px 38px 0 0;
 `;

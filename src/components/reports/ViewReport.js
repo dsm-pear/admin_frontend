@@ -60,6 +60,7 @@ const ViewReport = () => {
         date: "2020.11.14"
     }]
     const [data] = useState(dummyData);
+
     return (
         <S.Background>
             <Header />

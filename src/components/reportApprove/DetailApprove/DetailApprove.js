@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
-import Comment from './Comment';
 import { Download } from '../../../assets';
+import ModalApprove from './ModalApprove';
+import ModalComment from './ModalComment';
 
-const DetailReport = () => {
-    const dummyData = [{
-        name: '김혜준',
-        text: '이런 기능들이 구현된 웹 사이트라니 너무 멋있네요!',
-        date: '2020.11.15 01:48'
-    }, {
-        name: '김혜준',
-        text: '참신한 아이디어에 박수를 칩니다',
-        date: '2020.11.15 01:53'
-    }, {
-        name: '김혜준',
-        text: '보고서를 깔끔하게 잘 작성하셨네요!',
-        date: '2020.11.15 01:55'
-    }]
-    const [data] = useState(dummyData);
-
+const DetailApprove = () => {
+    const [isApproveClick, setIsApproveClick] = useState(false);
+    const [isDisapproveClick, setIsDisapproveClick] = useState(false);
+    const [isFill, setIsFill] = useState('');
+    const [isSend, setIsSend] = useState(false);
+    const onApproveClick = e => {
+        setIsApproveClick(true);
+        setIsDisapproveClick(false);
+    }
+    const onDisapproveClick = e => {
+        setIsApproveClick(false);
+        setIsDisapproveClick(true);
+    }
+    const onInputChange = e => {
+        const input = e.target.value;
+        if(input !== '') {
+            setIsFill(true);
+        }
+    }
+    const onSendClick = e => {
+        setIsSend(true);
+    }
     return(
         <S.Background>
             <Header />
@@ -27,7 +34,7 @@ const DetailReport = () => {
                 <S.TitleBox>
                     <div>작성자</div>
                     <S.Line />
-                    <div>김혜준</div>
+                    <div>217호</div>
                     <div>작성일</div>
                     <S.Line />
                     <div>2020.11.14</div>
@@ -42,9 +49,6 @@ const DetailReport = () => {
                 </S.Contents>
                 <S.Team>
                     <div>TEAM</div>
-                    <S.BlackLine />
-                    <div>217호</div>
-                    <div>TEAM MEMBER</div>
                     <S.SBlackLine />
                     <div>김혜준, 김혜준, 김혜준</div>
                 </S.Team>
@@ -69,21 +73,26 @@ const DetailReport = () => {
                     <img src={ Download } alt='다운로드'/>
                     <S.Preview>미리보기</S.Preview>
                 </S.Flie>
-                <S.CommentTitle>댓글</S.CommentTitle>
-                <S.CommentBox>
-                    {data.map(data => {
-                        return (
-                            <Comment 
-                                name={data.name}
-                                text={data.text}
-                                date={data.date}
-                            />
-                        )
-                    })}
-                </S.CommentBox>
+                <S.Btn>
+                    <S.DisApproveBtn onClick={onDisapproveClick} color={isDisapproveClick}>승인거부</S.DisApproveBtn>
+                    <S.ApproveBtn onClick={onApproveClick} color={isApproveClick}>승인</S.ApproveBtn>
+                </S.Btn>
+                {isDisapproveClick &&
+                    <S.Comment>
+                        <div>COMMENT:</div>
+                        <S.CommentInput onChange={onInputChange}/>
+                        <S.Send onClick={onSendClick} color={isFill}>►</S.Send>
+                    </S.Comment>
+                }
+                {isSend &&
+                    <ModalComment setIsDisapproveClick={setIsDisapproveClick} setIsSend={setIsSend} />
+                }
+                {isApproveClick &&
+                    <ModalApprove setIsApproveClick={setIsApproveClick}/>
+                }
             </S.WhiteBox>
         </S.Background>
     )
 }
 
-export default DetailReport;
+export default DetailApprove;
