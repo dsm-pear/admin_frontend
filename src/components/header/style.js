@@ -5,24 +5,34 @@ export const Flex = style.div `
     margin-left: 6%
 `;
 export const Size = style.div `
-    width: 752px;
+    width: 52.22vw;
+    min-width: 752px;
     height: 56px;
     background-color: white;
     display: flex;
     justify-content: space-around;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     align-items: center;
+    .color {
+        color: #1919B1;
+    }
 `;
 export const Category = style.div `
     font-size: 22px;
     cursor: pointer;
+    &:hover {
+        color: #1919B1;
+    }
+    > a {
+        color: black;
+    }
 `;
 export const Pear = style.div `
     font-size: 22px;
-    & > span {
+    > span {
         font-weight: bold;
     }
-    margin-right: 6.5%;
+    margin-right: 7%;
 `;
 export const Circle = style.div `
     width: 146px;
