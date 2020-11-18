@@ -18,7 +18,8 @@ const DetailReport = () => {
         text: '보고서를 깔끔하게 잘 작성하셨네요!',
         date: '2020.11.15 01:55'
     }]
-    const [data, setData] = useState(dummyData);
+    const [data, setData] = useState('');
+    setData(dummyData);
     return(
         <S.Background>
             <Header />

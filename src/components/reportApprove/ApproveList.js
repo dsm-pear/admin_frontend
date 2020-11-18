@@ -21,7 +21,8 @@ const ApproveList = () => {
         team: '팀이름',
         date: '2020.20.20',
     }]
-    const [data, setData] = useState(dummyData);
+    const [data, setData] = useState('');
+    setData(dummyData);
     return (
         <S.Background>
             <Header />
