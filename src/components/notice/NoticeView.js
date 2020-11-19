@@ -1,10 +1,49 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './style';
 import Header from '../header/Header';
 import NoticeLine from './NoticeLine';
 
 const NoticeView = () => {
+    /* 더미데이터 */
+    const dummyData = {
+        count: 7,
+	    total_pages: 5,
+	    results: [{
+            title: "보고서 작성 양식 알려드립니다.",
+            date: "2020.20.20"
+        }, {
+            title: "제출 오류 관련",
+            date: "1919.19.19"
+        }, {
+            title: "공지사항 테스트입니다.",
+            date: "1818.18.18"
+        }, {
+            title: "보고서 작성 양식 알려드립니다.",
+            date: "2020.20.20"
+        }, {
+            title: "보고서 작성 양식 알려드립니다.",
+            date: "2020.20.20"
+        }, {
+            title: "보고서 작성 양식 알려드립니다.",
+            date: "2020.20.20"
+        }, {
+            title: "보고서 작성 양식 알려드립니다.",
+            date: "2020.20.20"
+        }]
+    }
+    const [data] = useState(dummyData.results);
+    const pageBtn = useCallback(() => {
+        const pages = dummyData.total_pages; // 5
+        const pageNumber = [];
+        for(let i = 0; i < pages; i++) {
+            pageNumber.push(
+                <div data-id={i}>{i+1}</div>
+            );
+        }
+        return pageNumber;
+
+    }, [])
     return (
         <S.Background>
             <Header />
@@ -20,35 +59,22 @@ const NoticeView = () => {
                         <div>작성일</div>
                     </S.NoticeTitle>
                     <ul>
-                        <Link to='/notice/view-notice'>
-                            <NoticeLine 
-                                title="보고서 작성 양식 알려드립니다."
-                                date="2020.20.20"
-                            />
-                        </Link>
-                        <NoticeLine 
-                            title="제출 오류 관련"
-                            date="1919.19.19"
-                        />
-                        <NoticeLine
-                            title="공지사항 테스트입니다."
-                            date="1818.18.18"
-                        />
-                        <NoticeLine />
-                        <NoticeLine />
-                        <NoticeLine />
-                        <NoticeLine />
-                        <NoticeLine />
+                        {data.map(data => {
+                            return (
+                                <Link to='/notice/view-notice'>
+                                    <NoticeLine 
+                                        title={data.title}
+                                        date={data.date}
+                                    />
+                                </Link>
+                            )
+                        })}
                     </ul>
                 </div>
                 <div>
                     <S.Turn>◀︎</S.Turn>
                     <S.Count>
-                        <div data-id='1'>1</div>
-                        <div data-id='2'>2</div>
-                        <div data-id='3'>3</div>
-                        <div data-id='4'>4</div>
-                        <div data-id='5'>5</div>
+                        {pageBtn()}
                     </S.Count>
                     <S.Turn>▶︎</S.Turn>
                 </div>
