@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import * as S from './style';
 import Header from '../header/Header';
 import ReportLine from './ReportLine';
 
 const ViewReport = () => {
+    /* 검색 선택 창 */
     const [select, setSelect] = useState('정렬');
-    const [isFirstClick, setIsFirstClick] = useState(false);
-    const [isSecondClick, setIsSecondClick] = useState(false);
-    const [isThirdClick, setIsThirdClick] = useState(false);
-    const [isFourthClick, setIsFourthClick] = useState(false);
     const onClick = e => {
         const selectname = e.currentTarget.dataset.selectname;
         if(selectname === 'title') {
@@ -18,6 +15,11 @@ const ViewReport = () => {
             setSelect('작성자');
         }
     }
+    /* 보고서 보기 선택 창 */
+    const [isFirstClick, setIsFirstClick] = useState(false);
+    const [isSecondClick, setIsSecondClick] = useState(false);
+    const [isThirdClick, setIsThirdClick] = useState(false);
+    const [isFourthClick, setIsFourthClick] = useState(false);
     const onBtnClick = e => {
         const number = Number(e.currentTarget.dataset.id);
         if(number === 1) {
@@ -30,12 +32,13 @@ const ViewReport = () => {
             setIsFourthClick(!isFourthClick);
         }
     }
+    /* 더미데이터 */
     const dummyData = {
-        "count": "2",
-	    "total_pages": "1",
-	    "results": [{
+        count: 2,
+	    total_pages: 5,
+	    results: [{
             title: "탐책",
-            name: "217호",
+            name: "김혜준",
             date: "2020.11.14"
         }, {
             title: "보고서 제목",
@@ -64,6 +67,17 @@ const ViewReport = () => {
         }]
     }
     const [data] = useState(dummyData.results);
+    const pageBtn = useCallback(() => {
+        const pages = dummyData.total_pages; // 5
+        const pageNumber = [];
+        for(let i = 0; i < pages; i++) {
+            pageNumber.push(
+                <div data-id={i}>{i+1}</div>
+            );
+        }
+        return pageNumber;
+
+    }, [])
     return (
         <S.Background>
             <Header />
@@ -118,11 +132,7 @@ const ViewReport = () => {
                 <div>
                     <S.Turn>◀︎</S.Turn>
                     <S.Count>
-                        <div data-id='1'>1</div>
-                        <div data-id='2'>2</div>
-                        <div data-id='3'>3</div>
-                        <div data-id='4'>4</div>
-                        <div data-id='5'>5</div>
+                        {pageBtn()}
                     </S.Count>
                     <S.Turn>▶︎</S.Turn>
                 </div>

@@ -202,7 +202,7 @@ export const Count = style.div `
     justify-content: space-between;
     font-size: 16px;
     cursor: pointer;
-    > div > div:first-child {
+    > div:active {
         font-size: 18px;
         font-weight: bold;
     }
