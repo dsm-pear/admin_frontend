@@ -4,8 +4,14 @@ import Header from '../header/Header';
 import ReportLine from './ReportLine';
 
 const ViewReport = () => {
-    /* 검색 선택 창 */
+    const [isFirstClick, setIsFirstClick] = useState(false);
+    const [isSecondClick, setIsSecondClick] = useState(false);
+    const [isThirdClick, setIsThirdClick] = useState(false);
+    const [isFourthClick, setIsFourthClick] = useState(false);
+    const [page, pageChange] = useState(1);
     const [select, setSelect] = useState('정렬');
+
+    /* 검색 선택 창 */
     const onClick = e => {
         const selectname = e.currentTarget.dataset.selectname;
         if(selectname === 'title') {
@@ -15,11 +21,8 @@ const ViewReport = () => {
             setSelect('작성자');
         }
     }
+
     /* 보고서 보기 선택 창 */
-    const [isFirstClick, setIsFirstClick] = useState(false);
-    const [isSecondClick, setIsSecondClick] = useState(false);
-    const [isThirdClick, setIsThirdClick] = useState(false);
-    const [isFourthClick, setIsFourthClick] = useState(false);
     const onBtnClick = e => {
         const number = Number(e.currentTarget.dataset.id);
         if(number === 1) {
@@ -32,13 +35,14 @@ const ViewReport = () => {
             setIsFourthClick(!isFourthClick);
         }
     }
+
     /* 더미데이터 */
     const dummyData = {
-        count: 2,
+        count: 7,
 	    total_pages: 5,
 	    results: [{
             title: "탐책",
-            name: "김혜준",
+            name: "217호",
             date: "2020.11.14"
         }, {
             title: "보고서 제목",
@@ -67,17 +71,28 @@ const ViewReport = () => {
         }]
     }
     const [data] = useState(dummyData.results);
+
+    /* 페이지 버튼 클릭시 */
+    const onPageBtnClick = e => {
+        let id = e.target.dataset.id;
+        pageChange(id);
+    }
+
+    const setPageNumberClassName = useCallback((nowPage, i)=> {
+        return nowPage === i + 1 ? "pageBtnClick" : '';
+    }, []);
+    
     const pageBtn = useCallback(() => {
         const pages = dummyData.total_pages; // 5
         const pageNumber = [];
         for(let i = 0; i < pages; i++) {
             pageNumber.push(
-                <div data-id={i}>{i+1}</div>
+                <div data-id={i+1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>{i+1}</div>
             );
         }
         return pageNumber;
+    }, [page, dummyData, setPageNumberClassName]);
 
-    }, [])
     return (
         <S.Background>
             <Header />
