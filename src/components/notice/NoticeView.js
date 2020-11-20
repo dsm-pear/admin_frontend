@@ -5,6 +5,8 @@ import Header from '../header/Header';
 import NoticeLine from './NoticeLine';
 
 const NoticeView = () => {
+    const [page, pageChange] = useState(1);
+
     /* 더미데이터 */
     const dummyData = {
         count: 7,
@@ -33,17 +35,28 @@ const NoticeView = () => {
         }]
     }
     const [data] = useState(dummyData.results);
+
+    /* 페이지 버튼 클릭시 */
+    const onPageBtnClick = e => {
+        let id = e.target.dataset.id;
+        pageChange(id);
+    }
+
+    const setPageNumberClassName = useCallback((nowPage, i)=> {
+        return nowPage === i + 1 ? "pageBtnClick" : '';
+    }, []);
+    
     const pageBtn = useCallback(() => {
         const pages = dummyData.total_pages; // 5
         const pageNumber = [];
         for(let i = 0; i < pages; i++) {
             pageNumber.push(
-                <div data-id={i}>{i+1}</div>
+                <div data-id={i+1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>{i+1}</div>
             );
         }
         return pageNumber;
+    }, [page, dummyData, setPageNumberClassName]);
 
-    }, [])
     return (
         <S.Background>
             <Header />
