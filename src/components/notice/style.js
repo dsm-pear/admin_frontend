@@ -197,7 +197,7 @@ export const Count = style.div `
     justify-content: space-between;
     font-size: 16px;
     cursor: pointer;
-    > div:first-child {
+    .pageBtnClick {
         font-size: 18px;
         font-weight: bold;
     }
