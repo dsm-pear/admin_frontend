@@ -34,7 +34,7 @@ const DetailApprove = () => {
                 <S.TitleBox>
                     <div>작성자</div>
                     <S.Line />
-                    <div>217호</div>
+                    <div>김혜준</div>
                     <div>작성일</div>
                     <S.Line />
                     <div>2020.11.14</div>
@@ -49,6 +49,9 @@ const DetailApprove = () => {
                 </S.Contents>
                 <S.Team>
                     <div>TEAM</div>
+                    <S.BlackLine />
+                    <div>217호</div>
+                    <div>TEAM MEMBER</div>
                     <S.SBlackLine />
                     <div>김혜준, 김혜준, 김혜준</div>
                 </S.Team>
