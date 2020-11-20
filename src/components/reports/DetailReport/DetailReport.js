@@ -18,8 +18,7 @@ const DetailReport = () => {
         text: '보고서를 깔끔하게 잘 작성하셨네요!',
         date: '2020.11.15 01:55'
     }]
-    const [data, setData] = useState('');
-    setData(dummyData);
+    const [data] = useState(dummyData);
     return(
         <S.Background>
             <Header />
@@ -27,7 +26,7 @@ const DetailReport = () => {
                 <S.TitleBox>
                     <div>작성자</div>
                     <S.Line />
-                    <div>217호</div>
+                    <div>김혜준</div>
                     <div>작성일</div>
                     <S.Line />
                     <div>2020.11.14</div>
@@ -42,6 +41,9 @@ const DetailReport = () => {
                 </S.Contents>
                 <S.Team>
                     <div>TEAM</div>
+                    <S.BlackLine />
+                    <div>217호</div>
+                    <div>TEAM MEMBER</div>
                     <S.SBlackLine />
                     <div>김혜준, 김혜준, 김혜준</div>
                 </S.Team>
