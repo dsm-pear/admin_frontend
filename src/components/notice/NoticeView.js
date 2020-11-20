@@ -43,7 +43,7 @@ const NoticeView = () => {
     }
 
     const setPageNumberClassName = useCallback((nowPage, i)=> {
-        return nowPage === i + 1 ? "pageBtnClick" : '';
+        return Number(nowPage) === i + 1 ? "pageBtnClick" : '';
     }, []);
     
     const pageBtn = useCallback(() => {
