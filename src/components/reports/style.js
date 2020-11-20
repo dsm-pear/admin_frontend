@@ -36,12 +36,12 @@ export const WhiteBox = style.div `
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     }
     > div:last-child {
-        width: 19.51vw;
+        width: 100%;
         min-width: 281px;
         height: 19px;
         display: flex;
         align-items: center;
-        margin: 0 auto;
+        justify-content: center;
         margin-top: 2%;
     }
 `;
@@ -167,13 +167,20 @@ export const TitleBox = style.div `
     display: flex;
     align-items: center;
     > div:first-child {
+        width: 112px;
         margin-left: 27px;
-        margin-right: 84px;
     }
     > div:nth-child(2) {
-        width: 51%;
+        width: calc(100% - 139px);
+        display: flex;
     }
-    > div:nth-child(3) {
+    > div > div:first-child {
+        width: 59.5%;
+    }
+    > div > div:nth-child(2) {
+        width: 21.5%;
+    }
+    > div > div:nth-child(3) {
         width: 19%;
     }
 `;
@@ -195,7 +202,7 @@ export const Count = style.div `
     justify-content: space-between;
     font-size: 16px;
     cursor: pointer;
-    > div:first-child {
+    .pageBtnClick {
         font-size: 18px;
         font-weight: bold;
     }
@@ -223,16 +230,19 @@ export const Line = style.li `
     > a {
         display: flex;
         color: black;
-        width: 100%;
+        width: calc(100% - 139px);
     }
     > a > div:first-child {
-        width: 57.5%;
+        width: 59.5%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
     > a > div:nth-child(2) {
-        width: 20%;
+        width: 21.5%;
+    }
+    > a > div:last-child {
+        width: 19%;
     }
 `;
 
