@@ -49,7 +49,6 @@ const NoticeView = () => {
     const pageBtn = useCallback(() => {
         const pages = dummyData.total_pages; // 5
         const pageNumber = [];
-        console.log(page)
         for(let i = 0; i < pages; i++) {
             pageNumber.push(
                 <div data-id={i+1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>{i+1}</div>
