@@ -7,3 +7,4 @@ export { default as ApproveList } from '../components/reportApprove/ApproveList'
 export { default as ViewReport } from '../components/reports/ViewReport';
 export { default as DetailApprove } from '../components/reportApprove/DetailApprove/DetailApprove';
 export { default as DetailReport } from '../components/reports/DetailReport/DetailReport';
+export { default as ModifyNotice } from '../components/notice/DetailNotice/ModifyNotice';
