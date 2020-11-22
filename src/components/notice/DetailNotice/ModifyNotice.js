@@ -3,7 +3,7 @@ import * as S from './style';
 import Header from '../../header/Header';
 import { Upload, Img, LinkImg } from '../../../assets';
 
-const ModifyNotice = ({title, contents}) => {
+const ModifyNotice = () => {
     return (
         <S.MBackground>
             <Header />
