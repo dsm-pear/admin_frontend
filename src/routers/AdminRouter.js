@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { AdminLogin, NoticeView, NoticeWrite, Question, ApproveList, ViewReport, DetailNotice, DetailApprove, DetailReport } from './index';
+import { AdminLogin, NoticeView, NoticeWrite, Question, ApproveList, ViewReport, DetailNotice, DetailApprove, DetailReport, ModifyNotice } from './index';
 
 const AdminRouter = () => {
   return (
@@ -10,6 +10,7 @@ const AdminRouter = () => {
         <Route path='/notice-write' component={ NoticeWrite } />
         <Route exact path='/notice' component={ NoticeView } />
         <Route exact path='/notice/view-notice' component={ DetailNotice } />
+        <Route exact path='/notice/modify' component={ ModifyNotice } />
         <Route exact path='/approve' component={ ApproveList } />
         <Route path='/approve/view-approve-report' component={ DetailApprove } />
         <Route exact path='/report' component={ ViewReport } />
