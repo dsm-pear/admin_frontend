@@ -1,5 +1,6 @@
 import React from 'react';
 import { LogInImg } from '../../assets';
+import { Link } from 'react-router-dom';
 import Input from './LogInInput';
 import * as S from './style';
 
@@ -21,7 +22,11 @@ const AdminLogin = () => {
                             type="password"
                         />
                     </S.Inputs>
-                    <S.LogInButton>LOGIN</S.LogInButton>
+                    <S.LogInButton>
+                        <Link to='report'>
+                            LOGIN
+                        </Link>
+                    </S.LogInButton>
                 </div>
             </S.Whitebox>
         </S.Background>
