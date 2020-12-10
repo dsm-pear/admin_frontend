@@ -20,7 +20,7 @@ const Header = () => {
                     </NavLink>
                 </S.Category>
                 <S.Category>
-                    <NavLink to='/notice-write' activeClassName='color'>
+                    <NavLink to='/notice' activeClassName='color'>
                         공지사항
                     </NavLink>
                 </S.Category>
