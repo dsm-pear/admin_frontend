@@ -6,15 +6,15 @@ const AdminRouter = () => {
   return (
       <Switch>
         <Route exact path='/' component={ AdminLogin } />
-        <Route path='/question' component={ Question } />
-        <Route path='/notice-write' component={ NoticeWrite } />
-        <Route exact path='/notice' component={ NoticeView } />
+        <Route exact path='/question' component={ Question } />
+        <Route exact path='/notice' component={ NoticeWrite } />
+        <Route exact path='/notice/view' component={ NoticeView } />
         <Route exact path='/notice/view-notice' component={ DetailNotice } />
         <Route exact path='/notice/modify' component={ ModifyNotice } />
         <Route exact path='/approve' component={ ApproveList } />
-        <Route path='/approve/view-approve-report' component={ DetailApprove } />
+        <Route exact path='/approve/view-approve-report' component={ DetailApprove } />
         <Route exact path='/report' component={ ViewReport } />
-        <Route path='/report/view-report' component={ DetailReport }/>
+        <Route exact path='/report/view-report' component={ DetailReport }/>
       </Switch>
   );
 };
