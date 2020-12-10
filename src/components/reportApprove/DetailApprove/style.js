@@ -105,16 +105,12 @@ export const Team = style.div `
     align-items: center;
     font-size: 13px;
     > div:first-child {
-        width: 7.69%;
+        width: 12%;
         text-align: center;
     }
     > div:nth-child(3) {
         width: 15%;
         margin-left: 10px;
-    }
-    > div:nth-child(4) {
-        width: 12%;
-        text-align: center;
     }
 `;
 export const Github = style.div `
