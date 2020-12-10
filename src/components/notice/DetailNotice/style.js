@@ -230,7 +230,7 @@ export const MWhiteBox = style.div `
     > div:last-child {
         width: 75.26vw;
         min-width: 1084px;
-        margin-left: 73px;
+        margin: 0 auto;
     }
 `;
 export const MLWrite = style.div `

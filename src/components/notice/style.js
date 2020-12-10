@@ -32,17 +32,17 @@ export const WhiteBox = style.div `
     > div:last-child {
         width: 75.26vw;
         min-width: 1084px;
-        margin-left: 73px;
+        margin: 0 auto;
     }
 `;
 export const LWhiteBox = style(WhiteBox)`
     > div:first-child {
         display: flex;
-        margin: 5.60vh 0 23px 7.67vh;
+        margin: 8vh 0 23px 7.67vh;
     }
     > div:nth-child(2) {
         width: 75.27vw;
-        margin-left: 73px;
+        margin: 0 auto;
         > ul {
             margin-top: 18px;
             margin-left: -34px;
