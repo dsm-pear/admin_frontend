@@ -18,7 +18,7 @@ export const Size = style.div `
     }
 `;
 export const Category = style.div `
-    font-size: 22px;
+    font-size: 1.5rem;
     cursor: pointer;
     &:hover {
         color: #1919B1;
@@ -28,7 +28,7 @@ export const Category = style.div `
     }
 `;
 export const Pear = style.div `
-    font-size: 22px;
+    font-size: 1.5rem;
     > span {
         font-weight: bold;
     }
@@ -45,8 +45,7 @@ export const Circle = style.div `
     z-index: -1;
 `;
 export const Logout = style.div `
-    cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: white;
     position: absolute;
     top: 73px;
