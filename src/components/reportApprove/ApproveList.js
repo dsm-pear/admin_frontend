@@ -8,17 +8,17 @@ const ApproveList = () => {
     const dummyData = [{
         number: '01.',
         title: '탐책',
-        team: '217호',
+        writer: '김혜준',
         date: '2020.11.14',
     }, {
         number: '02.',
         title: '보고서 제목',
-        team: '팀이름',
+        writer: '작성자',
         date: '2020.20.20',
     }, {
         number: '03.',
         title: '보고서 제목',
-        team: '팀이름',
+        writer: '작성자',
         date: '2020.20.20',
     }]
     const [data] = useState(dummyData);
@@ -36,7 +36,7 @@ const ApproveList = () => {
                                         key={data.id}
                                         number={data.number}
                                         title={data.title}
-                                        team={data.team}
+                                        writer={data.writer}
                                         date={data.date}
                                     />
                                 </Link>
