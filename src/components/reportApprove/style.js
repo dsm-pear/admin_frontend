@@ -43,7 +43,8 @@ export const SmallBox = style.div `
     min-width: 1103px;
     height: 61.6vh;
     background-color: rgba(223, 223, 255, 0.09);
-    margin: 15px 0 0 97px;
+    margin: 0 auto;
+    margin-top: 15px;
     box-sizing: border-box;
     padding-top: 30px;
     > div:first-child {
@@ -76,7 +77,7 @@ export const ReportLine = style.div `
     }
 `;
 export const Note = style.div `
-    font-size: 13px;
+    font-size: 1rem;
     margin-right: 12px;
     letter-spacing: 3px;
     color: black;
