@@ -40,9 +40,6 @@ const DetailReport = () => {
                     팀 프로젝트 '탐책'은 이러한 아이디어로 프로젝트를 계획했으며 이러한 기능을 사용할 수 있습니다.
                 </S.Contents>
                 <S.Team>
-                    <div>TEAM</div>
-                    <S.BlackLine />
-                    <div>217호</div>
                     <div>TEAM MEMBER</div>
                     <S.SBlackLine />
                     <div>김혜준, 김혜준, 김혜준</div>

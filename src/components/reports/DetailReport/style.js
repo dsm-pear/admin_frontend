@@ -41,7 +41,7 @@ export const TitleBox = style.div `
     display: flex;
     align-items: center;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     margin: 0 auto;
     background: linear-gradient(to bottom, #592dd6, #716dec);
     > div:first-child {
@@ -88,7 +88,7 @@ export const Contents = style.div `
     min-width: 1094px;
     height: 14vh;
     margin: 3.41vh 0 3.41vh 76px;
-    font-size: 16px;
+    font-size: 18px;
 `;
 export const SBlackLine = style(BlackLine) `
     height: 23px;
@@ -103,18 +103,14 @@ export const Team = style.div `
     margin: 0 auto;
     display: flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 15px;
     > div:first-child {
-        width: 7.69%;
+        width: 12%;
         text-align: center;
     }
     > div:nth-child(3) {
         width: 15%;
         margin-left: 10px;
-    }
-    > div:nth-child(4) {
-        width: 12%;
-        text-align: center;
     }
 `;
 export const Github = style.div `
@@ -123,7 +119,7 @@ export const Github = style.div `
     height: 36px;
     background-color: rgba(136, 136, 136, 0.06);
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     > div:first-child {
@@ -131,7 +127,7 @@ export const Github = style.div `
         text-align: center;
     }
     > a:nth-child(3) {
-        font-size: 12px;
+        font-size: 14px;
         color: rgba(46, 46, 46, 0.61);
     }
 `;
@@ -141,7 +137,7 @@ export const LanguageBox = style.div `
     height: 36px;
     background-color: rgba(136, 136, 136, 0.06);
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     margin-right: 9px;
@@ -167,7 +163,7 @@ export const Flie = style.div `
     margin: 0 auto;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 18px;
     > div:first-child {
         width: 142px;
         text-align: center;
@@ -183,7 +179,7 @@ export const Flie = style.div `
     }
 `;
 export const Preview = style.button `
-    width: 56px;
+    width: 60px;
     height: 25px;
     background-color: #36B5CF;
     color: white;
@@ -191,13 +187,13 @@ export const Preview = style.button `
     border-radius: 3px;
     border: none;
     text-align: center;
-    font-size: 10px;
+    font-size: 12px;
     cursor: pointer;
 `;
 
 /* 댓글 */
 export const CommentTitle = style.div `
-    font-size: 18px;
+    font-size: 20px;
     margin: 3vh 0 2vh 44px;
 `;
 export const CommentBox = style.div `
@@ -216,7 +212,7 @@ export const CommentBox = style.div `
 /* Comment.js */
 export const Comment = style.div `
     height: 26px;
-    font-size: 16px;
+    font-size: 18px;
     display: felx;
     margin-top: 15px;
     > img {
@@ -228,7 +224,7 @@ export const Comment = style.div `
         margin-right: 20px;
     }
     > div:nth-child(4) {
-        font-size: 10px;
+        font-size: 12px;
         margin-top: 7px;
         margin-left: 10px;
     }
@@ -240,7 +236,7 @@ export const DeleteBtn = style.button `
     display: none;
     width: 46px;
     height: 20px;
-    font-size: 10px;
+    font-size: 12px;
     border: none;
     color: red;
     border-radius: 5px;
@@ -274,7 +270,7 @@ export const ModalBoxTitle = style.div `
     background-color: #5151E6;
     color: white;
     text-align: center;
-    font-size: 15px;
+    font-size: 17px;
     padding-top: 3px;
     border-radius: 5px 5px 0 0;
     > span {
@@ -288,7 +284,7 @@ export const ModalBox = style.div `
     padding-top: 3.04vh;
     border-radius: 0 0 5px 5px;
     > div {
-        font-size: 14px;
+        font-size: 16px;
         width: 100%;
         text-align: center;
         margin-bottom: 6.21vh;
@@ -299,7 +295,7 @@ export const True = style.button `
     height: 20px;
     background-color: #1919B1;
     color: white;
-    font-size: 10px;
+    font-size: 12px;
     padding-bottom: 2px;
     border: none;
     float: right;
