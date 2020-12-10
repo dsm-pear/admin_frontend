@@ -12,7 +12,7 @@ const NoticeWirte = () => {
                 <div>
                     <S.Notice>공지사항</S.Notice>
                     <S.LWrite>쓰기 /</S.LWrite>
-                    <Link to='/notice'><S.LWatch>보기</S.LWatch></Link>
+                    <Link to='/notice/view'><S.LWatch>보기</S.LWatch></Link>
                 </div>
                 <div>
                     <S.Title placeholder="제목을 입력해주세요."/>

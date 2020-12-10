@@ -63,7 +63,7 @@ const NoticeView = () => {
             <S.LWhiteBox>
                 <div>
                     <S.Notice>공지사항</S.Notice>
-                    <Link to='/notice-write'><S.Write>쓰기/</S.Write></Link>
+                    <Link to='/notice'><S.Write>쓰기/</S.Write></Link>
                     <S.Watch>보기</S.Watch>
                 </div>
                 <div>
