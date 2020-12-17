@@ -1,6 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { AdminLogin, NoticeView, NoticeWrite, Question, ApproveList, ViewReport, DetailNotice, DetailApprove, DetailReport, ModifyNotice } from './index';
+import { AdminLogin,
+        NoticeView,
+        NoticeWrite,
+        Question,
+        ApproveList,
+        ViewReport,
+        DetailNotice,
+        DetailApprove,
+        DetailReport,
+        ModifyNotice } from './index';
 
 const AdminRouter = () => {
   return (
