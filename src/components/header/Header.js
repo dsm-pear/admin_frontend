@@ -1,8 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import * as S from './style'
 
 const Header = () => {
+    const history = useHistory();
+    const onClickLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        history.replace('/');
+    }
+
     return(
         <S.Flex>
             <S.Pear>
@@ -30,9 +37,7 @@ const Header = () => {
                     </NavLink>
                 </S.Category>
             </S.Size>
-            <S.Circle>
-                <S.Logout>로그아웃</S.Logout>
-            </S.Circle>
+            <S.Logout onClick={onClickLogout}>로그아웃</S.Logout>
         </S.Flex>
     )
 }
