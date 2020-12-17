@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
-import { Download } from '../../../assets';
+import { Download, Send } from '../../../assets';
 import ModalApprove from './ModalApprove';
 import ModalComment from './ModalComment';
 
 const DetailApprove = () => {
     const [isApproveClick, setIsApproveClick] = useState(false);
     const [isDisapproveClick, setIsDisapproveClick] = useState(false);
-    const [isFill, setIsFill] = useState('');
     const [isSend, setIsSend] = useState(false);
     const onApproveClick = e => {
         setIsApproveClick(true);
@@ -17,12 +16,6 @@ const DetailApprove = () => {
     const onDisapproveClick = e => {
         setIsApproveClick(false);
         setIsDisapproveClick(true);
-    }
-    const onInputChange = e => {
-        const input = e.target.value;
-        if(input !== '') {
-            setIsFill(true);
-        }
     }
     const onSendClick = e => {
         setIsSend(true);
@@ -70,7 +63,7 @@ const DetailApprove = () => {
                     <div>첨부파일</div>
                     <S.BlackLine />
                     <div>팀 프로젝트 보고서.pdf</div>
-                    <img src={ Download } alt='다운로드'/>
+                    <img src={Download} alt='다운로드'/>
                     <S.Preview>미리보기</S.Preview>
                 </S.Flie>
                 <S.Btn>
@@ -80,8 +73,10 @@ const DetailApprove = () => {
                 {isDisapproveClick &&
                     <S.Comment>
                         <div>COMMENT:</div>
-                        <S.CommentInput onChange={onInputChange}/>
-                        <S.Send onClick={onSendClick} color={isFill}>►</S.Send>
+                        <S.CommentInput />
+                        <S.Send onClick={onSendClick}>
+                            <img src={Send} alt='send'/>
+                        </S.Send>
                     </S.Comment>
                 }
                 {isSend &&
