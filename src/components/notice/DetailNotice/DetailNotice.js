@@ -1,11 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
 import { Link } from 'react-router-dom';
 import { Download } from '../../../assets';
 import DeleteNotice from './DeleteNotice';
+import { Api } from '../../../api/api';
 
-const DetailNotice = () => {
+const DetailNotice = ({id}) => {
+
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        const ViewDetailNotice = () => {
+            Api.get(`/notice/<notice_${id}>`, {
+            headers: {
+                Authorization: localStorage.getItem('access_token')
+            }
+        })
+        .then((res) => {
+            setData(res.data);
+        })
+        .catch((err) => {
+            switch(err.response.stauts) {
+                case 400:
+                    alert('공지사항 불러오기에 실패했습니다.');
+                    break;
+                case 404:
+                    console.log(err);
+                    break;
+                default:
+                    break;
+            }
+        })
+        }
+        ViewDetailNotice();
+    }, [])
+
     const [isClick, setIsClick] = useState(false);
     const DeleteBtn = e => {
         setIsClick(true);
@@ -17,15 +47,15 @@ const DetailNotice = () => {
                 <S.TitleBox>
                     <div>승인날짜</div>
                     <S.Line />
-                    <div>2020.20.20</div>
+                    <div>{data.created_at}</div>
                 </S.TitleBox>
                 <S.NoticeTitle>
                     <div>제목</div>
                     <S.BlackLine />
-                    <div>보고서 제출 양식 알려드리겠습니다</div>
+                    <div>{data.title}</div>
                 </S.NoticeTitle>
                 <S.Contents>
-                    보고서 제출 양식 링크로 첨부해 두었으니 확인해보시고 제출 부탁드립니다.
+                    {data.description}
                 </S.Contents>
                 <S.Flie>
                     <div>첨부파일</div>
@@ -36,7 +66,7 @@ const DetailNotice = () => {
                 </S.Flie>
                 <S.Delete onClick={DeleteBtn}>삭제</S.Delete>
                 {isClick &&
-                    <DeleteNotice setIsClick={setIsClick}/>
+                    <DeleteNotice setIsClick={setIsClick} id={id}/>
                 }
                 <S.Modify>
                     <Link to='/notice/modify'>
