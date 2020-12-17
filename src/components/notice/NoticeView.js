@@ -1,40 +1,44 @@
-import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import * as S from './style';
 import Header from '../header/Header';
 import NoticeLine from './NoticeLine';
+import { Api, onRefresh } from '../../api/api';
 
 const NoticeView = () => {
+    const history = useHistory();
     const [page, pageChange] = useState(1);
+    const [data, setData] = useState();
 
-    /* 더미데이터 */
-    const dummyData = {
-        count: 7,
-	    total_pages: 5,
-	    results: [{
-            title: "보고서 작성 양식 알려드립니다.",
-            date: "2020.20.20"
-        }, {
-            title: "제출 오류 관련",
-            date: "1919.19.19"
-        }, {
-            title: "공지사항 테스트입니다.",
-            date: "1818.18.18"
-        }, {
-            title: "보고서 작성 양식 알려드립니다.",
-            date: "2020.20.20"
-        }, {
-            title: "보고서 작성 양식 알려드립니다.",
-            date: "2020.20.20"
-        }, {
-            title: "보고서 작성 양식 알려드립니다.",
-            date: "2020.20.20"
-        }, {
-            title: "보고서 작성 양식 알려드립니다.",
-            date: "2020.20.20"
-        }]
-    }
-    const [data] = useState(dummyData.results);
+    useEffect(() => {
+        const ViewNotice = () => {
+            Api.get(`/notice?page=${page}`, {
+                body: page,
+                headers: {
+                    Authorization: localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((err) => {
+                switch(err.response.status) {
+                    case 400:
+                        alert('공지사항 불러오기에 실패했습니다.');
+                        break;
+                    case 403:
+                        onRefresh()
+                        .then(() => {
+                            ViewNotice()
+                        })
+                        break;
+                    default:
+                        break;
+                }
+            })
+        }
+        ViewNotice();
+    }, [page])
 
     /* 페이지 버튼 클릭시 */
     const onPageBtnClick = e => {
@@ -47,7 +51,8 @@ const NoticeView = () => {
     }, []);
     
     const pageBtn = useCallback(() => {
-        const pages = dummyData.total_pages; // 5
+        const pages = 5;
+        // data.total_pages;
         const pageNumber = [];
         for(let i = 0; i < pages; i++) {
             pageNumber.push(
@@ -55,7 +60,7 @@ const NoticeView = () => {
             );
         }
         return pageNumber;
-    }, [page, dummyData, setPageNumberClassName]);
+    }, [page, setPageNumberClassName]);
 
     return (
         <S.Background>
@@ -63,7 +68,7 @@ const NoticeView = () => {
             <S.LWhiteBox>
                 <div>
                     <S.Notice>공지사항</S.Notice>
-                    <Link to='/notice'><S.Write>쓰기/</S.Write></Link>
+                    <Link to='/notice'><S.Write>쓰기</S.Write></Link>
                     <S.Watch>보기</S.Watch>
                 </div>
                 <div>
@@ -72,14 +77,17 @@ const NoticeView = () => {
                         <div>작성일</div>
                     </S.NoticeTitle>
                     <ul>
-                        {data.map(data => {
+                        {data &&
+                        data.results &&
+                        data.results.map(data => {
                             return (
-                                <Link to='/notice/view-notice'>
-                                    <NoticeLine 
-                                        title={data.title}
-                                        date={data.date}
-                                    />
-                                </Link>
+                                <NoticeLine 
+                                    key={data.id}
+                                    id={data.id}
+                                    title={data.title}
+                                    date={data['created_at']}
+                                    onClick={() => history.push(`/notice/view-notice?id=${data.id}`)}
+                                />
                             )
                         })}
                     </ul>
