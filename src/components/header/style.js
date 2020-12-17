@@ -34,20 +34,14 @@ export const Pear = style.div `
     }
     margin-right: 7%;
 `;
-export const Circle = style.div `
-    width: 146px;
-    height: 146px;
-    border-radius: 75px;
-    background-color: #6363EF;
-    position: absolute;
-    top: -29px;
-    right: -38px;
-    z-index: -1;
-`;
 export const Logout = style.div `
-    font-size: 1.125rem;
-    color: white;
-    position: absolute;
-    top: 73px;
-    right: 51px;
+    width: 90px;
+    height: 30px;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #1919b1;
+    cursor: pointer;
+    border-bottom: 3px solid  #1919b1;
+    margin-left: 150px;
+    margin-top: 15px;
 `;
