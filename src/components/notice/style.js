@@ -28,6 +28,7 @@ export const WhiteBox = style.div `
     > div:first-child {
         display: flex;
         margin: 46px 0 23px 63px;
+        align-items: center;
     }
     > div:last-child {
         width: 75.26vw;
@@ -58,18 +59,28 @@ export const LWhiteBox = style(WhiteBox)`
         margin-top: 3%;
     }
 `;
-export const LWrite = style.div `
-    font-size: 30px;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    color: #5D6BC9;
+export const LWrite = style.button `
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    background-color: #5d6bc9;
+    border: none;
+    color: white;
     cursor: pointer;
+    border-radius: 15px;
+    margin-right: 10px;
 `;
-export const LWatch = style.div `
-    font-size: 22px;
-    margin-left: 10px;
-    margin-top: 10px;
+export const LWatch = style.button `
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    background-color: #cfcfcf;
+    border: none;
+    color: white;
     cursor: pointer;
-    color: black;
+    border-radius: 15px;
 `;
 export const Title = style.input `
     width: 100%;
@@ -149,21 +160,18 @@ export const Addflie = style.div `
 `;
 
 /* 공지사항 보기 */
-export const Write = style.div `
-    font-size: 22px;
-    cursor: pointer;
-    margin-top: 10px;
-    color: black;
+export const Write = style(LWrite) `
+    background-color: #cfcfcf;
 `;
-export const Watch = style.div `
+export const Watch = style(LWatch) `
+    background-color: #5d6bc9;
+`;
+export const Notice = style.div `
     font-size: 30px;
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     color: #5D6BC9;
     margin: 0 10px;
     cursor: pointer;
-`;
-export const Notice = style(Watch) `
-    cursor: default;
 `;
 export const NoticeTitle = style.div `
     width: 75.27vw;
