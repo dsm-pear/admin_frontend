@@ -1,26 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../header/Header';
 import Line from './Line';
+import { Api, onRefresh } from '../../api/api';
 
 const Question = () => {
-    const dummyData = [{
-        title: '승인되었다는 이메일을 받았는데 게시글에 올라가있지 않습니다.',
-        date: '2020.10.28',
-        email: 'rlagPwns@rlagPwns',
-        contents: '이메일이 잘못 온 건지 저만 안 보이는 건지 모르겠습니다.'
-    }, {
-        title: '마이페이지에 보고서가 안 보여요',
-        date: '2020.11.16',
-        email: 'rlagPwns@rlagPwns',
-        contents: '어제까지만 해도 잘 보였는데 오늘 갑자기 사라졌어요'
-    }, {
-        title: '문의사항 드립니다',
-        date: '2020.11.16',
-        email: 'rlagPwns@rlagPwns',
-        contents: '문의사항 입니다'
-    }]
-    const [data, setData] = useState(dummyData);
+    const [page, setPage] = useState(0);
+    const [data, setData] = useState();
+    setPage(1);
+
+    useEffect(() => {
+        const ViewQuestion = () => {
+            Api.get(`/questions?page=${page}`, {
+                body: {
+
+                },
+                headers: {
+                    Authorization: localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((err) => {
+                switch(err.response.status) {
+                    case 400:
+                        alert('문의사항 불러오기를 실패했습니다.');
+                        break;
+                    case 403:
+                        onRefresh()
+                        .then(() => {
+                            ViewQuestion()
+                        })
+                        break;
+                    default:
+                        break;
+                }
+            })
+        }
+        ViewQuestion();
+    }, [])
+
     return (
         <S.Background>
             <Header />
@@ -28,14 +48,16 @@ const Question = () => {
                 <S.Title>문의사항</S.Title>
                 <S.Scontents>
                     <div>
-                        {data.map(data => {
+                        {data &&
+                        data.results &&
+                        data.map(data => {
                             return (
                                 <Line 
-                                    title={data.title}
+                                    key={data.id}
+                                    id={data.id}
                                     date={data.date}
                                     email={data.email}
-                                    contents={data.contents}
-                                    setData={setData}
+                                    description={data.description}
                                 />
                             )
                         })}
