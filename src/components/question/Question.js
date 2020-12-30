@@ -2,25 +2,25 @@ import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../header/Header';
 import Line from './Line';
-import { Api, onRefresh } from '../../api/api';
+import { Api, useRefresh } from '../../api/api';
 
 const Question = () => {
     const [page, setPage] = useState(0);
     const [data, setData] = useState();
     setPage(1);
 
+    const refreshHandler = useRefresh();
+
     useEffect(() => {
         const ViewQuestion = () => {
             Api.get(`/questions?page=${page}`, {
-                body: {
-
-                },
+                body: page,
                 headers: {
                     Authorization: localStorage.getItem('access_token')
                 }
             })
             .then((res) => {
-                setData(res.data);
+                setData((prevData) => [...prevData, ...res.data]);
             })
             .catch((err) => {
                 switch(err.response.status) {
@@ -28,7 +28,7 @@ const Question = () => {
                         alert('문의사항 불러오기를 실패했습니다.');
                         break;
                     case 403:
-                        onRefresh()
+                        refreshHandler()
                         .then(() => {
                             ViewQuestion()
                         })
@@ -39,7 +39,7 @@ const Question = () => {
             })
         }
         ViewQuestion();
-    }, [])
+    }, [page, refreshHandler])
 
     return (
         <S.Background>
