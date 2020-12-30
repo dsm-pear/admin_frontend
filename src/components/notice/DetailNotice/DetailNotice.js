@@ -4,11 +4,12 @@ import Header from '../../header/Header';
 import { Link } from 'react-router-dom';
 import { Download } from '../../../assets';
 import DeleteNotice from './DeleteNotice';
-import { Api } from '../../../api/api';
+import { Api, useRefresh, FileApi } from '../../../api/api';
 
 const DetailNotice = ({id}) => {
-
     const [data, setData] = useState();
+    const refreshHandler = useRefresh();
+    const [files, setFiles] = useState();
 
     useEffect(() => {
         const ViewDetailNotice = () => {
@@ -21,11 +22,18 @@ const DetailNotice = ({id}) => {
             setData(res.data);
         })
         .catch((err) => {
-            switch(err.response.stauts) {
+            switch(err.response.status) {
                 case 400:
-                    alert('공지사항 불러오기에 실패했습니다.');
+                    alert('공지사항 불러오기를 실패했습니다.');
                     break;
-                case 404:
+                case 403:
+                    refreshHandler()
+                    .then(() => {
+                        ViewDetailNotice();
+                    })
+                    break;
+                case 401:
+                case 422:
                     console.log(err);
                     break;
                 default:
@@ -33,13 +41,43 @@ const DetailNotice = ({id}) => {
             }
         })
         }
+        const GetFilesId = () => {
+            FileApi.get(`/notice/files/{notice_${id}}`, {
+                body: {
+                    notice_id: id
+                }
+            })
+            .then((res) => {
+                setFiles(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+        GetFilesId();
         ViewDetailNotice();
-    }, [])
+    }, [id, refreshHandler])
 
     const [isClick, setIsClick] = useState(false);
     const DeleteBtn = e => {
         setIsClick(true);
     }
+
+    const onDownloadBtnClick = () => {
+        FileApi.get(`notice/{file_${files.id}}`, {
+            body: {
+                files_id: files.id
+            }
+        })
+        .then(() => {
+            alert('다운로드 성공');
+        })
+        .catch((err) => {
+            alert('다운로드 실패');
+            console.log(err);
+        })
+    }
+
     return (
         <S.Background>
             <Header />
@@ -60,13 +98,13 @@ const DetailNotice = ({id}) => {
                 <S.Flie>
                     <div>첨부파일</div>
                     <S.BlackLine />
-                    <div>보고서 제출 양식.hwp</div>
-                    <img src={ Download } alt='다운로드'/>
+                    <div>{files.path}</div>
+                    <img src={ Download } alt='다운로드' onClick={onDownloadBtnClick}/>
                     <S.Preview>미리보기</S.Preview>
                 </S.Flie>
                 <S.Delete onClick={DeleteBtn}>삭제</S.Delete>
                 {isClick &&
-                    <DeleteNotice setIsClick={setIsClick} id={id}/>
+                    <DeleteNotice title={data.title} description={data.description} date={data.created_at} setIsClick={setIsClick} id={id}/>
                 }
                 <S.Modify>
                     <Link to='/notice/modify'>
