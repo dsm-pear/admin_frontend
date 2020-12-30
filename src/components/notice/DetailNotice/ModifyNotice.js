@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
 import { Upload, Img, LinkImg } from '../../../assets';
+import { FileApi } from '../../../api/api';
 
-const ModifyNotice = () => {
+const ModifyNotice = ({title, description, id}) => {
+    const [file, setFile] = useState();
+    const [changeTitle, setChangeTitle] = useState();
+    const [changeDescription, setDescription] = useState();
+
+    useEffect(() => {
+        const GetFileId = () => {
+            FileApi.post(`/notice/files/{notce_${id}}`, {
+                body: {
+                    notice_id: id,
+                }
+            })
+            .then((res) => {
+                setFile(res.data);
+            })
+            .catch((err) => {
+                alert('파일 불러오기 실패');
+                console.log(err);
+            })
+        }
+        GetFileId();
+    }, [])
+
+    const onTitleChange = e => {
+        setChangeTitle(e.target.value)
+    }
+
     return (
         <S.MBackground>
             <Header />
@@ -13,7 +40,7 @@ const ModifyNotice = () => {
                     <S.MLWrite>수정</S.MLWrite>
                 </div>
                 <div>
-                    <S.MTitle placeholder="제목을 입력해주세요." value='보고서 제출 양식 알려드리겠습니다' />
+                    <S.MTitle placeholder="제목을 입력해주세요." value={title} onChange={onTitleChange} />
                     <S.MContentsBox>
                         <div>
                             <S.MContentsTitle>내용입력</S.MContentsTitle>
@@ -28,10 +55,10 @@ const ModifyNotice = () => {
                                 </S.MAdd>
                             </div>
                         </div>
-                        <S.MContents placeholder="내용을 입력해주세요." value='보고서 제출 양식 링크로 첨부해 두었으니 확인해보시고 제출 부탁드립니다.'/>
+                        <S.MContents placeholder="내용을 입력해주세요." value={description}/>
                         <S.MAddflie>
                             파일첨부
-                            <div>보고서 제출 양식.hwp</div>
+                            <div></div>
                         </S.MAddflie>
                         <S.MUpload>
                             <img src={ Upload } alt="업로드" width="12px" height="12px"/>
