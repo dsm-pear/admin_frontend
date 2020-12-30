@@ -3,11 +3,12 @@ import * as S from './style';
 import DeleteComment from './DeleteComment';
 import { Profile } from '../../../assets';
 
-const Comment = ({name, text, date, setData}) => {
+const Comment = ({name, text, date, setData, Rid, Cid}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const onClick = e => {
         setIsModalOpen(true);
     }
+
     return (
         <S.Comment>
             <img src={Profile} alt='프로필'/>
@@ -16,7 +17,7 @@ const Comment = ({name, text, date, setData}) => {
             <div>{date}</div>
             <S.DeleteBtn className='DeleteBtn' onClick={onClick}>삭제</S.DeleteBtn>
             {isModalOpen &&
-                <DeleteComment setIsModalOpen={setIsModalOpen} setData={setData} />
+                <DeleteComment setIsModalOpen={setIsModalOpen} setData={setData} Rid={Rid} Cid={Cid}/>
             }
         </S.Comment>
     )
