@@ -106,6 +106,9 @@ export const ContentsBox = style.div `
     > div:first-child > div:last-child {
         display: flex;
         margin-right: 20px;
+        > input {
+            display: none;
+        }
     }
 `;
 export const ContentsTitle = style.div `
@@ -122,7 +125,7 @@ export const Contents = style.textarea `
     display: block;
     margin: 0 auto;
 `;
-export const Add = style.div `
+export const Label = style.label `
     width: 77px;
     height: 22px;
     background-color: #e1e1e1;
