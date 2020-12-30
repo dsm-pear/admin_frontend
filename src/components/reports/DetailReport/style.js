@@ -79,9 +79,10 @@ export const Title = style.div `
         width: 12.36%;
         text-align: center;
     }
-    > div:nth-child(3) {
-        margin-left: 26px;
-    }
+`;
+export const TeamMember = style.div `
+    width: 15%;
+    margin-left: 10px;
 `;
 export const Contents = style.div `
     width: 75.97vw;

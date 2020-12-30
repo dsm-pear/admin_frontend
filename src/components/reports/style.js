@@ -115,6 +115,17 @@ export const SearchInput = style.input `
     border-radius: 0 5px 5px 0px;
 `;
 
+export const SearchBtn = style.button `
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: #5D38DA;
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+`;
+
 /* 제목 */
 export const Title = style.div `
     font-size: 24px;
