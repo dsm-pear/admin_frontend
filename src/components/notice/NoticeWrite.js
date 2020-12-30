@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import * as S from './style';
 import Header from '../header/Header';
 import { Upload, Img, LinkImg } from '../../assets';
-import { Api } from '../../api/api';
+import { Api, FileApi, useRefresh } from '../../api/api';
 
 const NoticeWirte = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [file, setFile] = useState([]);
+    const refreshHandler = useRefresh();
 
     const NoticeWirte = () => {
         Api.post('/notice', {
             body: {
                 title,
-                description,
-                file
+                description
             },
             headers: {
                 Authorization: localStorage.getItem('access_token')
@@ -25,8 +25,18 @@ const NoticeWirte = () => {
             alert('공지사항 작성을 성공했습니다.');
         })
         .catch((err) => {
-            if(err.response.status === 400) {
-                alert('공지사항 작성을 실패했습니다.');
+            switch(err.status) {
+                case 400:
+                    alert('공지사항 작성을 실패했습니다.');
+                    break;
+                case 403:
+                    refreshHandler()
+                    .then(() => {
+                        NoticeWirte()
+                    })
+                    break;
+                default:
+                    break;
             }
         })
     }
@@ -53,14 +63,16 @@ const NoticeWirte = () => {
                         <div>
                             <S.ContentsTitle>내용입력</S.ContentsTitle>
                             <div>
-                                <S.Add>
-                                    <img  src={ LinkImg } alt="파일첨부"/>
+                                <S.Label for="ffile">
+                                    <img src={ LinkImg } alt="파일첨부"/>
                                     파일첨부
-                                </S.Add>
-                                <S.Add>
+                                </S.Label>
+                                <input type="file" accept=".pdf, .hwp, .txt" id="ffile" name='noticeFile'/>
+                                <S.Label for="img">
                                     <img src={ Img } width="13px" height="13px" alt="사진첨부"/>
                                     사진첨부
-                                </S.Add>
+                                </S.Label>
+                                <input type="file" accept=".png, .jpeg, .jpg, .svg" id="img"/>
                             </div>
                         </div>
                         <S.Contents placeholder="내용을 입력해주세요." onChange={onDescriptionChange}/>
