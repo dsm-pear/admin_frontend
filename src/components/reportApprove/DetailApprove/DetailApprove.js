@@ -1,25 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
 import { Download, Send } from '../../../assets';
 import ModalApprove from './ModalApprove';
 import ModalComment from './ModalComment';
+import { Api, useRefresh } from '../../../api/api';
 
-const DetailApprove = () => {
+const DetailApprove = ({id}) => {
     const [isApproveClick, setIsApproveClick] = useState(false);
     const [isDisapproveClick, setIsDisapproveClick] = useState(false);
     const [isSend, setIsSend] = useState(false);
-    const onApproveClick = e => {
+    const [data, setData] = useState();
+    const [comment, setComment] = useState('');
+    const onApproveClick = () => {
         setIsApproveClick(true);
         setIsDisapproveClick(false);
     }
-    const onDisapproveClick = e => {
+    const onDisapproveClick = () => {
         setIsApproveClick(false);
         setIsDisapproveClick(true);
     }
-    const onSendClick = e => {
+    const onSendClick = () => {
         setIsSend(true);
     }
+    const onCommentChange = e => {
+        setComment(e.target.value);
+    }
+
+    const refreshHandler = useRefresh();
+
+    useEffect(() => {
+        const ViewDetailApproveReport = () => {
+            Api.get(`/request/<report_${id}>`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((err) => {
+                switch(err.response.status) {
+                    case 400:
+                        alert('보고서 불러오기를 실패했습니다.');
+                        break;
+                    case 403:
+                        refreshHandler()
+                        .then(() => {
+                            ViewDetailApproveReport();
+                        })
+                        break;
+                    case 401:
+                    case 422:
+                        console.log(err);
+                        break;
+                    default:
+                        break;
+                };
+            })
+        }
+        ViewDetailApproveReport();
+    }, [id, refreshHandler])
+
     return(
         <S.Background>
             <Header />
@@ -27,36 +69,43 @@ const DetailApprove = () => {
                 <S.TitleBox>
                     <div>작성자</div>
                     <S.Line />
-                    <div>김혜준</div>
+                    <div>{data.member[0]}</div>
                     <div>작성일</div>
                     <S.Line />
-                    <div>2020.11.14</div>
+                    <div>{data['created_at']}</div>
                 </S.TitleBox>
                 <S.Title>
                     <div>제목</div>
                     <S.BlackLine />
-                    <div>탐책</div>
+                    <div>{data.title}</div>
                 </S.Title>
                 <S.Contents>
-                    팀 프로젝트 '탐책'은 이러한 아이디어로 프로젝트를 계획했으며 이러한 기능을 사용할 수 있습니다.
+                    {data.description}
                 </S.Contents>
                 <S.Team>
                     <div>TEAM MEMBER</div>
                     <S.SBlackLine />
-                    <div>김혜준, 김혜준, 김혜준</div>
+                    {data.member.map(data => {
+                        return(
+                            <S.TeamMember>
+                                <div>{data['user_email']}</div>
+                                <div>{data.name}</div>
+                            </S.TeamMember>
+                        )
+                    })}
                 </S.Team>
                 <div>
                     <S.Github>
                         <div>GitHub</div>
                         <S.SBlackLine />
-                        <a href='https://github.com/Tamchack' target="_blank" rel="noopener noreferrer">
-                        https://github.com/Tamchack
+                        <a href={data.github} target="_blank" rel="noopener noreferrer">
+                        {data.github}
                         </a>
                     </S.Github>
                     <S.LanguageBox>
                         <div>사용언어</div>
                         <S.SBlackLine />
-                        <S.Language>JAVA</S.Language>
+                        <S.Language>{data.languages}</S.Language>
                     </S.LanguageBox>
                 </div>
                 <S.Flie>
@@ -73,17 +122,17 @@ const DetailApprove = () => {
                 {isDisapproveClick &&
                     <S.Comment>
                         <div>COMMENT:</div>
-                        <S.CommentInput />
+                        <S.CommentInput onChange={onCommentChange} />
                         <S.Send onClick={onSendClick}>
                             <img src={Send} alt='send'/>
                         </S.Send>
                     </S.Comment>
                 }
                 {isSend &&
-                    <ModalComment setIsDisapproveClick={setIsDisapproveClick} setIsSend={setIsSend} />
+                    <ModalComment setIsDisapproveClick={setIsDisapproveClick} setIsSend={setIsSend} id={data.id} />
                 }
                 {isApproveClick &&
-                    <ModalApprove setIsApproveClick={setIsApproveClick}/>
+                    <ModalApprove setIsApproveClick={setIsApproveClick} id={data.id} comment={comment}/>
                 }
             </S.WhiteBox>
         </S.Background>
