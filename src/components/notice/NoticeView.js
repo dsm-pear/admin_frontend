@@ -3,16 +3,17 @@ import { Link, useHistory } from 'react-router-dom';
 import * as S from './style';
 import Header from '../header/Header';
 import NoticeLine from './NoticeLine';
-import { Api, onRefresh } from '../../api/api';
+import { Api, useRefresh } from '../../api/api';
 
 const NoticeView = () => {
     const history = useHistory();
     const [page, pageChange] = useState(1);
-    const [data, setData] = useState();
+    const [data, setData] = useState({total_pages: 0});
+    const refreshHandler = useRefresh();
 
     useEffect(() => {
         const ViewNotice = () => {
-            Api.get(`/notice?page=${page}`, {
+            Api.get('/notice', {
                 body: page,
                 headers: {
                     Authorization: localStorage.getItem('access_token')
@@ -24,10 +25,10 @@ const NoticeView = () => {
             .catch((err) => {
                 switch(err.response.status) {
                     case 400:
-                        alert('공지사항 불러오기에 실패했습니다.');
+                        alert('공지사항 불러오기를 실패했습니다.');
                         break;
                     case 403:
-                        onRefresh()
+                        refreshHandler()
                         .then(() => {
                             ViewNotice()
                         })
@@ -38,7 +39,7 @@ const NoticeView = () => {
             })
         }
         ViewNotice();
-    }, [page])
+    }, [page, refreshHandler])
 
     /* 페이지 버튼 클릭시 */
     const onPageBtnClick = e => {
@@ -51,8 +52,7 @@ const NoticeView = () => {
     }, []);
     
     const pageBtn = useCallback(() => {
-        const pages = 5;
-        // data.total_pages;
+        const pages = data.total_pages;
         const pageNumber = [];
         for(let i = 0; i < pages; i++) {
             pageNumber.push(
@@ -60,7 +60,7 @@ const NoticeView = () => {
             );
         }
         return pageNumber;
-    }, [page, setPageNumberClassName]);
+    }, [page, data.total_pages, setPageNumberClassName]);
 
     return (
         <S.Background>
