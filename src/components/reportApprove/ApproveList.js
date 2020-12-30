@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as S from './style';
-import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import ReportLine from './ReportLine';
-import { Api, onRefresh } from '../../api/api';
+import { Api, useRefresh } from '../../api/api';
 
 const ApproveList = () => {
-    const [page, setPage] = useState();
+    const history = useHistory();
+    const [page, setPage] = useState(1);
     const [data, setData] = useState();
-    setPage(1);
+    const refreshHandler = useRefresh();
 
     useEffect(() => {
         const ViewList = () => {
@@ -19,7 +20,7 @@ const ApproveList = () => {
                 }
             })
             .then((res) => {
-                setData(res.data);
+                setData((prevData) => [...prevData, ...res.data]);
             })
             .catch((err) => {
                 switch(err.response.status) {
@@ -27,7 +28,7 @@ const ApproveList = () => {
                         alert('보고서 불러오기를 실패했습니다!');
                         break;
                     case 403:
-                        onRefresh()
+                        refreshHandler()
                         .then(() => {
                             ViewList()
                         })
@@ -38,7 +39,7 @@ const ApproveList = () => {
             })
         }
         ViewList();
-    }, [page])
+    }, [page, refreshHandler])
     
     return (
         <S.Background>
@@ -51,14 +52,13 @@ const ApproveList = () => {
                         data.results &&
                         data.results.map(data => {
                             return (
-                                <Link to='/approve/view-approve-report'>
-                                    <ReportLine 
-                                        key={data.id}
-                                        number={data.id}
-                                        title={data.title}
-                                        date={data['created_at']}
-                                    />
-                                </Link>
+                                <ReportLine 
+                                    key={data.id}
+                                    number={data.id}
+                                    title={data.title}
+                                    date={data['created_at']}
+                                    onClick={() => history.push(`/approve/view-approve-report?id=${data.id}`)}
+                                />
                             )
                         })}
                     </div>
