@@ -110,10 +110,10 @@ export const Team = style.div `
         width: 12%;
         text-align: center;
     }
-    > div:nth-child(3) {
-        width: 15%;
-        margin-left: 10px;
-    }
+`;
+export const TeamMember = style.div `
+    width: 15%;
+    margin-left: 10px;
 `;
 export const Github = style.div `
     width: 40.13vw;
