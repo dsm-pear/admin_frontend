@@ -1,7 +1,7 @@
 import React, {useState, } from 'react';
 import * as S from './style';
 import { Share } from '../../assets';
-import { Api, onRefresh } from '../../api/api';
+import { Api, useRefresh } from '../../api/api';
 import { useHistory } from 'react-router-dom';
 
 const Line = ({description, date, email, id}) => {
@@ -11,6 +11,8 @@ const Line = ({description, date, email, id}) => {
     const handleClick = () => {
         setIsOpened(!isOpened);
     }
+
+    const refreshHandler = useRefresh();
 
     const onDeleteBtnClick = () => {
         Api.delete(`/question/<question_${id}>`, {
@@ -25,8 +27,9 @@ const Line = ({description, date, email, id}) => {
             switch(err.response.status) {
                 case 400:
                     alert('문의사항 삭제를 실패했습니다.');
+                    break;
                 case 403:
-                    onRefresh()
+                    refreshHandler()
                     .then(() => {
                         onDeleteBtnClick()
                     })
