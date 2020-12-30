@@ -1,24 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
 import Comment from './Comment';
 import { Download } from '../../../assets';
+import { Api, FileApi, useRefresh } from '../../../api/api';
 
-const DetailReport = () => {
-    const dummyData = [{
-        name: '김혜준',
-        text: '이런 기능들이 구현된 웹 사이트라니 너무 멋있네요!',
-        date: '2020.11.15 01:48'
-    }, {
-        name: '김혜준',
-        text: '참신한 아이디어에 박수를 칩니다',
-        date: '2020.11.15 01:53'
-    }, {
-        name: '김혜준',
-        text: '보고서를 깔끔하게 잘 작성하셨네요!',
-        date: '2020.11.15 01:55'
-    }]
-    const [data] = useState(dummyData);
+const DetailReport = ({id}) => {
+    const [data, setData] = useState();
+    const [files, setFiles] = useState();
+    const [isTeam, setIsTeam] = useState(true);
+    const refreshHandler = useRefresh();
+
+    useEffect(() => {
+        const ViewDetailReport = () => {
+            Api.get(`/list/<report_${id}>`, {
+                headers: {
+                    Authorization: localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((err) => {
+                switch(err.response.stauts) {
+                    case 400:
+                        alert('보고서 불러오기를 실패했습니다.');
+                        break;
+                    case 403:
+                        refreshHandler()
+                        .then(() => {
+                            ViewDetailReport();
+                        })
+                        break;
+                    case 401:
+                    case 422:
+                        console.log(err);
+                        break;
+                    default:
+                        break;
+                }
+            })
+        }
+        const GetFilesId = () => {
+            FileApi.get(`/report/files/{report_${id}}`, {
+                body: {
+                    report_id: id
+                }
+            })
+            .then((res) => {
+                setFiles(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+        const setType = () => {
+            if(data.type === 'SOLE') {
+                setIsTeam(false);
+            }
+            else setIsTeam(true);
+        }
+        ViewDetailReport();
+        GetFilesId();
+        setType();
+    }, [id, refreshHandler])
+
+    const onDownloadBtnClick = () => {
+        FileApi.get(`/report/{file_${files.id}}`, {
+            body: {
+                files_id: files.id
+            }
+        })
+        .then(() => {
+            alert('다운로드 성공');
+        })
+        .catch((err) => {
+            alert('다운로드 실패');
+            console.log(err);
+        })
+    }
+
     return(
         <S.Background>
             <Header />
@@ -26,53 +87,65 @@ const DetailReport = () => {
                 <S.TitleBox>
                     <div>작성자</div>
                     <S.Line />
-                    <div>김혜준</div>
+                    <div>{data.type === 'TEAM' || data.type === 'CIRCLE' ? data.author : data.author[0].name}</div>
                     <div>작성일</div>
                     <S.Line />
-                    <div>2020.11.14</div>
+                    <div>{data['created_at']}</div>
                 </S.TitleBox>
                 <S.Title>
                     <div>제목</div>
                     <S.BlackLine />
-                    <div>탐책</div>
+                    <div>{data.title}</div>
                 </S.Title>
                 <S.Contents>
-                    팀 프로젝트 '탐책'은 이러한 아이디어로 프로젝트를 계획했으며 이러한 기능을 사용할 수 있습니다.
+                    {data.description}
                 </S.Contents>
-                <S.Team>
-                    <div>TEAM MEMBER</div>
-                    <S.SBlackLine />
-                    <div>김혜준, 김혜준, 김혜준</div>
-                </S.Team>
+                {isTeam &&
+                    <S.Team>
+                        <div>TEAM MEMBER</div>
+                        <S.SBlackLine />
+                        {data.member.map(data => {
+                            return(
+                                <S.TeamMember>
+                                    <div>{data['user_email']}</div>
+                                    <div>{data.name}</div>
+                                </S.TeamMember>
+                            )
+                        })}
+                    </S.Team>
+                }
                 <div>
                     <S.Github>
                         <div>GitHub</div>
                         <S.SBlackLine />
-                        <a href='https://github.com/Tamchack' target="_blank" rel="noopener noreferrer">
-                        https://github.com/Tamchack
+                        <a href={data.github} target="_blank" rel="noopener noreferrer">
+                        {data.github}
                         </a>
                     </S.Github>
                     <S.LanguageBox>
                         <div>사용언어</div>
                         <S.SBlackLine />
-                        <S.Language>JAVA</S.Language>
+                        <S.Language>{data.languages}</S.Language>
                     </S.LanguageBox>
                 </div>
                 <S.Flie>
                     <div>첨부파일</div>
                     <S.BlackLine />
-                    <div>팀 프로젝트 보고서.pdf</div>
-                    <img src={ Download } alt='다운로드'/>
+                    <div>{files.path}</div>
+                    <img src={ Download } alt='다운로드' onClick={onDownloadBtnClick}/>
                     <S.Preview>미리보기</S.Preview>
                 </S.Flie>
                 <S.CommentTitle>댓글</S.CommentTitle>
                 <S.CommentBox>
-                    {data.map(data => {
+                    {data.comments.map(data => {
                         return (
                             <Comment 
+                                key={data.id}
+                                Rid={id}
+                                Cid={data.id}
                                 name={data.name}
-                                text={data.text}
-                                date={data.date}
+                                text={data.content}
+                                date={data['created_at']}
                             />
                         )
                     })}
