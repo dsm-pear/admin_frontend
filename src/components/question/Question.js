@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../header/Header';
 import Line from './Line';
@@ -9,17 +9,20 @@ const Question = () => {
   const [data, setData] = useState([]);
   const [rdata, setRData] = useState([]);
   const refreshHandler = useRefresh();
+  const [isPage, setIsPage] = useState(true);
 
   const ViewQuestion = (page) => {
     Api.get('/question', {
-      body: page,
+      params: {
+        page,
+      },
       headers: {
         Authorization: localStorage.getItem('access_token'),
       },
     })
       .then((res) => {
         setData(res.data);
-        setRData((prevData) => [...res.data.results, ...prevData]);
+        setRData((prevData) => [...prevData, ...res.data.results]);
       })
       .catch((err) => {
         switch (err.response.status) {
@@ -36,23 +39,31 @@ const Question = () => {
         }
       });
   };
+
   useEffect(() => {
-    console.log(page);
-    ViewQuestion(page);
+    {
+      isPage && ViewQuestion(page);
+    }
   }, [page]);
 
   const _infiniteScroll = () => {
     let scrollHeight = document.querySelector('.questionBox').scrollHeight;
     let scrollTop = document.querySelector('.questionBox').scrollTop;
     let clientHeight = document.querySelector('.questionBox').clientHeight;
-    if (scrollTop + clientHeight >= scrollHeight) {
-      setPage((prevPage) => prevPage + 1);
+
+    if (scrollTop > 0 && scrollTop + clientHeight >= scrollHeight - 1) {
+      if (page + 1 >= data.total_pages) {
+        setIsPage(false);
+      } else setPage((prevPage) => prevPage + 1);
     }
   };
 
   useEffect(() => {
     window.addEventListener('scroll', _infiniteScroll, true);
-  }, [_infiniteScroll]);
+    return () => {
+      window.removeEventListener('scroll', _infiniteScroll);
+    };
+  }, []);
 
   return (
     <S.Background>
