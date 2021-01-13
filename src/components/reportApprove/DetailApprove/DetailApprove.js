@@ -5,138 +5,166 @@ import { Download, Send } from '../../../assets';
 import ModalApprove from './ModalApprove';
 import ModalComment from './ModalComment';
 import { Api, useRefresh } from '../../../api/api';
+import { useParams } from 'react-router-dom';
 
-const DetailApprove = ({id}) => {
-    const [isApproveClick, setIsApproveClick] = useState(false);
-    const [isDisapproveClick, setIsDisapproveClick] = useState(false);
-    const [isSend, setIsSend] = useState(false);
-    const [data, setData] = useState();
-    const [comment, setComment] = useState('');
-    const onApproveClick = () => {
-        setIsApproveClick(true);
-        setIsDisapproveClick(false);
-    }
-    const onDisapproveClick = () => {
-        setIsApproveClick(false);
-        setIsDisapproveClick(true);
-    }
-    const onSendClick = () => {
-        setIsSend(true);
-    }
-    const onCommentChange = e => {
-        setComment(e.target.value);
-    }
+const DetailApprove = () => {
+  const refreshHandler = useRefresh();
+  const [isApproveClick, setIsApproveClick] = useState(false);
+  const [isDisapproveClick, setIsDisapproveClick] = useState(false);
+  const [isSend, setIsSend] = useState(false);
+  const [data, setData] = useState({ created_at: 0, languages: '', author: '' });
+  const [comment, setComment] = useState('');
+  let { id } = useParams();
+  // 보고서 날짜
+  const date = new Date(data.created_at);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDay();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const showDate = `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
+  // 사용 언어
+  const language = data.languages.split(',');
 
-    const refreshHandler = useRefresh();
+  // 승인버튼
+  const onApproveClick = () => {
+    setIsApproveClick(true);
+    setIsDisapproveClick(false);
+  };
+  // 승인거부버튼
+  const onDisapproveClick = () => {
+    setIsApproveClick(false);
+    setIsDisapproveClick(true);
+  };
+  // 전송버튼
+  const onSendClick = () => {
+    setIsSend(true);
+  };
+  const onCommentChange = (e) => {
+    setComment(e.target.value);
+  };
 
-    useEffect(() => {
-        const ViewDetailApproveReport = () => {
-            Api.get(`/request/<report_${id}>`, {
-                headers: {
-                    Authorization: localStorage.getItem('access_token')
-                }
-            })
-            .then((res) => {
-                setData(res.data);
-            })
-            .catch((err) => {
-                switch(err.response.status) {
-                    case 400:
-                        alert('보고서 불러오기를 실패했습니다.');
-                        break;
-                    case 403:
-                        refreshHandler()
-                        .then(() => {
-                            ViewDetailApproveReport();
-                        })
-                        break;
-                    case 401:
-                    case 422:
-                        console.log(err);
-                        break;
-                    default:
-                        break;
-                };
-            })
-        }
-        ViewDetailApproveReport();
-    }, [id, refreshHandler])
+  useEffect(() => {
+    const ViewDetailApproveReport = () => {
+      Api.get(`/request/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem('access_token'),
+        },
+      })
+        .then((res) => {
+          setData(res.data);
+        })
+        .catch((err) => {
+          switch (err.response.status) {
+            case 400:
+              alert('보고서 불러오기를 실패했습니다.');
+              break;
+            case 403:
+              refreshHandler().then(() => {
+                ViewDetailApproveReport();
+              });
+              break;
+            case 401:
+            case 422:
+              console.log(err);
+              break;
+            default:
+              break;
+          }
+        });
+    };
+    ViewDetailApproveReport();
+  }, []);
 
-    return(
-        <S.Background>
-            <Header />
-            <S.WhiteBox>
-                <S.TitleBox>
-                    <div>작성자</div>
-                    <S.Line />
-                    <div>{data.member[0]}</div>
-                    <div>작성일</div>
-                    <S.Line />
-                    <div>{data['created_at']}</div>
-                </S.TitleBox>
-                <S.Title>
-                    <div>제목</div>
-                    <S.BlackLine />
-                    <div>{data.title}</div>
-                </S.Title>
-                <S.Contents>
-                    {data.description}
-                </S.Contents>
-                <S.Team>
-                    <div>TEAM MEMBER</div>
-                    <S.SBlackLine />
-                    {data.member.map(data => {
-                        return(
-                            <S.TeamMember>
-                                <div>{data['user_email']}</div>
-                                <div>{data.name}</div>
-                            </S.TeamMember>
-                        )
-                    })}
-                </S.Team>
-                <div>
-                    <S.Github>
-                        <div>GitHub</div>
-                        <S.SBlackLine />
-                        <a href={data.github} target="_blank" rel="noopener noreferrer">
-                        {data.github}
-                        </a>
-                    </S.Github>
-                    <S.LanguageBox>
-                        <div>사용언어</div>
-                        <S.SBlackLine />
-                        <S.Language>{data.languages}</S.Language>
-                    </S.LanguageBox>
-                </div>
-                <S.Flie>
-                    <div>첨부파일</div>
-                    <S.BlackLine />
-                    <div>팀 프로젝트 보고서.pdf</div>
-                    <img src={Download} alt='다운로드'/>
-                    <S.Preview>미리보기</S.Preview>
-                </S.Flie>
-                <S.Btn>
-                    <S.DisApproveBtn onClick={onDisapproveClick} color={isDisapproveClick}>승인거부</S.DisApproveBtn>
-                    <S.ApproveBtn onClick={onApproveClick} color={isApproveClick}>승인</S.ApproveBtn>
-                </S.Btn>
-                {isDisapproveClick &&
-                    <S.Comment>
-                        <div>COMMENT:</div>
-                        <S.CommentInput onChange={onCommentChange} />
-                        <S.Send onClick={onSendClick}>
-                            <img src={Send} alt='send'/>
-                        </S.Send>
-                    </S.Comment>
-                }
-                {isSend &&
-                    <ModalComment setIsDisapproveClick={setIsDisapproveClick} setIsSend={setIsSend} id={data.id} />
-                }
-                {isApproveClick &&
-                    <ModalApprove setIsApproveClick={setIsApproveClick} id={data.id} comment={comment}/>
-                }
-            </S.WhiteBox>
-        </S.Background>
-    )
-}
+  return (
+    <S.Background>
+      <Header />
+      <S.WhiteBox>
+        <S.TitleBox>
+          <div>작성자</div>
+          <S.Line />
+          <div>{data.author}</div>
+          <div>작성일</div>
+          <S.Line />
+          <div>{showDate}</div>
+        </S.TitleBox>
+        <S.Title>
+          <div>제목</div>
+          <S.BlackLine />
+          <div>{data.title}</div>
+        </S.Title>
+        <S.Contents>{data.description}</S.Contents>
+        {data.type === 'TEAM' ||
+          (data.type === 'CIRCLE' && (
+            <S.Team>
+              <div>TEAM MEMBER</div>
+              <S.SBlackLine />
+              {data &&
+                data.member &&
+                data.member.map((data) => {
+                  return (
+                    <S.TeamMember>
+                      <div>{data.name}</div>
+                      <div>{data.user_email}</div>
+                    </S.TeamMember>
+                  );
+                })}
+            </S.Team>
+          ))}
+        <S.GithubLanguageBox>
+          <S.Github>
+            <div>GitHub</div>
+            <S.SBlackLine />
+            <a href={data.github} target="_blank" rel="noopener noreferrer">
+              {data.github}
+            </a>
+          </S.Github>
+          <S.LanguageBox>
+            <div>사용언어</div>
+            <S.SBlackLine />
+            {language &&
+              language.map((language) => {
+                return <S.Language>{language}</S.Language>;
+              })}
+          </S.LanguageBox>
+        </S.GithubLanguageBox>
+        <S.Flie>
+          <div>첨부파일</div>
+          <S.BlackLine />
+          <div>팀 프로젝트 보고서.pdf</div>
+          <img src={Download} alt="다운로드" />
+          <S.Preview>미리보기</S.Preview>
+        </S.Flie>
+        <S.Btn>
+          <S.DisApproveBtn onClick={onDisapproveClick} color={isDisapproveClick}>
+            승인거부
+          </S.DisApproveBtn>
+          <S.ApproveBtn onClick={onApproveClick} color={isApproveClick}>
+            승인
+          </S.ApproveBtn>
+        </S.Btn>
+        {isDisapproveClick && (
+          <S.Comment>
+            <div>COMMENT:</div>
+            <S.CommentInput onChange={onCommentChange} />
+            <S.Send onClick={onSendClick}>
+              <img src={Send} alt="send" />
+            </S.Send>
+          </S.Comment>
+        )}
+        {isSend && (
+          <ModalComment
+            setIsDisapproveClick={setIsDisapproveClick}
+            setIsSend={setIsSend}
+            id={data.id}
+          />
+        )}
+        {isApproveClick && (
+          <ModalApprove setIsApproveClick={setIsApproveClick} id={data.id} comment={comment} />
+        )}
+      </S.WhiteBox>
+    </S.Background>
+  );
+};
 
 export default DetailApprove;
