@@ -1,10 +1,10 @@
 import style from 'styled-components';
 
-export const Flex = style.div `
+export const Flex = style.div`
     display: flex;
     margin-left: 6%
 `;
-export const Size = style.div `
+export const Size = style.div`
     width: 52.22vw;
     min-width: 752px;
     height: 56px;
@@ -17,7 +17,7 @@ export const Size = style.div `
         color: #1919B1;
     }
 `;
-export const Category = style.div `
+export const Category = style.div`
     font-size: 1.5rem;
     cursor: pointer;
     &:hover {
@@ -27,15 +27,15 @@ export const Category = style.div `
         color: black;
     }
 `;
-export const Pear = style.div `
+export const Pear = style.div`
     font-size: 1.5rem;
     > span {
         font-weight: bold;
     }
     margin-right: 7%;
 `;
-export const Logout = style.div `
-    width: 90px;
+export const Logout = style.div`
+    min-width: 90px;
     height: 30px;
     font-size: 1.4rem;
     text-align: center;
