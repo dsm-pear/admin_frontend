@@ -5,6 +5,7 @@ import { Api, useRefresh } from '../../api/api';
 
 const Line = ({ description, date, email, id, title }) => {
   const [isOpened, setIsOpened] = useState(false);
+  const showTitle = description.split('.');
 
   const handleClick = () => {
     setIsOpened(!isOpened);
@@ -41,7 +42,7 @@ const Line = ({ description, date, email, id, title }) => {
     <div>
       <S.LineBox onClick={handleClick}>
         <img src={Share} alt="share" />
-        <S.Qtitle>{title}</S.Qtitle>
+        <S.Qtitle>{showTitle[0]}</S.Qtitle>
         <S.QDate>{date}</S.QDate>
       </S.LineBox>
       {isOpened && (
