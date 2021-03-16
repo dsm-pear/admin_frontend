@@ -61,7 +61,8 @@ const Question = () => {
   useEffect(() => {
     window.addEventListener('scroll', _infiniteScroll, true);
     return () => {
-      window.removeEventListener('scroll', _infiniteScroll);
+      window.removeEventListener('scroll', _infiniteScroll, true);
+      console.log(1);
     };
   }, []);
 
