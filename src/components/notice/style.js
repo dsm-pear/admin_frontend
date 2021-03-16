@@ -42,7 +42,8 @@ export const LWhiteBox = style(WhiteBox)`
         margin: 8vh 0 23px 7.67vh;
     }
     > div:nth-child(2) {
-        width: 75.27vw;
+        width: 75.10vw;
+        height: 454px;
         margin: 0 auto;
         > ul {
             margin-top: 18px;
