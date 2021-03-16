@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Download } from '../../../assets';
 import DeleteNotice from './DeleteNotice';
 import { Api, useRefresh, FileApi } from '../../../api/api';
