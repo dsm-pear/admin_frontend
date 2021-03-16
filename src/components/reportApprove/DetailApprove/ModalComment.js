@@ -31,16 +31,19 @@ const ModalComment = ({ setIsDisapproveClick, setIsSend, id, comment }) => {
   };
 
   const onCommentBtnClick = () => {
-    Api.patch(`request/<report_${id}>`, {
-      body: {
+    Api.patch(
+      `/request/${id}`,
+      {
         is_accepted: 0,
         comment,
       },
-      headers: {
-        Authorization: localStorage.getItem('access_token'),
-      },
-    })
-      .then((res) => {
+      {
+        headers: {
+          Authorization: localStorage.getItem('access_token'),
+        },
+      }
+    )
+      .then(() => {
         alert('승인거부 완료');
         history.replace('/approve');
       })

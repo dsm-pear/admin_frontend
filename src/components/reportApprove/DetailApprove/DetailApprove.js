@@ -131,7 +131,7 @@ const DetailApprove = () => {
         <S.Flie>
           <div>첨부파일</div>
           <S.BlackLine />
-          <div>팀 프로젝트 보고서.pdf</div>
+          <div></div>
           <img src={Download} alt="다운로드" />
           <S.Preview>미리보기</S.Preview>
         </S.Flie>
@@ -157,11 +157,10 @@ const DetailApprove = () => {
             setIsDisapproveClick={setIsDisapproveClick}
             setIsSend={setIsSend}
             id={data.id}
+            comment={comment}
           />
         )}
-        {isApproveClick && (
-          <ModalApprove setIsApproveClick={setIsApproveClick} id={data.id} comment={comment} />
-        )}
+        {isApproveClick && <ModalApprove setIsApproveClick={setIsApproveClick} id={data.id} />}
       </S.WhiteBox>
     </S.Background>
   );

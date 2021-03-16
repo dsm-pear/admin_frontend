@@ -11,15 +11,18 @@ const ModalApprove = ({ setIsApproveClick, id }) => {
   };
 
   const onApproveBtnClick = () => {
-    Api.patch(`request/<report_${id}>`, {
-      body: {
+    Api.patch(
+      `/request/${id}`,
+      {
         is_accepted: 1,
       },
-      headers: {
-        Authorization: localStorage.getItem('access_token'),
-      },
-    })
-      .then((res) => {
+      {
+        headers: {
+          Authorization: localStorage.getItem('access_token'),
+        },
+      }
+    )
+      .then(() => {
         alert('승인 완료');
         history.replace('/approve');
       })
