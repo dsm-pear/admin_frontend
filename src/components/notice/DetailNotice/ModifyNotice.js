@@ -3,9 +3,10 @@ import * as S from './style';
 import Header from '../../header/Header';
 import { Upload, Img, LinkImg } from '../../../assets';
 import { Api, FileApi, useRefresh } from '../../../api/api';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const ModifyNotice = () => {
+  const history = useHistory();
   const refreshHandler = useRefresh();
   const [data, setData] = useState({ title: '' });
   const [file, setFile] = useState({ path: '' });
@@ -69,17 +70,21 @@ const ModifyNotice = () => {
   };
 
   const onUploadBtnClick = () => {
-    Api.patch(`/notice/${id}`, {
-      body: {
+    Api.patch(
+      `/notice/${id}`,
+      {
         title: changeTitle,
         description: changeDescription,
       },
-      headers: {
-        Authorization: localStorage.getItem('access_token'),
-      },
-    })
+      {
+        headers: {
+          Authorization: localStorage.getItem('access_token'),
+        },
+      }
+    )
       .then(() => {
         alert('공지사항 수정 완료');
+        history.replace('/notice/view');
       })
       .catch((err) => {
         switch (err.response.status) {
