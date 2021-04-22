@@ -44,17 +44,12 @@ const ModifyNotice = () => {
         });
     };
     const GetFileId = () => {
-      FileApi.post(`/notice/files/${id}`, {
-        body: {
-          notice_id: id,
-        },
-      })
+      FileApi.post(`/notice/files/${id}`)
         .then((res) => {
           setFile(res.data);
         })
         .catch((err) => {
           alert('파일 불러오기 실패');
-          console.log(err);
         });
     };
     ViewDetailNotice();
@@ -100,6 +95,26 @@ const ModifyNotice = () => {
             break;
         }
       });
+    const onFileClick = async () => {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await FileApi.put(
+        `/notice/${file.id}`,
+        {
+          notice_id: { id },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access-token')}`,
+          },
+        }
+      );
+      console.log(res);
+    };
+  };
+
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -120,14 +135,27 @@ const ModifyNotice = () => {
             <div>
               <S.MContentsTitle>내용입력</S.MContentsTitle>
               <div>
-                <S.MAdd>
+                <S.Label for="ffile">
                   <img src={LinkImg} alt="파일첨부" />
                   파일첨부
-                </S.MAdd>
-                <S.MAdd>
+                </S.Label>
+                <input
+                  type="file"
+                  accept=".pdf, .hwp, .txt"
+                  id="ffile"
+                  name="noticeFile"
+                  onChange={onFileChange}
+                />
+                <S.Label for="img">
                   <img src={Img} width="13px" height="13px" alt="사진첨부" />
                   사진첨부
-                </S.MAdd>
+                </S.Label>
+                <input
+                  type="file"
+                  accept=".png, .jpeg, .jpg, .svg"
+                  id="img"
+                  onChange={onFileChange}
+                />
               </div>
             </div>
             <S.MContents
