@@ -98,6 +98,7 @@ export const Flie = style.div`
         width: 20px;
         height: 17px;
         margin-left: 50px;
+        cursor: pointer;
     }
 `;
 export const Preview = style.button`
@@ -268,6 +269,9 @@ export const MContentsBox = style.div`
     > div:first-child > div:last-child {
         display: flex;
         margin-right: 20px;
+        > input {
+            display: none;
+        }
     }
 `;
 export const MContentsTitle = style.div`
@@ -283,22 +287,6 @@ export const MContents = style.textarea`
     background-color: rgba(0, 0, 0, 0.05);
     display: block;
     margin: 0 auto;
-`;
-export const MAdd = style.div`
-    width: 77px;
-    height: 22px;
-    background-color: #e1e1e1;
-    opacity: 0.58;
-    font-size: 9px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    > img {
-        margin-right: 2px;
-        width: 15px;
-        height: 14px;
-    }
 `;
 export const MUpload = style.div`
     width: 109px;
@@ -323,5 +311,21 @@ export const MAddflie = style.div`
     > div {
         margin-left: 25px;
         color: rgba(3, 1, 0, 0.45);
+    }
+`;
+export const Label = style.label`
+    width: 77px;
+    height: 22px;
+    background-color: #e1e1e1;
+    opacity: 0.58;
+    font-size: 9px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > img {
+        margin-right: 2px;
+        width: 15px;
+        height: 14px;
     }
 `;
