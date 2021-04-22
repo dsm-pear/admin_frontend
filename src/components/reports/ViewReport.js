@@ -12,6 +12,7 @@ const ViewReport = () => {
   const [isFourthClick, setIsFourthClick] = useState(false);
   const [filter, setFilter] = useState('');
   const [page, pageChange] = useState(1);
+  const [filterPage, setFilterPage] = useState(1);
   const [sort, setSort] = useState('');
   const [data, setData] = useState({ total_pages: 0 });
   const [select, setSelect] = useState('정렬');
@@ -33,19 +34,38 @@ const ViewReport = () => {
   const onBtnClick = (e) => {
     const number = Number(e.currentTarget.dataset.id);
     if (number === 1) {
-      setFilter(2021);
       setIsFirstClick(!isFirstClick);
+      if (!isFirstClick === true) {
+        setIsSecondClick(false);
+        setIsThirdClick(false);
+        setIsFourthClick(false);
+      }
+      setFilter(isFirstClick ? '' : e.currentTarget.dataset.type);
     } else if (number === 2) {
-      setFilter('SOLE');
       setIsSecondClick(!isSecondClick);
+      if (!isSecondClick === true) {
+        setIsFirstClick(false);
+        setIsThirdClick(false);
+        setIsFourthClick(false);
+      }
+      setFilter(isSecondClick ? '' : e.currentTarget.dataset.type);
     } else if (number === 3) {
-      setFilter('TEAM');
       setIsThirdClick(!isThirdClick);
+      if (!isThirdClick === true) {
+        setIsFirstClick(false);
+        setIsSecondClick(false);
+        setIsFourthClick(false);
+      }
+      setFilter(isThirdClick ? '' : e.currentTarget.dataset.type);
     } else {
-      setFilter('CIRCLE');
       setIsFourthClick(!isFourthClick);
+      if (!isFourthClick === true) {
+        setIsFirstClick(false);
+        setIsSecondClick(false);
+        setIsThirdClick(false);
+      }
+      setFilter(isFourthClick ? '' : e.currentTarget.dataset.type);
     }
-    onFilterBtnClick();
   };
 
   const ViewReport = (page) => {
@@ -74,9 +94,46 @@ const ViewReport = () => {
       });
   };
 
+  const onFilterBtnClick = (type, page) => {
+    Api.get(`/list/filter?q=${type}&page=${page}`, {
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        switch (err.response.status) {
+          case 400:
+            alert('보고서 불러오기 실패');
+            break;
+          case 403:
+            refreshHandler().then(() => {
+              onFilterBtnClick();
+            });
+            break;
+          default:
+            break;
+        }
+      });
+  };
+
   useEffect(() => {
-    ViewReport(page);
+    if (searchData === '') {
+      ViewReport(page);
+    } else {
+      onSearchBtnClick();
+    }
   }, [page]);
+
+  useEffect(() => {
+    if (filter === '') {
+      ViewReport(page);
+    } else {
+      onFilterBtnClick(filter, filterPage);
+    }
+  }, [filter, page, filterPage]);
 
   // 검색
   const onSearchBtnClick = () => {
@@ -107,37 +164,6 @@ const ViewReport = () => {
             break;
         }
       });
-    console.log(searchData);
-    console.log(select);
-  };
-
-  // 필터링
-  const onFilterBtnClick = () => {
-    Api.get('/list/filter', {
-      params: {
-        q: filter,
-      },
-      headers: {
-        Authorization: localStorage.getItem('access_token'),
-      },
-    })
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        switch (err.response.status) {
-          case 400:
-            alert('보고서 불러오기 실패');
-            break;
-          case 403:
-            refreshHandler().then(() => {
-              onFilterBtnClick();
-            });
-            break;
-          default:
-            break;
-        }
-      });
   };
 
   const onSearchValueChange = (e) => {
@@ -147,7 +173,11 @@ const ViewReport = () => {
   /* 페이지 버튼 클릭시 */
   const onPageBtnClick = (e) => {
     let id = e.target.dataset.id;
-    pageChange(id);
+    if (filter === '') {
+      pageChange(id);
+    } else {
+      setFilterPage(id);
+    }
   };
 
   const setPageNumberClassName = useCallback((nowPage, i) => {
@@ -159,19 +189,23 @@ const ViewReport = () => {
     const pageNumber = [];
     for (let i = 0; i < pages; i++) {
       pageNumber.push(
-        <div data-id={i + 1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>
+        <div
+          data-id={i + 1}
+          onClick={onPageBtnClick}
+          className={
+            filter === '' ? setPageNumberClassName(page, i) : setPageNumberClassName(filterPage, i)
+          }
+        >
           {i + 1}
         </div>
       );
     }
     return pageNumber;
-  }, [page, data.total_pages, setPageNumberClassName]);
+  }, [page, data.total_pages, setPageNumberClassName, filterPage]);
 
   // 파일 다운로드
   const onDownloadBtnClick = () => {
-    FileApi.get('/files', {
-      body: {},
-    })
+    FileApi.get(`/files`)
       .then(() => {
         alert('다운로드 성공');
       })
@@ -211,16 +245,16 @@ const ViewReport = () => {
         </div>
         <S.TitleLine>
           <S.Title>보고서 보기</S.Title>
-          <S.Button onClick={onBtnClick} color={isFirstClick} data-id="1">
+          <S.Button onClick={onBtnClick} color={isFirstClick} data-type="2021" data-id="1">
             2021
           </S.Button>
-          <S.Button onClick={onBtnClick} color={isSecondClick} data-id="2">
+          <S.Button onClick={onBtnClick} color={isSecondClick} data-type="SOLE" data-id="2">
             개인
           </S.Button>
-          <S.Button onClick={onBtnClick} color={isThirdClick} data-id="3">
+          <S.Button onClick={onBtnClick} color={isThirdClick} data-type="TEAM" data-id="3">
             팀
           </S.Button>
-          <S.Button onClick={onBtnClick} color={isFourthClick} data-id="4">
+          <S.Button onClick={onBtnClick} color={isFourthClick} data-type="CIRCLE" data-id="4">
             동아리
           </S.Button>
         </S.TitleLine>
