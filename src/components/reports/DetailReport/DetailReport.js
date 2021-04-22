@@ -52,13 +52,10 @@ const DetailReport = () => {
         });
     };
     const GetFilesId = () => {
-      FileApi.get(`/report/files/${id}`, {
-        body: {
-          report_id: id,
-        },
-      })
+      FileApi.get(`/report/files/${id}`)
         .then((res) => {
           setFiles(res.data);
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
@@ -69,18 +66,9 @@ const DetailReport = () => {
   }, [id]);
 
   const onDownloadBtnClick = () => {
-    FileApi.get(`/report/${files.id}`, {
-      body: {
-        files_id: files.id,
-      },
-    })
-      .then(() => {
-        alert('다운로드 성공');
-      })
-      .catch((err) => {
-        alert('다운로드 실패');
-        console.log(err);
-      });
+    const ATag = document.createElement('a');
+    ATag.href = `http://54.180.224.67:3000/report/${files.id}`;
+    ATag.click();
   };
 
   return (
