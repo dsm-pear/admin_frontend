@@ -124,6 +124,7 @@ export const SearchBtn = style.button`
     border-radius: 5px;
     margin-left: 5px;
     font-size: 12px;
+    cursor: pointer;
 `;
 
 /* 제목 */
