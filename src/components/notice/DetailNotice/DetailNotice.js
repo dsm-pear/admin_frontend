@@ -49,17 +49,15 @@ const DetailNotice = () => {
           }
         });
     };
+    // 파일 상태
     const GetFilesId = () => {
-      FileApi.get(`/notice/files/${id}`, {
-        body: {
-          notice_id: id,
-        },
-      })
+      FileApi.get(`/notice/files/${id}`, {})
         .then((res) => {
           setFiles(res.data);
+          console.log(res.data);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          setFiles();
         });
     };
     GetFilesId();
@@ -72,11 +70,7 @@ const DetailNotice = () => {
   };
 
   const onDownloadBtnClick = () => {
-    FileApi.get(`notice/${files.id}`, {
-      body: {
-        files_id: files.id,
-      },
-    })
+    FileApi.get(`/notice/${files.id}`)
       .then(() => {
         alert('다운로드 성공');
       })
@@ -104,9 +98,13 @@ const DetailNotice = () => {
         <S.Flie>
           <div>첨부파일</div>
           <S.BlackLine />
-          <div>{files.path}</div>
-          <img src={Download} alt="다운로드" onClick={onDownloadBtnClick} />
-          <S.Preview>미리보기</S.Preview>
+          {files && (
+            <>
+              <div>{files.path}</div>
+              <img src={Download} alt="다운로드" onClick={onDownloadBtnClick} />
+              <S.Preview>미리보기</S.Preview>
+            </>
+          )}
         </S.Flie>
         <S.Delete onClick={DeleteBtn}>삭제</S.Delete>
         {isClick && (
