@@ -4,7 +4,7 @@ import Header from '../../header/Header';
 import { Download, Send } from '../../../assets';
 import ModalApprove from './ModalApprove';
 import ModalComment from './ModalComment';
-import { Api, useRefresh } from '../../../api/api';
+import { Api, useRefresh, FileApi } from '../../../api/api';
 import { useParams } from 'react-router-dom';
 
 const DetailApprove = () => {
@@ -15,14 +15,15 @@ const DetailApprove = () => {
   const [data, setData] = useState({ created_at: 0, languages: '', author: '' });
   const [comment, setComment] = useState('');
   let { id } = useParams();
+  const [files, setFiles] = useState([{ path: '' }]);
   // 보고서 날짜
-  const date = new Date(data.created_at);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDay();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const showDate = `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
+  const reportDate = new Date(data.created_at);
+  const year = reportDate.getFullYear();
+  const month = reportDate.getMonth() + 1;
+  const date = reportDate.getDate();
+  const hours = reportDate.getHours();
+  const minutes = reportDate.getMinutes();
+  const showDate = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
   // 사용 언어
   const language = data.languages.split(',');
 
@@ -52,7 +53,8 @@ const DetailApprove = () => {
         },
       })
         .then((res) => {
-          setData(res.data);
+          setData(res.data, { init: 1 });
+          console.log(res.data);
         })
         .catch((err) => {
           switch (err.response.status) {
@@ -73,8 +75,25 @@ const DetailApprove = () => {
           }
         });
     };
+    const GetFileId = () => {
+      FileApi.get(`/report/files/${id}`)
+        .then((res) => {
+          setFiles(res.data);
+        })
+        .catch(() => {
+          setFiles();
+        });
+    };
     ViewDetailApproveReport();
-  }, []);
+    GetFileId();
+  }, [id]);
+
+  const onDownloadBtnClick = () => {
+    const ATag = document.createElement('a');
+    ATag.href = `http://54.180.224.67:3000/report/${files[0].id}`;
+    ATag.target = '_blank';
+    ATag.click();
+  };
 
   return (
     <S.Background>
@@ -131,9 +150,12 @@ const DetailApprove = () => {
         <S.Flie>
           <div>첨부파일</div>
           <S.BlackLine />
-          <div></div>
-          <img src={Download} alt="다운로드" />
-          <S.Preview>미리보기</S.Preview>
+          {files && (
+            <>
+              <div>{files[0].path}</div>
+              <img src={Download} alt="다운로드" onClick={onDownloadBtnClick} />
+            </>
+          )}
         </S.Flie>
         <S.Btn>
           <S.DisApproveBtn onClick={onDisapproveClick} color={isDisapproveClick}>
