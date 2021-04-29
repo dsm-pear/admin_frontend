@@ -1,10 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Api } from '../../../api/api';
+import { Api, FileApi } from '../../../api/api';
 import * as S from './style';
 
-const DeleteNotice = ({ setIsClick, id }) => {
+const DeleteNotice = ({ setIsClick, id, file }) => {
   const history = useHistory();
+  const ACCESS_TOKEN = localStorage.getItem('access_token');
 
   const onClick = (e) => {
     setIsClick(false);
@@ -13,11 +14,26 @@ const DeleteNotice = ({ setIsClick, id }) => {
   const onDeleteBtnClick = () => {
     Api.delete(`/notice/${id}`, {
       headers: {
-        Authorization: localStorage.getItem('access_token'),
+        Authorization: `${ACCESS_TOKEN}`,
       },
     })
       .then(() => {
-        history.push('/notice/view');
+        if (file[0]) {
+          FileApi.delete(`/notice/${file[0].id}`, {
+            headers: {
+              Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+          })
+            .then(() => {
+              console.log('file delete success');
+              history.push('/notice/view');
+              alert('공지사항 삭제를 성공했습니다.');
+            })
+            .catch(() => {
+              alert('공지사항 삭제를 실패했습니다.');
+              console.log('file delete fail');
+            });
+        }
       })
       .catch((err) => {
         if (err.response.status === 400) {
