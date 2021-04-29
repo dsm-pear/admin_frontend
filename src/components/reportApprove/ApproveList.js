@@ -12,8 +12,7 @@ const ApproveList = () => {
   const [isPage, setIsPage] = useState(true);
 
   const ViewList = (page) => {
-    Api.get('/request', {
-      params: page,
+    Api.get(`/request?page=${page}`, {
       headers: {
         Authorization: localStorage.getItem('access_token'),
       },
@@ -79,7 +78,7 @@ const ApproveList = () => {
                     number={data.id}
                     title={data.title}
                     writer={data.author}
-                    date={data.created_at}
+                    dates={data.created_at}
                   />
                 );
               })}
