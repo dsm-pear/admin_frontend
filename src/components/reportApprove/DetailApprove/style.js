@@ -154,6 +154,7 @@ export const Language = style.div`
     border-radius: 20px;
     text-align: center;
     padding-top: 4px;
+    margin-right: 5px;
 `;
 export const GithubLanguageBox = style.div`
     width: 81.25vw;
