@@ -8,6 +8,7 @@ import { Api, useRefresh } from '../../api/api';
 const NoticeView = () => {
   const [page, pageChange] = useState(1);
   const [data, setData] = useState({ total_pages: 0 });
+  const [pageList, setPageList] = useState(0);
   const refreshHandler = useRefresh();
 
   useEffect(() => {
@@ -50,17 +51,74 @@ const NoticeView = () => {
   }, []);
 
   const pageBtn = useCallback(() => {
-    const pages = data.total_pages;
+    const totalPages = data.total_pages;
     const pageNumber = [];
-    for (let i = 0; i < pages; i++) {
-      pageNumber.push(
-        <div data-id={i + 1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>
-          {i + 1}
-        </div>
-      );
+    const pages = Math.floor(totalPages / 5);
+    if (pages === 0) {
+      for (let i = 0; i < totalPages; i++) {
+        pageNumber.push(
+          <div data-id={i + 1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>
+            {i + 1}
+          </div>
+        );
+      }
+    } else if (pages !== 0 && totalPages % 5 === 0) {
+      for (let i = 0; i < 5; i++) {
+        pageNumber.push(
+          <div
+            data-id={i + 1 + pageList * 5}
+            onClick={onPageBtnClick}
+            className={setPageNumberClassName(page, i)}
+          >
+            {i + 1 + pageList * 5}
+          </div>
+        );
+      }
+    } else if (pages !== 0 && totalPages % 5 !== 0) {
+      for (let i = pageList * 5; i < (pageList + 1) * 5; i++) {
+        if (i + 1 < totalPages) {
+          pageNumber.push(
+            <div
+              data-id={i + 1}
+              onClick={onPageBtnClick}
+              className={setPageNumberClassName(page, i)}
+            >
+              {i + 1}
+            </div>
+          );
+        }
+      }
     }
     return pageNumber;
   }, [page, data.total_pages, setPageNumberClassName]);
+
+  const prev = () => {
+    if (pageList > 0) {
+      if (page % 5 === 0) {
+        if (page - 5 !== 0) {
+          pageChange(page - 5);
+        }
+      } else {
+        pageChange(page - 1);
+      }
+      setPageList(pageList - 1);
+    }
+  };
+
+  const next = () => {
+    if (pageList < Math.floor(data.total_pages / 5)) {
+      if (page % 5 !== 0) {
+        if (page + 5 < data.total_pages) {
+          pageChange(page + 5);
+        } else pageChange(data.total_pages);
+      } else {
+        if (Number(page) + 1 < data.total_pages) {
+          pageChange(Number(page) + 1);
+        }
+      }
+      setPageList(pageList + 1);
+    }
+  };
 
   return (
     <S.Background>
@@ -87,16 +145,16 @@ const NoticeView = () => {
                     key={data.id}
                     id={data.id}
                     title={data.title}
-                    date={data.created_at}
+                    noticeDate={data.created_at}
                   />
                 );
               })}
           </ul>
         </div>
         <div>
-          <S.Turn>◀︎</S.Turn>
+          <S.Turn onClick={prev}>◀︎</S.Turn>
           <S.Count>{pageBtn()}</S.Count>
-          <S.Turn>▶︎</S.Turn>
+          <S.Turn onClick={next}>▶︎</S.Turn>
         </div>
       </S.LWhiteBox>
     </S.Background>
