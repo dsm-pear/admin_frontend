@@ -8,7 +8,7 @@ import { Api, FileApi, useRefresh } from '../../api/api';
 const NoticeWirte = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState([{ name: '' }]);
   const refreshHandler = useRefresh();
   const history = useHistory();
   const ACCESS_TOKEN = localStorage.getItem('access_token');
@@ -29,13 +29,14 @@ const NoticeWirte = () => {
       }
     )
       .then((e) => {
-        const formData = new FormData();
-        formData.append('noticeFile', file);
+        const noticeFiles = new FormData();
+        noticeFiles.append('noticeFile', file[0]);
+        console.log(file[0]);
         const id = e.data.id;
-        FileApi.post(`/notice/files/${id}`, formData, {
+        FileApi.post(`/notice/files/${id}`, noticeFiles, {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
           },
         })
           .then(() => {
@@ -45,6 +46,8 @@ const NoticeWirte = () => {
           .catch(() => {
             console.log('파일 업로드 실패');
           });
+        console.log('파일 업로드 성공');
+        history.push('/notice/view');
       })
       .catch((err) => {
         switch (err.status) {
@@ -60,19 +63,17 @@ const NoticeWirte = () => {
             break;
         }
       });
-
-    console.log(title);
-    console.log(description);
   };
 
   const onFileChange = (e) => {
-    console.log(e);
     setFile(e.target.files);
+    console.log(e.target.files);
   };
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
+
   const onDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -120,7 +121,10 @@ const NoticeWirte = () => {
               </div>
             </div>
             <S.Contents placeholder="내용을 입력해주세요." onChange={onDescriptionChange} />
-            <S.Addflie>파일첨부</S.Addflie>
+            <S.FileLine>
+              <S.Addflie>파일첨부</S.Addflie>
+              <div>{file[0].name}</div>
+            </S.FileLine>
             <S.Upload onClick={NoticeWirte}>
               <img src={Upload} alt="업로드" width="12px" height="12px" />
               업로드
