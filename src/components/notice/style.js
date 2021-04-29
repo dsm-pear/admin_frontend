@@ -125,6 +125,8 @@ export const Contents = style.textarea`
     background-color: rgba(0, 0, 0, 0.05);
     display: block;
     margin: 0 auto;
+    box-sizing: border-box;
+    padding: 10px 0 0 10px;
 `;
 export const Label = style.label`
     width: 77px;
@@ -159,8 +161,8 @@ export const Upload = style.div`
     }
 `;
 export const Addflie = style.div`
-    font-size: 13px;
-    margin: 16px 30px 0 25px;
+    font-size: 14px;
+    margin: 0px 30px 0 25px;
 `;
 
 /* 공지사항 보기 */
@@ -241,4 +243,10 @@ export const LineTitle = style.div`
 export const LineDate = style.div`
     width: 25.5%
     font-size: 13px;
+`;
+
+// 파일첨부
+export const FileLine = style.div`
+    display: flex;
+    margin-top: 15px;
 `;
