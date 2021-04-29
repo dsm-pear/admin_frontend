@@ -97,20 +97,9 @@ export const Flie = style.div`
     > img {
         width: 20px;
         height: 17px;
-        margin-left: 50px;
+        margin-left: 3px;
         cursor: pointer;
     }
-`;
-export const Preview = style.button`
-    width: 56px;
-    height: 25px;
-    background-color: #36B5CF;
-    color: white;
-    margin-left: 7px;
-    border-radius: 3px;
-    border: none;
-    text-align: center;
-    font-size: 10px;
 `;
 export const Buttons = style.div`
     display: felx;
@@ -142,7 +131,7 @@ export const ModalBackground = style.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: rgba(113, 113, 113, 0.4);
     > div {
