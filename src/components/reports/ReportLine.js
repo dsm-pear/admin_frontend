@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FileApi } from '../../api/api';
