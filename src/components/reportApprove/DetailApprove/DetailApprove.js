@@ -16,6 +16,7 @@ const DetailApprove = () => {
   const [comment, setComment] = useState('');
   let { id } = useParams();
   const [files, setFiles] = useState([{ path: '' }]);
+  const [language, setLanguage] = useState(['X']);
   // 보고서 날짜
   const reportDate = new Date(data.created_at);
   const year = reportDate.getFullYear();
@@ -24,8 +25,6 @@ const DetailApprove = () => {
   const hours = reportDate.getHours();
   const minutes = reportDate.getMinutes();
   const showDate = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
-  // 사용 언어
-  const language = data.languages.split(',');
 
   // 승인버튼
   const onApproveClick = () => {
@@ -54,7 +53,9 @@ const DetailApprove = () => {
       })
         .then((res) => {
           setData(res.data, { init: 1 });
-          console.log(res.data);
+          if (data.languages !== '') {
+            setLanguage(data.languages.split(','));
+          }
         })
         .catch((err) => {
           switch (err.response.status) {
@@ -102,8 +103,8 @@ const DetailApprove = () => {
         <S.TitleBox>
           <div>작성자</div>
           <S.Line />
-          <div>{data.author}</div>
-          <div>작성일</div>
+          {data.author === null && <div>{data.member[0].name}</div>}
+          {data.author !== null && <div>{data.author}</div>}
           <S.Line />
           <div>{showDate}</div>
         </S.TitleBox>
