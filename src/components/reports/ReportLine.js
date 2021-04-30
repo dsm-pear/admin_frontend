@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { FileApi } from '../../api/api';
 import * as S from './style';
 
-const ReportLine = ({ title, soleName, teamName, date, id, setDownloadFiles, downloadFiles }) => {
+const ReportLine = ({ title, writer, date, id, setDownloadFiles, downloadFiles }) => {
   const [isCheck, setIsCheck] = useState(false);
   const history = useHistory();
   const dates = new Date(date);
@@ -13,7 +13,6 @@ const ReportLine = ({ title, soleName, teamName, date, id, setDownloadFiles, dow
   const hours = dates.getHours();
   const minutes = dates.getMinutes();
   const showDate = `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
-  const showSoleName = soleName[0].name;
 
   const onClick = () => {
     setIsCheck(!isCheck);
@@ -37,8 +36,7 @@ const ReportLine = ({ title, soleName, teamName, date, id, setDownloadFiles, dow
       <S.CheckBox onClick={onClick} boolean={isCheck} />
       <a onClick={() => history.push(`/report/view-report/${id}`)}>
         <div>{title}</div>
-        {teamName === null && <div>{showSoleName}</div>}
-        {teamName !== null && <div>{teamName}</div>}
+        <div>{writer}</div>
         <div>{showDate}</div>
       </a>
     </S.Line>
