@@ -1,88 +1,160 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './style';
 import Header from '../../header/Header';
 import Comment from './Comment';
 import { Download } from '../../../assets';
+import { Api, FileApi, useRefresh } from '../../../api/api';
+import { useParams } from 'react-router-dom';
 
 const DetailReport = () => {
-    const dummyData = [{
-        name: '김혜준',
-        text: '이런 기능들이 구현된 웹 사이트라니 너무 멋있네요!',
-        date: '2020.11.15 01:48'
-    }, {
-        name: '김혜준',
-        text: '참신한 아이디어에 박수를 칩니다',
-        date: '2020.11.15 01:53'
-    }, {
-        name: '김혜준',
-        text: '보고서를 깔끔하게 잘 작성하셨네요!',
-        date: '2020.11.15 01:55'
-    }]
-    const [data] = useState(dummyData);
-    return(
-        <S.Background>
-            <Header />
-            <S.WhiteBox>
-                <S.TitleBox>
-                    <div>작성자</div>
-                    <S.Line />
-                    <div>김혜준</div>
-                    <div>작성일</div>
-                    <S.Line />
-                    <div>2020.11.14</div>
-                </S.TitleBox>
-                <S.Title>
-                    <div>제목</div>
-                    <S.BlackLine />
-                    <div>탐책</div>
-                </S.Title>
-                <S.Contents>
-                    팀 프로젝트 '탐책'은 이러한 아이디어로 프로젝트를 계획했으며 이러한 기능을 사용할 수 있습니다.
-                </S.Contents>
-                <S.Team>
-                    <div>TEAM</div>
-                    <S.BlackLine />
-                    <div>217호</div>
-                    <div>TEAM MEMBER</div>
-                    <S.SBlackLine />
-                    <div>김혜준, 김혜준, 김혜준</div>
-                </S.Team>
-                <div>
-                    <S.Github>
-                        <div>GitHub</div>
-                        <S.SBlackLine />
-                        <a href='https://github.com/Tamchack' target="_blank" rel="noopener noreferrer">
-                        https://github.com/Tamchack
-                        </a>
-                    </S.Github>
-                    <S.LanguageBox>
-                        <div>사용언어</div>
-                        <S.SBlackLine />
-                        <S.Language>JAVA</S.Language>
-                    </S.LanguageBox>
-                </div>
-                <S.Flie>
-                    <div>첨부파일</div>
-                    <S.BlackLine />
-                    <div>팀 프로젝트 보고서.pdf</div>
-                    <img src={ Download } alt='다운로드'/>
-                    <S.Preview>미리보기</S.Preview>
-                </S.Flie>
-                <S.CommentTitle>댓글</S.CommentTitle>
-                <S.CommentBox>
-                    {data.map(data => {
-                        return (
-                            <Comment 
-                                name={data.name}
-                                text={data.text}
-                                date={data.date}
-                            />
-                        )
-                    })}
-                </S.CommentBox>
-            </S.WhiteBox>
-        </S.Background>
-    )
-}
+  const [data, setData] = useState({ type: '', author: '', languages: '' });
+  const [files, setFiles] = useState([{ path: '' }]);
+  const [language, setLanguage] = useState(['X']);
+  const refreshHandler = useRefresh();
+  let { id } = useParams();
+  // 보고서 날짜
+  const reportDate = new Date(data.created_at);
+  const year = reportDate.getFullYear();
+  const month = reportDate.getMonth() + 1;
+  const date = reportDate.getDate();
+  const hours = reportDate.getHours();
+  const minutes = reportDate.getMinutes();
+  const showDate = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
+
+  useEffect(() => {
+    const ViewDetailReport = () => {
+      Api.get(`/list/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem('access_token'),
+        },
+      })
+        .then((res) => {
+          setData(res.data);
+          if (data.languages !== '') {
+            setLanguage(data.languages.split(','));
+          }
+        })
+        .catch((err) => {
+          switch (err.response.stauts) {
+            case 400:
+              alert('보고서 불러오기를 실패했습니다.');
+              break;
+            case 403:
+              refreshHandler().then(() => {
+                ViewDetailReport();
+              });
+              break;
+            case 401:
+            case 422:
+              console.log(err);
+              break;
+            default:
+              break;
+          }
+        });
+    };
+    const GetFilesId = () => {
+      FileApi.get(`/report/files/${id}`)
+        .then((res) => {
+          setFiles(res.data);
+        })
+        .catch(() => {
+          setFiles();
+        });
+    };
+    ViewDetailReport();
+    GetFilesId();
+  }, [id]);
+
+  const onDownloadBtnClick = () => {
+    const ATag = document.createElement('a');
+    ATag.href = `http://54.180.224.67:3000/report/${files[0].id}`;
+    ATag.target = '_blank';
+    ATag.click();
+  };
+
+  return (
+    <S.Background>
+      <Header />
+      <S.WhiteBox>
+        <S.TitleBox>
+          <div>작성자</div>
+          <S.Line />
+          {data.author === null && <div>{data.member[0].name}</div>}
+          {data.author !== null && <div>{data.author}</div>}
+          <div>작성일</div>
+          <S.Line />
+          <div>{showDate}</div>
+        </S.TitleBox>
+        <S.Title>
+          <div>제목</div>
+          <S.BlackLine />
+          <div>{data.title}</div>
+        </S.Title>
+        <S.Contents>{data.description}</S.Contents>
+        {data.author !== null && (
+          <S.Team>
+            <div>TEAM MEMBER</div>
+            <S.SBlackLine />
+            {data &&
+              data.member &&
+              data.member.map((data) => {
+                return (
+                  <S.TeamMember>
+                    <div>{data.name}</div>
+                    <div>{data.user_email}</div>
+                  </S.TeamMember>
+                );
+              })}
+          </S.Team>
+        )}
+        <S.GithubLanguageBox>
+          <S.Github>
+            <div>GitHub</div>
+            <S.SBlackLine />
+            <a href={data.github} target="_blank" rel="noopener noreferrer">
+              {data.github}
+            </a>
+          </S.Github>
+          <S.LanguageBox>
+            <div>사용언어</div>
+            <S.SBlackLine />
+            {language &&
+              language.map((language) => {
+                return <S.Language>{language}</S.Language>;
+              })}
+          </S.LanguageBox>
+        </S.GithubLanguageBox>
+        <S.Flie>
+          <div>첨부파일</div>
+          <S.BlackLine />
+          {files && (
+            <>
+              <div>{files[0].path}</div>
+              <img src={Download} alt="다운로드" onClick={onDownloadBtnClick} />
+            </>
+          )}
+        </S.Flie>
+        <S.CommentTitle>댓글</S.CommentTitle>
+        <S.CommentBox>
+          {data &&
+            data.comments &&
+            data.comments.map((data) => {
+              return (
+                <Comment
+                  key={data.id}
+                  Rid={id}
+                  Cid={data.id}
+                  name={data.name}
+                  text={data.content}
+                  date={data.created_at}
+                />
+              );
+            })}
+        </S.CommentBox>
+      </S.WhiteBox>
+    </S.Background>
+  );
+};
 
 export default DetailReport;

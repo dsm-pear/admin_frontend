@@ -1,17 +1,17 @@
 import style from 'styled-components';
 import { BackgroundImg } from '../../assets';
 
-export const Background = style.div `
+export const Background = style.div`
     width: 100%;
     height: 100vh;
     background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-image: url(${ BackgroundImg });
+    background-image: url(${BackgroundImg});
     align-items: center;
     justify-content: center;
     display: flex;
 `;
-export const Whitebox = style.div `
+export const Whitebox = style.div`
     background-color: #FFFFFF;
     width: 1020px;
     height: 647px;
@@ -21,12 +21,12 @@ export const Whitebox = style.div `
     display: flex;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.16);
 `;
-export const Img = style.div `
+export const Img = style.div`
     width: 186px;
     height: 170px;
     margin: 0 auto;
 `;
-export const Input = style.input `
+export const Input = style.input`
     width: 358px;
     heigth: 40px;
     font-size: 20px;
@@ -41,7 +41,7 @@ export const Input = style.input `
         margin-left: -27px;
     }
 `;
-export const LogInButton = style.button `
+export const LogInButton = style.button`
     width: 196px;
     height: 52px;
     font-size: 22px;
@@ -56,12 +56,8 @@ export const LogInButton = style.button `
     outline: none;
     cursor: pointer;
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.16);
-    > a {
-        color: white;
-        
-    }
 `;
-export const Inputs = style.div `
+export const Inputs = style.div`
     margin-top: 7px;
     margin-bottom: 53px;
     width: 364px;

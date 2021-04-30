@@ -2,12 +2,12 @@ import style from 'styled-components';
 import { BackgroundImg1 } from '../../assets';
 
 /* 공지사항 작성 */
-export const Background = style.div `
+export const Background = style.div`
     width: 100%;
     height: 100vh;
     background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-image: url(${ BackgroundImg1 });
+    background-image: url(${BackgroundImg1});
     position: relative;
     overflow: hidden;
     min-width: 1280px;
@@ -16,7 +16,7 @@ export const Background = style.div `
         margin-bottom: 25px;
     }
 `;
-export const WhiteBox = style.div `
+export const WhiteBox = style.div`
     width: 86vw;
     min-width: 1244px;
     height: 82vh;
@@ -28,21 +28,23 @@ export const WhiteBox = style.div `
     > div:first-child {
         display: flex;
         margin: 46px 0 23px 63px;
+        align-items: center;
     }
     > div:last-child {
         width: 75.26vw;
         min-width: 1084px;
-        margin-left: 73px;
+        margin: 0 auto;
     }
 `;
 export const LWhiteBox = style(WhiteBox)`
     > div:first-child {
         display: flex;
-        margin: 5.60vh 0 23px 7.67vh;
+        margin: 8vh 0 23px 7.67vh;
     }
     > div:nth-child(2) {
-        width: 75.27vw;
-        margin-left: 73px;
+        width: 87.18%;
+        height: 454px;
+        margin: 0 auto;
         > ul {
             margin-top: 18px;
             margin-left: -34px;
@@ -58,20 +60,30 @@ export const LWhiteBox = style(WhiteBox)`
         margin-top: 3%;
     }
 `;
-export const LWrite = style.div `
-    font-size: 30px;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    color: #5D6BC9;
+export const LWrite = style.button`
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    background-color: #5d6bc9;
+    border: none;
+    color: white;
     cursor: pointer;
+    border-radius: 15px;
+    margin-right: 10px;
 `;
-export const LWatch = style.div `
-    font-size: 22px;
-    margin-left: 10px;
-    margin-top: 10px;
+export const LWatch = style.button`
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    background-color: #cfcfcf;
+    border: none;
+    color: white;
     cursor: pointer;
-    color: black;
+    border-radius: 15px;
 `;
-export const Title = style.input `
+export const Title = style.input`
     width: 100%;
     height: 47px;
     font-size: 14px;
@@ -82,7 +94,7 @@ export const Title = style.input `
     padding-left: 20px;
     box-sizing: border-box;
 `;
-export const ContentsBox = style.div `
+export const ContentsBox = style.div`
     width: 100%;
     height: 465px;
     background-color: white;
@@ -95,13 +107,16 @@ export const ContentsBox = style.div `
     > div:first-child > div:last-child {
         display: flex;
         margin-right: 20px;
+        > input {
+            display: none;
+        }
     }
 `;
-export const ContentsTitle = style.div `
+export const ContentsTitle = style.div`
     font-size: 14px;
     color: #2E2E2E;
 `;
-export const Contents = style.textarea `
+export const Contents = style.textarea`
     width: 72.08vw;
     min-width: 1038px;
     height: 296px;
@@ -110,8 +125,10 @@ export const Contents = style.textarea `
     background-color: rgba(0, 0, 0, 0.05);
     display: block;
     margin: 0 auto;
+    box-sizing: border-box;
+    padding: 10px 0 0 10px;
 `;
-export const Add = style.div `
+export const Label = style.label`
     width: 77px;
     height: 22px;
     background-color: #e1e1e1;
@@ -127,7 +144,7 @@ export const Add = style.div `
         height: 14px;
     }
 `;
-export const Upload = style.div `
+export const Upload = style.div`
     width: 109px;
     height: 33px;
     background-color: #1919B1;
@@ -143,29 +160,26 @@ export const Upload = style.div `
         margin-right: 10px;
     }
 `;
-export const Addflie = style.div `
-    font-size: 13px;
-    margin: 16px 30px 0 25px;
+export const Addflie = style.div`
+    font-size: 14px;
+    margin: 0px 30px 0 25px;
 `;
 
 /* 공지사항 보기 */
-export const Write = style.div `
-    font-size: 22px;
-    cursor: pointer;
-    margin-top: 10px;
-    color: black;
+export const Write = style(LWrite)`
+    background-color: #cfcfcf;
 `;
-export const Watch = style.div `
+export const Watch = style(LWatch)`
+    background-color: #5d6bc9;
+`;
+export const Notice = style.div`
     font-size: 30px;
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     color: #5D6BC9;
     margin: 0 10px;
     cursor: pointer;
 `;
-export const Notice = style(Watch) `
-    cursor: default;
-`;
-export const NoticeTitle = style.div `
+export const NoticeTitle = style.div`
     width: 75.27vw;
     min-width: 1084px;
     height: 42px;
@@ -179,16 +193,17 @@ export const NoticeTitle = style.div `
         font-size: 19px;
         font-weight: bold;
         margin-left: 32px;
-        width: 85%;
+        width: 75%;
     }
     > div:last-child {
+        width: 15;
         color: white;
         font-size: 14px;
         margin-right: 75px;
         width: 39px;
     }
 `;
-export const Count = style.div `
+export const Count = style.div`
     width: 14.44px;
     min-width: 208px;
     height: 100%;
@@ -202,14 +217,14 @@ export const Count = style.div `
         font-weight: bold;
     }
 `;
-export const Turn = style.span `
+export const Turn = style.span`
     height: 100%;
     font-size: 15px;
     margin: 0 32px;
     cursor: pointer;
 `;
 /* Line */
-export const Line = style.li `
+export const Line = style.li`
     width: 75.27vw;
     min-width: 1084px;
     height: 5.35vh;
@@ -220,11 +235,18 @@ export const Line = style.li `
     cursor: pointer;
     color: black;
 `;
-export const LineTitle = style.div `
+export const LineTitle = style.div`
     font-size: 14px;
-    width: 84.5%;
+    width: 74.5%;
     margin-left: 25px;
 `;
-export const LineDate = style.div `
-    font-size: 11px;
+export const LineDate = style.div`
+    width: 25.5%
+    font-size: 13px;
+`;
+
+// 파일첨부
+export const FileLine = style.div`
+    display: flex;
+    margin-top: 15px;
 `;

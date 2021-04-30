@@ -1,12 +1,12 @@
 import style from 'styled-components';
 import { BackgroundImg1 } from '../../../assets';
 
-export const Background = style.div `
+export const Background = style.div`
     width: 100%;
     height: 100vh;
     background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-image: url(${ BackgroundImg1 });
+    background-image: url(${BackgroundImg1});
     position: relative;
     overflow: hidden;
     min-width: 1280px;
@@ -15,7 +15,7 @@ export const Background = style.div `
         margin-bottom: 25px;
     }
 `;
-export const WhiteBox = style.div `
+export const WhiteBox = style.div`
     width: 86.52vw;
     min-width: 1246px;
     height: 80.75vh;
@@ -26,7 +26,7 @@ export const WhiteBox = style.div `
     border: 1px solid #858585;
     padding-top: 25px;
 `;
-export const TitleBox = style.div `
+export const TitleBox = style.div`
     width: 81.66vw;
     min-width: 1176px;
     height: 46px;
@@ -45,15 +45,15 @@ export const TitleBox = style.div `
         margin-left: 22px;
     }
 `;
-export const Line = style.div `
+export const Line = style.div`
     width: 0px;
     height: 33px;
     border: 1px solid white;
 `;
-export const BlackLine = style(Line) `
+export const BlackLine = style(Line)`
     border: 1px solid rgba(112, 112, 112, 0.3);
 `;
-export const NoticeTitle = style.div `
+export const NoticeTitle = style.div`
     width: 81.66vw;
     min-width: 1176px;
     height: 45px;
@@ -70,13 +70,13 @@ export const NoticeTitle = style.div `
         margin-left: 22px;
     }
 `;
-export const Contents = style.div `
+export const Contents = style.div`
     width: 75.97vw;
     min-width: 1094px;
     height: 34.95vh;
     margin: 3.41vh 0 3.41vh 76px;
 `;
-export const Flie = style.div `
+export const Flie = style.div`
     width: 81.66vw;
     min-width: 1176px;
     height: 45px;
@@ -97,26 +97,16 @@ export const Flie = style.div `
     > img {
         width: 20px;
         height: 17px;
-        margin-left: 50px;
+        margin-left: 3px;
+        cursor: pointer;
     }
 `;
-export const Preview = style.button `
-    width: 56px;
-    height: 25px;
-    background-color: #36B5CF;
-    color: white;
-    margin-left: 7px;
-    border-radius: 3px;
-    border: none;
-    text-align: center;
-    font-size: 10px;
-`;
-export const Buttons = style.div `
+export const Buttons = style.div`
     display: felx;
     width: 100%;
     height: 29px;
 `;
-export const Modify = style.button `
+export const Modify = style.button`
     width: 87px;
     height: 29px;
     border: none;
@@ -130,18 +120,18 @@ export const Modify = style.button `
         color: black;
     }
 `;
-export const Delete = style(Modify) `
+export const Delete = style(Modify)`
     background-color: #1919B1;
     color: white;
     margin-right: 41px;
 `;
 
 /* 삭제 모달 */
-export const ModalBackground = style.div `
+export const ModalBackground = style.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: rgba(113, 113, 113, 0.4);
     > div {
@@ -154,7 +144,7 @@ export const ModalBackground = style.div `
         height: 17.05vh;
     }
 `;
-export const ModalBoxTitle = style.div `
+export const ModalBoxTitle = style.div`
     width: 100%;
     height: 3.28vh;
     background-color: #5151E6;
@@ -167,7 +157,7 @@ export const ModalBoxTitle = style.div `
         font-weight: bold;
     }
 `;
-export const ModalBox = style.div `
+export const ModalBox = style.div`
     width: 100%;
     height: 13.76vh;
     background-color: white;
@@ -180,7 +170,7 @@ export const ModalBox = style.div `
         margin-bottom: 6.21vh;
     }
 `;
-export const True = style.button `
+export const True = style.button`
     width: 42px;
     height: 20px;
     background-color: #1919B1;
@@ -194,18 +184,18 @@ export const True = style.button `
     cursor: pointer;
     text-align: center;
 `;
-export const Cancle = style(True) `
+export const Cancle = style(True)`
     background-color: rgba(17, 17, 17, 0.14);
     color: rgba(0, 0, 0, 0.43);
 `;
 
 /* 공지사항 수정 */
-export const MBackground = style.div `
+export const MBackground = style.div`
     width: 100%;
     height: 100vh;
     background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-image: url(${ BackgroundImg1 });
+    background-image: url(${BackgroundImg1});
     position: relative;
     overflow: hidden;
     min-width: 1280px;
@@ -214,7 +204,7 @@ export const MBackground = style.div `
         margin-bottom: 25px;
     }
 `;
-export const MWhiteBox = style.div `
+export const MWhiteBox = style.div`
     width: 86vw;
     min-width: 1244px;
     height: 82vh;
@@ -230,21 +220,21 @@ export const MWhiteBox = style.div `
     > div:last-child {
         width: 75.26vw;
         min-width: 1084px;
-        margin-left: 73px;
+        margin: 0 auto;
     }
 `;
-export const MLWrite = style.div `
+export const MLWrite = style.div`
     font-size: 30px;
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     color: #5D6BC9;
 `;
-export const MNotice = style.div `
+export const MNotice = style.div`
     font-size: 30px;
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     color: #5D6BC9;
     margin: 0 10px;
 `;
-export const MTitle = style.input `
+export const MTitle = style.input`
     width: 100%;
     height: 47px;
     font-size: 14px;
@@ -255,7 +245,7 @@ export const MTitle = style.input `
     padding-left: 20px;
     box-sizing: border-box;
 `;
-export const MContentsBox = style.div `
+export const MContentsBox = style.div`
     width: 100%;
     height: 465px;
     background-color: white;
@@ -268,13 +258,16 @@ export const MContentsBox = style.div `
     > div:first-child > div:last-child {
         display: flex;
         margin-right: 20px;
+        > input {
+            display: none;
+        }
     }
 `;
-export const MContentsTitle = style.div `
+export const MContentsTitle = style.div`
     font-size: 14px;
     color: #2E2E2E;
 `;
-export const MContents = style.textarea `
+export const MContents = style.textarea`
     width: 72.08vw;
     min-width: 1038px;
     height: 296px;
@@ -284,23 +277,7 @@ export const MContents = style.textarea `
     display: block;
     margin: 0 auto;
 `;
-export const MAdd = style.div `
-    width: 77px;
-    height: 22px;
-    background-color: #e1e1e1;
-    opacity: 0.58;
-    font-size: 9px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    > img {
-        margin-right: 2px;
-        width: 15px;
-        height: 14px;
-    }
-`;
-export const MUpload = style.div `
+export const MUpload = style.div`
     width: 109px;
     height: 33px;
     background-color: #1919B1;
@@ -316,12 +293,28 @@ export const MUpload = style.div `
         margin-right: 10px;
     }
 `;
-export const MAddflie = style.div `
+export const MAddflie = style.div`
     font-size: 13px;
     margin: 16px 30px 0 25px;
     display: flex;
     > div {
         margin-left: 25px;
         color: rgba(3, 1, 0, 0.45);
+    }
+`;
+export const Label = style.label`
+    width: 77px;
+    height: 22px;
+    background-color: #e1e1e1;
+    opacity: 0.58;
+    font-size: 9px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > img {
+        margin-right: 2px;
+        width: 15px;
+        height: 14px;
     }
 `;

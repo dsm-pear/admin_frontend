@@ -1,10 +1,10 @@
 import style from 'styled-components';
 
-export const Flex = style.div `
+export const Flex = style.div`
     display: flex;
     margin-left: 6%
 `;
-export const Size = style.div `
+export const Size = style.div`
     width: 52.22vw;
     min-width: 752px;
     height: 56px;
@@ -17,8 +17,8 @@ export const Size = style.div `
         color: #1919B1;
     }
 `;
-export const Category = style.div `
-    font-size: 22px;
+export const Category = style.div`
+    font-size: 1.5rem;
     cursor: pointer;
     &:hover {
         color: #1919B1;
@@ -27,28 +27,21 @@ export const Category = style.div `
         color: black;
     }
 `;
-export const Pear = style.div `
-    font-size: 22px;
+export const Pear = style.div`
+    font-size: 1.5rem;
     > span {
         font-weight: bold;
     }
     margin-right: 7%;
 `;
-export const Circle = style.div `
-    width: 146px;
-    height: 146px;
-    border-radius: 75px;
-    background-color: #6363EF;
-    position: absolute;
-    top: -29px;
-    right: -38px;
-    z-index: -1;
-`;
-export const Logout = style.div `
+export const Logout = style.div`
+    min-width: 90px;
+    height: 30px;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #1919b1;
     cursor: pointer;
-    font-size: 18px;
-    color: white;
-    position: absolute;
-    top: 73px;
-    right: 51px;
+    border-bottom: 3px solid  #1919b1;
+    margin-left: 150px;
+    margin-top: 15px;
 `;
