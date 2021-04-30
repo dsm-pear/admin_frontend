@@ -21,7 +21,10 @@ const ReportLine = ({ title, soleName, teamName, date, id, setDownloadFiles, dow
       FileApi.get(`/report/files/${id}`)
         .then((res) => {
           console.log(res.data);
-          setDownloadFiles([...downloadFiles, { files: res.data[0].path, report_id: id }]);
+          setDownloadFiles([
+            ...downloadFiles,
+            { files: res.data[0].path, report_id: id, fileId: res.data[0].id },
+          ]);
         })
         .catch(() => {
           alert('보고서가 존재하지 않습니다.');
