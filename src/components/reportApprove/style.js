@@ -1,12 +1,12 @@
 import style from 'styled-components';
 import { BackgroundImg1 } from '../../assets';
 
-export const Background = style.div `
+export const Background = style.div`
     width: 100%;
     height: 100vh;
     background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-image: url(${ BackgroundImg1 });
+    background-image: url(${BackgroundImg1});
     position: relative;
     overflow: hidden;
     min-width: 1280px;
@@ -15,7 +15,7 @@ export const Background = style.div `
         margin-bottom: 25px;
     }
 `;
-export const WhiteBox = style.div `
+export const WhiteBox = style.div`
     width: 89.02vw;
     min-width: 1282px;
     height: 80.51vh;
@@ -25,7 +25,7 @@ export const WhiteBox = style.div `
     padding-top: 46px;
     box-sizing: border-box;
 `;
-export const Title = style.div `
+export const Title = style.div`
     width: 13.95vw;
     min-width: 201px;
     height: 52px;
@@ -38,12 +38,13 @@ export const Title = style.div `
     align-items: center;
     margin-left: 97px;
 `;
-export const SmallBox = style.div `
+export const SmallBox = style.div`
     width: 76.59vw;
     min-width: 1103px;
     height: 61.6vh;
     background-color: rgba(223, 223, 255, 0.09);
-    margin: 15px 0 0 97px;
+    margin: 0 auto;
+    margin-top: 15px;
     box-sizing: border-box;
     padding-top: 30px;
     > div:first-child {
@@ -57,7 +58,7 @@ export const SmallBox = style.div `
 
 /* ReportLine */
 
-export const ReportLine = style.div `
+export const ReportLine = style.div`
     width: 70.06vw;
     min-width: 1009px;
     height: 39px;
@@ -75,8 +76,8 @@ export const ReportLine = style.div `
         margin-left: 38px;
     }
 `;
-export const Note = style.div `
-    font-size: 13px;
+export const Note = style.div`
+    font-size: 1rem;
     margin-right: 12px;
     letter-spacing: 3px;
     color: black;
