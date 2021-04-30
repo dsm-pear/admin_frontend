@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useCallback, useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../header/Header';
@@ -125,28 +126,20 @@ const ViewReport = () => {
 
   useEffect(() => {
     if (searchData === '') {
-      ViewReport(page);
+      if (filter === '') {
+        ViewReport(page);
+      } else {
+        setFilterPage(page);
+        onFilterBtnClick(filter, filterPage);
+      }
     } else {
       onSearchBtnClick();
-    }
-  }, [page]);
-
-  useEffect(() => {
-    if (filter === '') {
-      ViewReport(page);
-    } else {
-      onFilterBtnClick(filter, filterPage);
     }
   }, [filter, page, filterPage]);
 
   // 검색
   const onSearchBtnClick = () => {
     Api.get(`/list/search?q=${searchData}&sort=${sort}&page=${page}`, {
-      params: {
-        q: searchData,
-        sort,
-        page,
-      },
       headers: {
         Authorization: localStorage.getItem('access_token'),
       },
