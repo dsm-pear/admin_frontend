@@ -2,13 +2,13 @@ import style from 'styled-components';
 import { BackgroundImg1 } from '../../assets/background';
 
 /* 배경 */
-export const Background = style.div `
+export const Background = style.div`
     width: 100%;
     min-width: 1280px;
     height: 100vh;
     background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-image: url(${ BackgroundImg1 });
+    background-image: url(${BackgroundImg1});
     position: relative;
     overflow: hidden;
     > div:first-child {
@@ -17,7 +17,7 @@ export const Background = style.div `
     }
 `;
 /* 흰색 박스 */
-export const WhiteBox = style.div `
+export const WhiteBox = style.div`
     width: 86.80vw;
     min-width: 1250px;
     height: 78.19vh;
@@ -47,13 +47,13 @@ export const WhiteBox = style.div `
 `;
 
 /* 정렬 선택바 */
-export const SelectUl = style.ul `
+export const SelectUl = style.ul`
     width: 63px;
     height: 100%;
     padding: 0;
     margin: 0;
 `;
-export const Select = style.li `
+export const Select = style.li`
     width: 100%;
     height: 100%;
     background-color: #5D38DA;
@@ -73,7 +73,7 @@ export const Select = style.li `
         display: block;
     }
 `;
-export const SubSelect = style.ul `
+export const SubSelect = style.ul`
     width: 61px;
     height: 42px;
     border: 1px solid rgba(112, 112, 112, 0.38);
@@ -84,7 +84,7 @@ export const SubSelect = style.ul `
     display: none;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 `;
-export const SubSelectItem = style.li `
+export const SubSelectItem = style.li`
     font-size: 10px;
     margin-bottom: 2px;
     > div:first-child {
@@ -97,48 +97,60 @@ export const SubSelectItem = style.li `
         border-color: #1919B1;
     }
 `;
-export const SubLine = style.div `
+export const SubLine = style.div`
     width: 38px;
     height: 0px;
     border: 1px solid #707070;
     margin: 0 auto;
 `;
-export const TitleSubLine = style(SubLine) `
+export const TitleSubLine = style(SubLine)`
     width: 30px;
 `;
 
 /* 검색창 */
-export const SearchInput = style.input `
+export const SearchInput = style.input`
     width: 172px;
     font-size: 11px;
     border: 1px solid rgba(77, 77, 77, 0.41);
     border-radius: 0 5px 5px 0px;
 `;
 
+export const SearchBtn = style.button`
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: #5D38DA;
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+    cursor: pointer;
+`;
+
 /* 제목 */
-export const Title = style.div `
+export const Title = style.div`
     font-size: 24px;
     font-weight: bold;
     margin-right: 30px;
 `;
-export const Button = style.button `
+export const Button = style.button`
     width: 69px;
     height: 22px;
     font-size: 10px;
     border: none;
     border-radius: 20px;
-    background-color: ${({color}) => color === true ? '#6e36e1' : '#DFDFFF'};
+    background-color: ${({ color }) => (color === true ? '#6e36e1' : '#DFDFFF')};
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     margin: 10px 3px 0 3px;
     cursor: pointer;
 `;
-export const TitleLine = style.div `
+export const TitleLine = style.div`
     display: flex;
     margin-top: 3.77vh;
     margin-left: 87px;
 `;
 /* 다운로드 */
-export const Download = style.button `
+export const Download = style.button`
     width: 76px;
     height: 20px;
     background-color: #6040DC;
@@ -154,7 +166,7 @@ export const Download = style.button `
 `;
 
 /* 안내 창 */
-export const TitleBox = style.div `
+export const TitleBox = style.div`
     width: 75.20vw;
     min-width: 1083px;
     height: 42px;
@@ -185,7 +197,7 @@ export const TitleBox = style.div `
     }
 `;
 
-export const Lines = style.ul `
+export const Lines = style.ul`
     width: 75.20vw;
     min-width: 1083px;
     list-style: none;
@@ -193,7 +205,7 @@ export const Lines = style.ul `
     padding: 0;
 `;
 
-export const Count = style.div `
+export const Count = style.div`
     width: 14.44px;
     min-width: 208px;
     height: 100%;
@@ -208,7 +220,7 @@ export const Count = style.div `
     }
 `;
 
-export const Turn = style.span `
+export const Turn = style.span`
     height: 100%;
     font-size: 15px;
     margin: 0 32px;
@@ -217,7 +229,7 @@ export const Turn = style.span `
 
 /* ReportLine.js */
 
-export const Line = style.li `
+export const Line = style.li`
     width: 75.20vw;
     min-width: 1083px;
     height: 58px;
@@ -246,7 +258,7 @@ export const Line = style.li `
     }
 `;
 
-export const CheckBox = style.button `
+export const CheckBox = style.button`
     width: 22px;
     height: 22px;
     border: 1px solid #707070;
@@ -254,5 +266,5 @@ export const CheckBox = style.button `
     margin-right: 90px;
     outline: none;
     cursor: pointer;
-    background-color: ${({boolean}) => boolean ? '#5D38DA' : 'white'}
+    background-color: ${({ boolean }) => (boolean ? '#5D38DA' : 'white')}
 `;
