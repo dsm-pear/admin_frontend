@@ -3,3 +3,4 @@ export { BackgroundImg, BackgroundImg1 } from './background';
 export { Share } from './question';
 export { Upload, Img, LinkImg, Download } from './notice';
 export { Profile } from './report';
+export { Send } from './approve';
