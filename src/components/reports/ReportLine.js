@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { FileApi } from '../../api/api';
 import * as S from './style';
 
-const ReportLine = ({ title, name, date, id }) => {
+const ReportLine = ({ title, soleName, teamName, date, id, setDownloadFiles, downloadFiles }) => {
   const [isCheck, setIsCheck] = useState(false);
   const history = useHistory();
   const dates = new Date(date);
@@ -12,19 +13,31 @@ const ReportLine = ({ title, name, date, id }) => {
   const hours = dates.getHours();
   const minutes = dates.getMinutes();
   const showDate = `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
+  const showSoleName = soleName[0].name;
 
   const onClick = () => {
     setIsCheck(!isCheck);
+    if (isCheck !== true) {
+      FileApi.get(`/report/files/${id}`)
+        .then((res) => {
+          console.log(res.data);
+          setDownloadFiles([...downloadFiles, { files: res.data[0].path, report_id: id }]);
+        })
+        .catch(() => {
+          alert('보고서가 존재하지 않습니다.');
+        });
+    }
   };
 
   return (
-    <S.Line onClick={() => history.push(`/report/view-report/${id}`)}>
+    <S.Line>
       <S.CheckBox onClick={onClick} boolean={isCheck} />
-      <Link to="/report/view-report">
+      <a onClick={() => history.push(`/report/view-report/${id}`)}>
         <div>{title}</div>
-        <div>{name}</div>
+        {teamName === null && <div>{showSoleName}</div>}
+        {teamName !== null && <div>{teamName}</div>}
         <div>{showDate}</div>
-      </Link>
+      </a>
     </S.Line>
   );
 };
