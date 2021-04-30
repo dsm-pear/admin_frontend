@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './style';
