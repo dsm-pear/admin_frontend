@@ -15,7 +15,6 @@ const ViewReport = () => {
   const [select, setSelect] = useState('정렬');
   const [searchData, setSearchData] = useState('');
   const [downloadFiles, setDownloadFiles] = useState([]);
-  const [baseUrl, setBaseUrl] = useState('http://54.180.224.67:3000/files?');
   // filter btn
   const [isFirstClick, setIsFirstClick] = useState(false);
   const [isSecondClick, setIsSecondClick] = useState(false);
@@ -264,11 +263,11 @@ const ViewReport = () => {
       ATag.target = '_blank';
       ATag.click();
     } else {
+      let baseUrl = 'http://54.180.224.67:3000/files?';
       for (let i = 0; i < downloadFiles.length; i++) {
-        setBaseUrl(baseUrl + `files=${downloadFiles[i].files}&`);
+        baseUrl += `files=${downloadFiles[i].files}&`;
       }
       ATag.href = baseUrl + 'report_id=1';
-      console.log(baseUrl);
       ATag.target = '_blank';
       ATag.click();
     }
@@ -335,8 +334,7 @@ const ViewReport = () => {
                   key={data.id}
                   id={data.id}
                   title={data.title}
-                  soleName={data.member}
-                  teamName={data.author}
+                  writer={data.author}
                   date={data.created_at}
                   setDownloadFiles={setDownloadFiles}
                   downloadFiles={downloadFiles}
