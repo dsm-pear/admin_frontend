@@ -15,6 +15,7 @@ const ViewReport = () => {
   const [select, setSelect] = useState('정렬');
   const [searchData, setSearchData] = useState('');
   const [downloadFiles, setDownloadFiles] = useState([]);
+  const [baseUrl, setBaseUrl] = useState('http://54.180.224.67:3000/files?');
   // filter btn
   const [isFirstClick, setIsFirstClick] = useState(false);
   const [isSecondClick, setIsSecondClick] = useState(false);
@@ -74,7 +75,6 @@ const ViewReport = () => {
   // 보고서 불러오기
   const ViewReport = (page) => {
     Api.get(`/list?page=${page}`, {
-      params: page,
       headers: {
         Authorization: localStorage.getItem('access_token'),
       },
@@ -254,12 +254,21 @@ const ViewReport = () => {
       setPageList(pageList + 1);
     }
   };
+
   // 파일 다운로드
   const onDownloadBtnClick = () => {
     console.log(downloadFiles);
     const ATag = document.createElement('a');
-    for (let i = 0; i < downloadFiles.length; i++) {
-      ATag.href = `http://54.180.224.67:3000/files?files=${downloadFiles[i].files}&report_id=${downloadFiles[i].report_id}`;
+    if (downloadFiles.length === 1) {
+      ATag.href = `http://54.180.224.67:3000/report/${downloadFiles[0].fileId}`;
+      ATag.target = '_blank';
+      ATag.click();
+    } else {
+      for (let i = 0; i < downloadFiles.length; i++) {
+        setBaseUrl(baseUrl + `files=${downloadFiles[i].files}&`);
+      }
+      ATag.href = baseUrl + 'report_id=1';
+      console.log(baseUrl);
       ATag.target = '_blank';
       ATag.click();
     }
