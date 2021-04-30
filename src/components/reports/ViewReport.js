@@ -2,21 +2,24 @@ import React, { useCallback, useEffect, useState } from 'react';
 import * as S from './style';
 import Header from '../header/Header';
 import ReportLine from './ReportLine';
-import { Api, FileApi, useRefresh } from '../../api/api';
+import { Api, useRefresh } from '../../api/api';
 
 const ViewReport = () => {
   const refreshHandler = useRefresh();
-  const [isFirstClick, setIsFirstClick] = useState(false);
-  const [isSecondClick, setIsSecondClick] = useState(false);
-  const [isThirdClick, setIsThirdClick] = useState(false);
-  const [isFourthClick, setIsFourthClick] = useState(false);
   const [filter, setFilter] = useState('');
   const [page, pageChange] = useState(1);
+  const [pageList, setPageList] = useState(0);
   const [filterPage, setFilterPage] = useState(1);
   const [sort, setSort] = useState('');
   const [data, setData] = useState({ total_pages: 0 });
   const [select, setSelect] = useState('정렬');
   const [searchData, setSearchData] = useState('');
+  const [downloadFiles, setDownloadFiles] = useState([]);
+  // filter btn
+  const [isFirstClick, setIsFirstClick] = useState(false);
+  const [isSecondClick, setIsSecondClick] = useState(false);
+  const [isThirdClick, setIsThirdClick] = useState(false);
+  const [isFourthClick, setIsFourthClick] = useState(false);
 
   /* 검색 선택 창 */
   const onClick = (e) => {
@@ -68,6 +71,7 @@ const ViewReport = () => {
     }
   };
 
+  // 보고서 불러오기
   const ViewReport = (page) => {
     Api.get(`/list?page=${page}`, {
       params: page,
@@ -94,6 +98,7 @@ const ViewReport = () => {
       });
   };
 
+  // 필터링
   const onFilterBtnClick = (type, page) => {
     Api.get(`/list/filter?q=${type}&page=${page}`, {
       headers: {
@@ -173,46 +178,91 @@ const ViewReport = () => {
   /* 페이지 버튼 클릭시 */
   const onPageBtnClick = (e) => {
     let id = e.target.dataset.id;
-    if (filter === '') {
-      pageChange(id);
-    } else {
-      setFilterPage(id);
-    }
+    pageChange(id);
   };
 
   const setPageNumberClassName = useCallback((nowPage, i) => {
     return Number(nowPage) === i + 1 ? 'pageBtnClick' : '';
   }, []);
 
-  const renderPageBtn = useCallback(() => {
-    const pages = data.total_pages;
+  const pageBtn = useCallback(() => {
+    const totalPages = data.total_pages;
     const pageNumber = [];
-    for (let i = 0; i < pages; i++) {
-      pageNumber.push(
-        <div
-          data-id={i + 1}
-          onClick={onPageBtnClick}
-          className={
-            filter === '' ? setPageNumberClassName(page, i) : setPageNumberClassName(filterPage, i)
-          }
-        >
-          {i + 1}
-        </div>
-      );
+    const pages = Math.floor(totalPages / 5);
+    if (pages === 0) {
+      for (let i = 0; i < totalPages; i++) {
+        pageNumber.push(
+          <div data-id={i + 1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>
+            {i + 1}
+          </div>
+        );
+      }
+    } else if (pages !== 0 && totalPages % 5 === 0) {
+      for (let i = 0; i < 5; i++) {
+        pageNumber.push(
+          <div
+            data-id={i + 1 + pageList * 5}
+            onClick={onPageBtnClick}
+            className={setPageNumberClassName(page, i)}
+          >
+            {i + 1 + pageList * 5}
+          </div>
+        );
+      }
+    } else if (pages !== 0 && totalPages % 5 !== 0) {
+      for (let i = pageList * 5; i < (pageList + 1) * 5; i++) {
+        if (i + 1 < totalPages) {
+          pageNumber.push(
+            <div
+              data-id={i + 1}
+              onClick={onPageBtnClick}
+              className={setPageNumberClassName(page, i)}
+            >
+              {i + 1}
+            </div>
+          );
+        }
+      }
     }
     return pageNumber;
-  }, [page, data.total_pages, setPageNumberClassName, filterPage]);
+  }, [page, data.total_pages, setPageNumberClassName]);
 
+  const prev = () => {
+    if (pageList > 0) {
+      if (page % 5 === 0) {
+        if (page - 5 !== 0) {
+          pageChange(page - 5);
+        }
+      } else {
+        pageChange(page - 1);
+      }
+      setPageList(pageList - 1);
+    }
+  };
+
+  const next = () => {
+    if (pageList < Math.floor(data.total_pages / 5)) {
+      if (page % 5 !== 0) {
+        if (page + 5 < data.total_pages) {
+          pageChange(page + 5);
+        } else pageChange(data.total_pages);
+      } else {
+        if (Number(page) + 1 < data.total_pages) {
+          pageChange(Number(page) + 1);
+        }
+      }
+      setPageList(pageList + 1);
+    }
+  };
   // 파일 다운로드
   const onDownloadBtnClick = () => {
-    FileApi.get(`/files`)
-      .then(() => {
-        alert('다운로드 성공');
-      })
-      .catch((err) => {
-        alert('다운로드 실패');
-        console.log(err);
-      });
+    console.log(downloadFiles);
+    const ATag = document.createElement('a');
+    for (let i = 0; i < downloadFiles.length; i++) {
+      ATag.href = `http://54.180.224.67:3000/files?files=${downloadFiles[i].files}&report_id=${downloadFiles[i].report_id}`;
+      ATag.target = '_blank';
+      ATag.click();
+    }
   };
 
   return (
@@ -276,16 +326,19 @@ const ViewReport = () => {
                   key={data.id}
                   id={data.id}
                   title={data.title}
-                  name={data.author}
+                  soleName={data.member}
+                  teamName={data.author}
                   date={data.created_at}
+                  setDownloadFiles={setDownloadFiles}
+                  downloadFiles={downloadFiles}
                 />
               );
             })}
         </S.Lines>
         <div>
-          <S.Turn>◀︎</S.Turn>
-          <S.Count>{renderPageBtn()}</S.Count>
-          <S.Turn>▶︎</S.Turn>
+          <S.Turn onClick={prev}>◀︎</S.Turn>
+          <S.Count>{pageBtn()}</S.Count>
+          <S.Turn onClick={next}>▶︎</S.Turn>
         </div>
       </S.WhiteBox>
     </S.Background>
