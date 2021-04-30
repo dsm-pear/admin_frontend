@@ -187,21 +187,9 @@ export const Flie = style.div`
     > img {
         width: 20px;
         height: 17px;
-        margin-left: 50px;
+        margin-left: 35px;
         cursor: pointer;
     }
-`;
-export const Preview = style.button`
-    width: 60px;
-    height: 25px;
-    background-color: #36B5CF;
-    color: white;
-    margin-left: 7px;
-    border-radius: 3px;
-    border: none;
-    text-align: center;
-    font-size: 12px;
-    cursor: pointer;
 `;
 
 /* 댓글 */
