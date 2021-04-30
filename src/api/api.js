@@ -2,10 +2,10 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 export const Api = axios.create({
-  baseURL: 'http://15.164.216.160:8000/admin',
+  baseURL: 'http://3.36.51.135:8000/admin',
 });
 export const FileApi = axios.create({
-  baseURL: 'http://15.164.102.79:3000',
+  baseURL: 'http://54.180.224.67:3000',
 });
 
 export const useRefresh = () => {
