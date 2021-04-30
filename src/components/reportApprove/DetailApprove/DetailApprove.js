@@ -105,6 +105,7 @@ const DetailApprove = () => {
           <S.Line />
           {data.author === null && <div>{data.member[0].name}</div>}
           {data.author !== null && <div>{data.author}</div>}
+          <div>작성일</div>
           <S.Line />
           <div>{showDate}</div>
         </S.TitleBox>
