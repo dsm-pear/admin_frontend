@@ -7,7 +7,9 @@
 * {
     font-family: Main-Font;
 }
-
+html {
+    font-size: 16px;
+}
 body {
     margin: 0;
     min-width: 1280px;
@@ -28,4 +30,10 @@ textarea {
 
 a {
     text-decoration: none;
+}
+
+@media screen and (max-width: 1440px) {
+    html {
+        font-size: 14px;
+    }
 }
