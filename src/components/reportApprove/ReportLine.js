@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './style';
 
-const ReportLine = ({ number, title, writer, dates, id }) => {
+const ReportLine = ({ number, title, dates, id }) => {
   const history = useHistory();
   // 보고서 날짜
   const reportDate = new Date(dates);
@@ -16,8 +16,6 @@ const ReportLine = ({ number, title, writer, dates, id }) => {
     <S.ReportLine onClick={() => history.push(`/approve/view-approve-report/${id}`)}>
       <S.Note>{number}</S.Note>
       <S.Note>{title}</S.Note>
-      <S.Note>-</S.Note>
-      <S.Note>{writer}</S.Note>
       <S.Note>-</S.Note>
       <S.Note>{showDate}</S.Note>
     </S.ReportLine>

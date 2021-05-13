@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { FileApi } from '../../api/api';
 import * as S from './style';
 
-const ReportLine = ({ title, writer, date, id, setDownloadFiles, downloadFiles }) => {
+const ReportLine = ({ title, date, id, setDownloadFiles, downloadFiles }) => {
   const [isCheck, setIsCheck] = useState(false);
   const history = useHistory();
   const dates = new Date(date);
@@ -37,7 +37,6 @@ const ReportLine = ({ title, writer, date, id, setDownloadFiles, downloadFiles }
       <S.CheckBox onClick={onClick} boolean={isCheck} />
       <a onClick={() => history.push(`/report/view-report/${id}`)}>
         <div>{title}</div>
-        <div>{writer}</div>
         <div>{showDate}</div>
       </a>
     </S.Line>

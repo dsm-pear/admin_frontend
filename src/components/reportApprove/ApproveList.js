@@ -78,7 +78,6 @@ const ApproveList = () => {
                     id={data.id}
                     number={data.id}
                     title={data.title}
-                    writer={data.author}
                     dates={data.created_at}
                   />
                 );

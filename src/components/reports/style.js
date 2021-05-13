@@ -187,13 +187,10 @@ export const TitleBox = style.div`
         display: flex;
     }
     > div > div:first-child {
-        width: 59.5%;
-    }
-    > div > div:nth-child(2) {
-        width: 21.5%;
+        width: 71%;
     }
     > div > div:nth-child(3) {
-        width: 19%;
+        width: 29%;
     }
 `;
 
@@ -245,16 +242,13 @@ export const Line = style.li`
         width: calc(100% - 139px);
     }
     > a > div:first-child {
-        width: 59.5%;
+        width: 70%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    > a > div:nth-child(2) {
-        width: 21.5%;
-    }
     > a > div:last-child {
-        width: 19%;
+        width: 30%;
     }
 `;
 
