@@ -37,7 +37,6 @@ const ReportLine = ({ title, writer, date, id, setDownloadFiles, downloadFiles }
       <S.CheckBox onClick={onClick} boolean={isCheck} />
       <a onClick={() => history.push(`/report/view-report/${id}`)}>
         <div>{title}</div>
-        <div>{writer}</div>
         <div>{showDate}</div>
       </a>
     </S.Line>

@@ -314,7 +314,6 @@ const ViewReport = () => {
           <div>선택</div>
           <div>
             <div>제목</div>
-            <div>작성자</div>
             <div>작성일</div>
           </div>
         </S.TitleBox>
@@ -327,7 +326,6 @@ const ViewReport = () => {
                   key={data.id}
                   id={data.id}
                   title={data.title}
-                  writer={data.author}
                   date={data.created_at}
                   setDownloadFiles={setDownloadFiles}
                   downloadFiles={downloadFiles}
