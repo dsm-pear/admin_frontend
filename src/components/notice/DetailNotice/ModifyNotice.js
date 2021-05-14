@@ -184,7 +184,7 @@ const ModifyNotice = () => {
             />
             <S.MAddflie>
               파일첨부
-              {file && <div>{file[0].name}</div>}
+              {file && <div>{file[0].path}</div>}
             </S.MAddflie>
             <S.MUpload onClick={onUploadBtnClick}>
               <img src={Upload} alt="업로드" width="12px" height="12px" />
