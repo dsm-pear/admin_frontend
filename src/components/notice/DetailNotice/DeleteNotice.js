@@ -17,8 +17,8 @@ const DeleteNotice = ({ setIsClick, id, file }) => {
         Authorization: `${ACCESS_TOKEN}`,
       },
     })
-      .then(() => {
-        if (file[0]) {
+      .then((res) => {
+        if (file[0].path !== '') {
           FileApi.delete(`/notice/${file[0].id}`, {
             headers: {
               Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -33,12 +33,13 @@ const DeleteNotice = ({ setIsClick, id, file }) => {
               alert('공지사항 삭제를 실패했습니다.');
               console.log('file delete fail');
             });
+        } else if (file[0].path === '') {
+          alert('공지사항 삭제를 성공했습니다.');
+          history.push('/notice/view');
         }
       })
-      .catch((err) => {
-        if (err.response.status === 400) {
-          alert('공지사항 삭제를 실패했습니다.');
-        }
+      .catch(() => {
+        history.push('/notice/view');
       });
   };
 
