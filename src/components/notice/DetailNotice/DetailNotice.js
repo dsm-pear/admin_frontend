@@ -96,12 +96,15 @@ const DetailNotice = () => {
         <S.Flie>
           <div>첨부파일</div>
           <S.BlackLine />
-          {file && (
-            <>
-              <div>{file[0].path}</div>
-              <img src={Download} alt="다운로드" onClick={onDownloadBtnClick} />
-            </>
-          )}
+          {file &&
+            file.map((data, i) => {
+              return (
+                <>
+                  <S.FilePath>{file[i].path}</S.FilePath>
+                  <img src={Download} alt="다운로드" onClick={onDownloadBtnClick} />
+                </>
+              );
+            })}
         </S.Flie>
         <S.Delete onClick={DeleteBtn}>삭제</S.Delete>
         {isClick && (
