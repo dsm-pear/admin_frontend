@@ -86,7 +86,6 @@ export const Flie = style.div`
     display: flex;
     align-items: center;
     font-size: 16px;
-    overflow: auto;
     > div:first-child {
         width: 142px;
         text-align: center;
