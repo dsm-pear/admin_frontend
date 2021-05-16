@@ -81,8 +81,25 @@ const ModifyNotice = () => {
       }
     )
       .then(() => {
-        if (newFile[0].path !== '') {
-          if (file[0].init !== 1) {
+        if (newFile[0].name !== '') {
+          if (file[0].init === 1) {
+            const newFormData = new FormData();
+            newFormData.append('noticeFile', newFile[0]);
+            FileApi.put(`/notice/${file[0].id}`, newFormData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+              },
+            })
+              .then(() => {
+                console.log('file upload success');
+                history.replace('/notice/view');
+                alert('공지사항 수정 완료');
+              })
+              .catch(() => {
+                console.log('file upload fail');
+              });
+          } else {
             const formData = new FormData();
             formData.append('noticeFile', newFile[0]);
             FileApi.post(`/notice/files/${id}`, formData, {
@@ -99,27 +116,10 @@ const ModifyNotice = () => {
               .catch(() => {
                 console.log('file upload fail');
               });
-          } else if (file[0].init === 1) {
-            const newFormData = new FormData();
-            newFormData.append('noticeFile', newFile[0]);
-            FileApi.put(`/notice/${file[0].id}`, newFormData, {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-              },
-            })
-              .then(() => {
-                console.log('file upload success');
-                alert('공지사항 수정 완료');
-                history.replace('/notice/view');
-              })
-              .catch(() => {
-                console.log('file upload fail');
-              });
           }
         } else {
-          alert('공지사항 수정 완료');
           history.replace('/notice/view');
+          alert('공지사항 수정 완료');
         }
       })
       .catch((err) => {
@@ -140,7 +140,6 @@ const ModifyNotice = () => {
 
   const onFileChange = (e) => {
     setNewFile(e.target.files);
-    console.log(e.target.files);
   };
 
   return (
