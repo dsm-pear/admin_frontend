@@ -86,13 +86,10 @@ export const Flie = style.div`
     display: flex;
     align-items: center;
     font-size: 16px;
+    overflow: auto;
     > div:first-child {
         width: 142px;
         text-align: center;
-    }
-    > div:nth-child(3) {
-        margin-left: 22px;
-        color: rgba(0, 0, 0, 0.52);
     }
     > img {
         width: 20px;
@@ -100,6 +97,10 @@ export const Flie = style.div`
         margin-left: 3px;
         cursor: pointer;
     }
+`;
+export const FilePath = style.div`
+    margin-left: 22px;
+    color: rgba(0, 0, 0, 0.52);
 `;
 export const Buttons = style.div`
     display: felx;
