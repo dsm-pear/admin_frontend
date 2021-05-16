@@ -11,6 +11,7 @@ const ModifyNotice = () => {
   const refreshHandler = useRefresh();
   const [data, setData] = useState({ title: '' });
   const [file, setFile] = useState([{ path: '' }]);
+  const [newFile, setNewFile] = useState([{ name: '' }]);
   const [changeTitle, setChangeTitle] = useState();
   const [changeDescription, setChangeDescription] = useState();
   let { id } = useParams();
@@ -80,40 +81,45 @@ const ModifyNotice = () => {
       }
     )
       .then(() => {
-        if (file[0].init !== 1) {
-          const formData = new FormData();
-          formData.append('noticeFile', file[0]);
-          FileApi.post(`/notice/files/${id}`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          })
-            .then(() => {
-              console.log('file upload success');
-              alert('공지사항 수정 완료');
-              history.replace('/notice/view');
+        if (newFile[0].name !== '') {
+          if (file[0].init === 1) {
+            const newFormData = new FormData();
+            newFormData.append('noticeFile', newFile[0]);
+            FileApi.put(`/notice/${file[0].id}`, newFormData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+              },
             })
-            .catch(() => {
-              console.log('file upload fail');
-            });
-        } else if (file[0].init === 1) {
-          const formData = new FormData();
-          formData.set('noticeFile', file[0]);
-          FileApi.put(`/notice/${file[0].id}`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          })
-            .then(() => {
-              console.log('file upload success');
-              alert('공지사항 수정 완료');
-              history.replace('/notice/view');
+              .then(() => {
+                console.log('file upload success');
+                history.replace('/notice/view');
+                alert('공지사항 수정 완료');
+              })
+              .catch(() => {
+                console.log('file upload fail');
+              });
+          } else {
+            const formData = new FormData();
+            formData.append('noticeFile', newFile[0]);
+            FileApi.post(`/notice/files/${id}`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+              },
             })
-            .catch(() => {
-              console.log('file upload fail');
-            });
+              .then(() => {
+                console.log('file upload success');
+                alert('공지사항 수정 완료');
+                history.replace('/notice/view');
+              })
+              .catch(() => {
+                console.log('file upload fail');
+              });
+          }
+        } else {
+          history.replace('/notice/view');
+          alert('공지사항 수정 완료');
         }
       })
       .catch((err) => {
@@ -133,7 +139,7 @@ const ModifyNotice = () => {
   };
 
   const onFileChange = (e) => {
-    setFile(e.target.files);
+    setNewFile(e.target.files);
   };
 
   return (
@@ -184,7 +190,8 @@ const ModifyNotice = () => {
             />
             <S.MAddflie>
               파일첨부
-              {file && <div>{file[0].path}</div>}
+              {!newFile[0].name && file && <div>{file[0].path}</div>}
+              {newFile[0].name && <div>{newFile[0].name}</div>}
             </S.MAddflie>
             <S.MUpload onClick={onUploadBtnClick}>
               <img src={Upload} alt="업로드" width="12px" height="12px" />
