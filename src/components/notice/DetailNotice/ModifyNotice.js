@@ -49,7 +49,7 @@ const ModifyNotice = () => {
     const GetFileId = () => {
       FileApi.get(`/notice/files/${id}`)
         .then((res) => {
-          setFile(res.data, { init: 1 });
+          setFile(res.data);
         })
         .catch(() => {
           setFile();
@@ -82,7 +82,7 @@ const ModifyNotice = () => {
     )
       .then(() => {
         if (newFile[0].name !== '') {
-          if (file[0].init === 1) {
+          if (file) {
             const newFormData = new FormData();
             newFormData.append('noticeFile', newFile[0]);
             FileApi.put(`/notice/${file[0].id}`, newFormData, {
@@ -109,9 +109,8 @@ const ModifyNotice = () => {
               },
             })
               .then(() => {
-                console.log('file upload success');
-                alert('공지사항 수정 완료');
                 history.replace('/notice/view');
+                alert('공지사항 수정 완료');
               })
               .catch(() => {
                 console.log('file upload fail');

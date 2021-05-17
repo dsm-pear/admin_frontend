@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useIsLogin } from '../api/api';
 import {
   AdminLogin,
   NoticeView,
@@ -14,6 +15,7 @@ import {
 } from './index';
 
 const AdminRouter = () => {
+  useIsLogin();
   return (
     <Switch>
       <Route exact path="/" component={AdminLogin} />

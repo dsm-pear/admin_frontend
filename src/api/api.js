@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export const Api = axios.create({
@@ -28,4 +29,12 @@ export const useRefresh = () => {
         localStorage.removeItem('refresh_token');
         history.push('/');
       });
+};
+
+export const useIsLogin = () => {
+  const history = useHistory();
+  useEffect(() => {
+    const ACCESS_TOKEN = localStorage.access_token;
+    if (!ACCESS_TOKEN) history.replace('/');
+  }, [history]);
 };
