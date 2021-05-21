@@ -257,10 +257,10 @@ const ViewReport = () => {
       ATag.click();
     } else {
       let baseUrl = 'http://54.180.224.67:3000/files?';
-      for (let i = 0; i < downloadFiles.length; i++) {
-        baseUrl += `files=${downloadFiles[i].files}&`;
+      for (let i = 0; i < downloadFiles.length - 1; i++) {
+        baseUrl += `files=${downloadFiles[i].report_id}&`;
       }
-      ATag.href = baseUrl + 'report_id=1';
+      ATag.href = baseUrl + `${downloadFiles[downloadFiles.length - 1].report_id}`;
       ATag.target = '_blank';
       ATag.click();
     }
