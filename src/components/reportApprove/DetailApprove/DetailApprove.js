@@ -55,8 +55,8 @@ const DetailApprove = () => {
       })
         .then((res) => {
           setData(res.data, { init: 1 });
-          if (data.languages !== '') {
-            setLanguage(data.languages.split(','));
+          if (res.data.languages !== '') {
+            setLanguage(res.data.languages.split(','));
           }
         })
         .catch((err) => {
@@ -97,7 +97,7 @@ const DetailApprove = () => {
 
   const onDownloadBtnClick = () => {
     const ATag = document.createElement('a');
-    ATag.href = `http://54.180.224.67:3000/report/${files[0].id}`;
+    ATag.href = `http://211.38.86.92:3001/report/${files[0].id}`;
     ATag.target = '_blank';
     ATag.click();
   };
@@ -121,23 +121,22 @@ const DetailApprove = () => {
           <div>{data.title}</div>
         </S.Title>
         <S.Contents>{data.description}</S.Contents>
-        {data.type === 'TEAM' ||
-          (data.type === 'CIRCLE' && (
-            <S.Team>
-              <div>TEAM MEMBER</div>
-              <S.SBlackLine />
-              {data &&
-                data.member &&
-                data.member.map((data) => {
-                  return (
-                    <S.TeamMember>
-                      <div>{data.name}</div>
-                      <div>{data.user_email}</div>
-                    </S.TeamMember>
-                  );
-                })}
-            </S.Team>
-          ))}
+        {(data.type === 'TEAM' || data.type === 'CIRCLE') && (
+          <S.Team>
+            <div>MEMBER</div>
+            <S.SBlackLine />
+            {data &&
+              data.member &&
+              data.member.map((data) => {
+                return (
+                  <S.TeamMember>
+                    <div>{data.name}</div>
+                    <div>{data.user_email}</div>
+                  </S.TeamMember>
+                );
+              })}
+          </S.Team>
+        )}
         <S.GithubLanguageBox>
           <S.Github>
             <div>GitHub</div>

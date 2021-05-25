@@ -43,7 +43,7 @@ export const TitleBox = style.div`
     }
     > div:nth-child(3) {
         width: 56.64%;
-        padding-left: 26px;
+        padding-left: 20px;
     }
     > div:nth-child(4) {
         width: 10%;
@@ -51,7 +51,7 @@ export const TitleBox = style.div`
     }
     > div:last-child {
         width: 20%;
-        padding-left: 10px;
+        padding-left: 20px;
     }
 `;
 export const Line = style.div`
@@ -72,11 +72,11 @@ export const Title = style.div`
     align-items: center;
     font-size: 1.125rem;
     > div:first-child {
-        width: 12.36%;
+        width: 12.1%;
         text-align: center;
     }
     > div:nth-child(3) {
-        padding-left: 10px;
+        padding-left: 20px;
     }
 `;
 export const Contents = style.div`
@@ -88,30 +88,45 @@ export const Contents = style.div`
 `;
 export const SBlackLine = style(BlackLine)`
     height: 23px;
-    margin-right: 9px;
+    margin: 0px 10px;
 `;
 export const Team = style.div`
     width: 81.25vw;
     min-width: 1170px;
-    height: 36px;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    height: 50px;
     background-color: rgba(136, 136, 136, 0.06);
     border-radius: 20px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     font-size: 0.9375rem;
+    overflow: auto;
+    ::-webkit-scrollbar {
+        height: 3px;
+    }
+    ::-webkit-scrollbar-track-piece {
+        background-color: white;
+        border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background-color: #5955d8;
+    }
     > div:first-child {
-        width: 12%;
+        width: 100px;
         text-align: center;
+    }
+    > div:nth-child(3) {
+        margin-left: 0px;
     }
 `;
 export const TeamMember = style.div`
     width: 10%;
-    margin-left: 15px;
-    display: flex;
+    margin-left: 20px;
     > div:last-child{
         font-size: 12px;
-        margin-left: 5px;
     }
 `;
 export const Github = style.div`
@@ -261,7 +276,7 @@ export const ModalBackground = style.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: rgba(113, 113, 113, 0.4);
     > div {

@@ -42,7 +42,7 @@ export const TitleBox = style.div`
     }
     > div:nth-child(3) {
         width: 56.64%;
-        padding-left: 10px;
+        padding-left: 20px;
     }
     > div:nth-child(4) {
         width: 10%;
@@ -50,7 +50,7 @@ export const TitleBox = style.div`
     }
     > div:last-child {
         width: 20%;
-        text-align: center;
+        padding-left: 20px;
     }
 `;
 export const Line = style.div`
@@ -69,21 +69,20 @@ export const Title = style.div`
     margin: 0 auto;
     display: flex;
     align-items: center;
+    font-size: 1.125rem;
     > div:first-child {
-        width: 12.36%;
+        width: 12.1%;
         text-align: center;
     }
     > div:last-child {
-        padding-left: 10px;
+        padding-left: 20px;
     }
 `;
 export const TeamMember = style.div`
     width: 10%;
     margin-left: 15px;
-    display: flex;
     > div:last-child {
         font-size: 12px;
-        margin-left: 5px;
     }
 `;
 export const Contents = style.div`
@@ -107,13 +106,23 @@ export const Team = style.div`
     display: flex;
     align-items: center;
     font-size: 15px;
+    ::-webkit-scrollbar {
+        height: 3px;
+    }
+    ::-webkit-scrollbar-track-piece {
+        background-color: white;
+        border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background-color: #5955d8;
+    }
     > div:first-child {
         width: 12%;
         text-align: center;
     }
     > div:nth-child(3) {
-        width: 15%;
-        margin-left: 10px;
+        margin-left: 0px;
     }
 `;
 export const Github = style.div`

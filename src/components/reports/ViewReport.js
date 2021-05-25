@@ -252,11 +252,11 @@ const ViewReport = () => {
     console.log(downloadFiles);
     const ATag = document.createElement('a');
     if (downloadFiles.length === 1) {
-      ATag.href = `http://54.180.224.67:3000/report/${downloadFiles[0].fileId}`;
+      ATag.href = `http://211.38.86.92:3001/report/${downloadFiles[0].fileId}`;
       ATag.target = '_blank';
       ATag.click();
     } else {
-      let baseUrl = 'http://54.180.224.67:3000/files?';
+      let baseUrl = 'http://211.38.86.92:3001/files?';
       for (let i = 0; i < downloadFiles.length - 1; i++) {
         baseUrl += `files=${downloadFiles[i].report_id}&`;
       }

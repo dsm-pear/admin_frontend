@@ -31,8 +31,8 @@ const DetailReport = () => {
       })
         .then((res) => {
           setData(res.data);
-          if (data.languages !== '') {
-            setLanguage(data.languages.split(','));
+          if (res.data.languages !== '') {
+            setLanguage(res.data.languages.split(','));
           }
         })
         .catch((err) => {
@@ -69,7 +69,7 @@ const DetailReport = () => {
 
   const onDownloadBtnClick = () => {
     const ATag = document.createElement('a');
-    ATag.href = `http://54.180.224.67:3000/report/${files[0].id}`;
+    ATag.href = `http://211.38.86.92:3001/report/${files[0].id}`;
     ATag.target = '_blank';
     ATag.click();
   };
