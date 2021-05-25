@@ -18,6 +18,7 @@ const DetailApprove = () => {
   let { id } = useParams();
   const [files, setFiles] = useState([{ path: '' }]);
   const [language, setLanguage] = useState(['X']);
+  const ACCESS_TOKEN = localStorage.getItem('access_token');
   // 보고서 날짜
   const reportDate = new Date(data.created_at);
   const year = reportDate.getFullYear();
@@ -49,7 +50,7 @@ const DetailApprove = () => {
     const ViewDetailApproveReport = () => {
       Api.get(`/request/${id}`, {
         headers: {
-          Authorization: localStorage.getItem('access_token'),
+          Authorization: `${ACCESS_TOKEN}`,
         },
       })
         .then((res) => {
@@ -78,7 +79,11 @@ const DetailApprove = () => {
         });
     };
     const GetFileId = () => {
-      FileApi.get(`/report/files/${id}`)
+      FileApi.get(`/report/files/${id}`, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      })
         .then((res) => {
           setFiles(res.data);
         })
