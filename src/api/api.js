@@ -6,7 +6,7 @@ export const Api = axios.create({
   baseURL: 'http://54.180.160.189:8000/admin',
 });
 export const FileApi = axios.create({
-  baseURL: 'http://211.38.86.92:3001/',
+  baseURL: 'http://211.38.86.92:3001',
 });
 
 export const useRefresh = () => {
