@@ -21,12 +21,13 @@ const DetailReport = () => {
   const hours = reportDate.getHours();
   const minutes = reportDate.getMinutes();
   const showDate = `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
+  const ACCESS_TOKEN = localStorage.getItem('access_token');
 
   useEffect(() => {
     const ViewDetailReport = () => {
       Api.get(`/list/${id}`, {
         headers: {
-          Authorization: localStorage.getItem('access_token'),
+          Authorization: `${ACCESS_TOKEN}`,
         },
       })
         .then((res) => {
@@ -55,7 +56,11 @@ const DetailReport = () => {
         });
     };
     const GetFilesId = () => {
-      FileApi.get(`/report/files/${id}`)
+      FileApi.get(`/report/files/${id}`, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      })
         .then((res) => {
           setFiles(res.data);
         })
@@ -69,7 +74,7 @@ const DetailReport = () => {
 
   const onDownloadBtnClick = () => {
     const ATag = document.createElement('a');
-    ATag.href = `http://211.38.86.92:3001/report/${files[0].id}`;
+    ATag.href = `http://211.38.86.92:3001/report/${files[0].id}?token=Bearer ${ACCESS_TOKEN}`;
     ATag.target = '_blank';
     ATag.click();
   };

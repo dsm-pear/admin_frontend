@@ -18,7 +18,11 @@ const ReportLine = ({ title, date, id, setDownloadFiles, downloadFiles }) => {
   const onClick = () => {
     setIsCheck(!isCheck);
     if (isCheck !== true) {
-      FileApi.get(`/report/files/${id}`)
+      FileApi.get(`/report/files/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
         .then((res) => {
           console.log(res.data);
           setDownloadFiles([

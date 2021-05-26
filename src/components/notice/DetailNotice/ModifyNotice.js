@@ -47,7 +47,11 @@ const ModifyNotice = () => {
         });
     };
     const GetFileId = () => {
-      FileApi.get(`/notice/files/${id}`)
+      FileApi.get(`/notice/files/${id}`, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      })
         .then((res) => {
           setFile(res.data);
         })
@@ -97,23 +101,24 @@ const ModifyNotice = () => {
                 alert('공지사항 수정 완료');
               })
               .catch(() => {
-                console.log('file upload fail');
+                console.log('file upload fail1');
               });
           } else {
             const formData = new FormData();
+            console.log(newFile[0]);
             formData.append('noticeFile', newFile[0]);
-            FileApi.post(`/notice/files/${id}`, formData, {
+            FileApi.post(`/notice/file/${id}`, formData, {
               headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${ACCESS_TOKEN}`,
               },
             })
               .then(() => {
-                history.replace('/notice/view');
                 alert('공지사항 수정 완료');
+                history.replace('/notice/view');
               })
               .catch(() => {
-                console.log('file upload fail');
+                console.log('file upload fail2');
               });
           }
         } else {

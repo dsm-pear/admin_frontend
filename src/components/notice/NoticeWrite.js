@@ -33,7 +33,7 @@ const NoticeWirte = () => {
         noticeFiles.append('noticeFile', file[0]);
         console.log(file[0]);
         const id = e.data.id;
-        FileApi.post(`/notice/files/${id}`, noticeFiles, {
+        FileApi.post(`/notice/file/${id}`, noticeFiles, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -46,7 +46,7 @@ const NoticeWirte = () => {
           .catch(() => {
             console.log('파일 업로드 실패');
           });
-        console.log('파일 업로드 성공');
+        console.log('공지사항 업로드 성공');
         history.push('/notice/view');
       })
       .catch((err) => {
