@@ -1,36 +1,37 @@
 /* eslint-disable */
-import React, { useCallback, useEffect, useState } from 'react';
-import * as S from './style';
-import Header from '../header/Header';
-import ReportLine from './ReportLine';
-import { Api, useRefresh } from '../../api/api';
+import React, { useCallback, useEffect, useState } from "react";
+import * as S from "./style";
+import Header from "../header/Header";
+import ReportLine from "./ReportLine";
+import { Api, useRefresh } from "../../api/api";
 
 const ViewReport = () => {
   const refreshHandler = useRefresh();
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
   const [page, pageChange] = useState(1);
   const [pageList, setPageList] = useState(0);
   const [filterPage, setFilterPage] = useState(1);
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState("");
   const [data, setData] = useState({ total_pages: 0 });
-  const [select, setSelect] = useState('정렬');
-  const [searchData, setSearchData] = useState('');
+  const [select, setSelect] = useState("정렬");
+  const [searchData, setSearchData] = useState("");
   const [downloadFiles, setDownloadFiles] = useState([]);
   // filter btn
   const [isFirstClick, setIsFirstClick] = useState(false);
   const [isSecondClick, setIsSecondClick] = useState(false);
   const [isThirdClick, setIsThirdClick] = useState(false);
   const [isFourthClick, setIsFourthClick] = useState(false);
+  const ACCESS_TOKEN = localStorage.getItem("access_token");
 
   /* 검색 선택 창 */
   const onClick = (e) => {
     const selectname = e.currentTarget.dataset.selectname;
-    if (selectname === 'title') {
-      setSelect('제목');
-      setSort('title');
+    if (selectname === "title") {
+      setSelect("제목");
+      setSort("title");
     } else {
-      setSelect('작성자');
-      setSort('user');
+      setSelect("작성자");
+      setSort("user");
     }
   };
 
@@ -44,7 +45,7 @@ const ViewReport = () => {
         setIsThirdClick(false);
         setIsFourthClick(false);
       }
-      setFilter(isFirstClick ? '' : e.currentTarget.dataset.type);
+      setFilter(isFirstClick ? "" : e.currentTarget.dataset.type);
     } else if (number === 2) {
       setIsSecondClick(!isSecondClick);
       if (!isSecondClick === true) {
@@ -52,7 +53,7 @@ const ViewReport = () => {
         setIsThirdClick(false);
         setIsFourthClick(false);
       }
-      setFilter(isSecondClick ? '' : e.currentTarget.dataset.type);
+      setFilter(isSecondClick ? "" : e.currentTarget.dataset.type);
     } else if (number === 3) {
       setIsThirdClick(!isThirdClick);
       if (!isThirdClick === true) {
@@ -60,7 +61,7 @@ const ViewReport = () => {
         setIsSecondClick(false);
         setIsFourthClick(false);
       }
-      setFilter(isThirdClick ? '' : e.currentTarget.dataset.type);
+      setFilter(isThirdClick ? "" : e.currentTarget.dataset.type);
     } else {
       setIsFourthClick(!isFourthClick);
       if (!isFourthClick === true) {
@@ -68,7 +69,7 @@ const ViewReport = () => {
         setIsSecondClick(false);
         setIsThirdClick(false);
       }
-      setFilter(isFourthClick ? '' : e.currentTarget.dataset.type);
+      setFilter(isFourthClick ? "" : e.currentTarget.dataset.type);
     }
   };
 
@@ -76,7 +77,7 @@ const ViewReport = () => {
   const ViewReport = (page) => {
     Api.get(`/list?page=${page}`, {
       headers: {
-        Authorization: localStorage.getItem('access_token'),
+        Authorization: `${ACCESS_TOKEN}`,
       },
     })
       .then((res) => {
@@ -85,7 +86,7 @@ const ViewReport = () => {
       .catch((err) => {
         switch (err.response.status) {
           case 400:
-            alert('보고서 불러오기를 실패했습니다.');
+            alert("보고서 불러오기를 실패했습니다.");
             break;
           case 403:
             refreshHandler().then(() => {
@@ -102,7 +103,7 @@ const ViewReport = () => {
   const onFilterBtnClick = (type, page) => {
     Api.get(`/list/filter?q=${type}&page=${page}`, {
       headers: {
-        Authorization: localStorage.getItem('access_token'),
+        Authorization: localStorage.getItem("access_token"),
       },
     })
       .then((res) => {
@@ -111,7 +112,7 @@ const ViewReport = () => {
       .catch((err) => {
         switch (err.response.status) {
           case 400:
-            alert('보고서 불러오기 실패');
+            alert("보고서 불러오기 실패");
             break;
           case 403:
             refreshHandler().then(() => {
@@ -125,8 +126,8 @@ const ViewReport = () => {
   };
 
   useEffect(() => {
-    if (searchData === '') {
-      if (filter === '') {
+    if (searchData === "") {
+      if (filter === "") {
         ViewReport(page);
       } else {
         setFilterPage(page);
@@ -141,7 +142,7 @@ const ViewReport = () => {
   const onSearchBtnClick = () => {
     Api.get(`/list/search?q=${searchData}&sort=${sort}&page=${page}`, {
       headers: {
-        Authorization: localStorage.getItem('access_token'),
+        Authorization: localStorage.getItem("access_token"),
       },
     })
       .then((res) => {
@@ -150,7 +151,7 @@ const ViewReport = () => {
       .catch((err) => {
         switch (err.response.status) {
           case 400:
-            alert('보고서 검색을 실패했습니다.');
+            alert("보고서 검색을 실패했습니다.");
             break;
           case 403:
             refreshHandler().then(() => {
@@ -174,7 +175,7 @@ const ViewReport = () => {
   };
 
   const setPageNumberClassName = useCallback((nowPage, i) => {
-    return Number(nowPage) === i + 1 ? 'pageBtnClick' : '';
+    return Number(nowPage) === i + 1 ? "pageBtnClick" : "";
   }, []);
 
   const pageBtn = useCallback(() => {
@@ -184,7 +185,11 @@ const ViewReport = () => {
     if (pages === 0) {
       for (let i = 0; i < totalPages; i++) {
         pageNumber.push(
-          <div data-id={i + 1} onClick={onPageBtnClick} className={setPageNumberClassName(page, i)}>
+          <div
+            data-id={i + 1}
+            onClick={onPageBtnClick}
+            className={setPageNumberClassName(page, i)}
+          >
             {i + 1}
           </div>
         );
@@ -250,18 +255,18 @@ const ViewReport = () => {
   // 파일 다운로드
   const onDownloadBtnClick = () => {
     console.log(downloadFiles);
-    const ATag = document.createElement('a');
+    const ATag = document.createElement("a");
     if (downloadFiles.length === 1) {
-      ATag.href = `http://211.38.86.92:3001/report/${downloadFiles[0].fileId}`;
-      ATag.target = '_blank';
+      ATag.href = `http://211.38.86.92:3001/report/${downloadFiles[0].fileId}?token=Bearer ${ACCESS_TOKEN}`;
+      ATag.target = "_blank";
       ATag.click();
     } else {
-      let baseUrl = 'http://211.38.86.92:3001/files?';
-      for (let i = 0; i < downloadFiles.length - 1; i++) {
-        baseUrl += `files=${downloadFiles[i].report_id}&`;
+      let baseUrl = "http://211.38.86.92:3001/files?";
+      for (let i = 0; i < downloadFiles.length; i++) {
+        baseUrl += `report_id=${downloadFiles[i].report_id}&`;
       }
-      ATag.href = baseUrl + `${downloadFiles[downloadFiles.length - 1].report_id}`;
-      ATag.target = '_blank';
+      ATag.href = baseUrl + `token=Bearer ${ACCESS_TOKEN}`;
+      ATag.target = "_blank";
       ATag.click();
     }
   };
@@ -277,13 +282,21 @@ const ViewReport = () => {
               <span>{select}</span>
               <S.SubSelect className="SubSelect">
                 <S.SubSelectItem>
-                  <div className="items" data-selectname="title" onClick={onClick}>
+                  <div
+                    className="items"
+                    data-selectname="title"
+                    onClick={onClick}
+                  >
                     [제목]
                   </div>
                   <S.TitleSubLine className="items-line" />
                 </S.SubSelectItem>
                 <S.SubSelectItem>
-                  <div className="items" data-selectname="user" onClick={onClick}>
+                  <div
+                    className="items"
+                    data-selectname="user"
+                    onClick={onClick}
+                  >
                     [작성자]
                   </div>
                   <S.SubLine className="items-line" />
@@ -291,21 +304,44 @@ const ViewReport = () => {
               </S.SubSelect>
             </S.Select>
           </S.SelectUl>
-          <S.SearchInput placeholder="검색어를 입력하세요" onChange={onSearchValueChange} />
+          <S.SearchInput
+            placeholder="검색어를 입력하세요"
+            onChange={onSearchValueChange}
+          />
           <S.SearchBtn onClick={onSearchBtnClick}>검색</S.SearchBtn>
         </div>
         <S.TitleLine>
           <S.Title>보고서 보기</S.Title>
-          <S.Button onClick={onBtnClick} color={isFirstClick} data-type="2021" data-id="1">
+          <S.Button
+            onClick={onBtnClick}
+            color={isFirstClick}
+            data-type="2021"
+            data-id="1"
+          >
             2021
           </S.Button>
-          <S.Button onClick={onBtnClick} color={isSecondClick} data-type="SOLE" data-id="2">
+          <S.Button
+            onClick={onBtnClick}
+            color={isSecondClick}
+            data-type="SOLE"
+            data-id="2"
+          >
             개인
           </S.Button>
-          <S.Button onClick={onBtnClick} color={isThirdClick} data-type="TEAM" data-id="3">
+          <S.Button
+            onClick={onBtnClick}
+            color={isThirdClick}
+            data-type="TEAM"
+            data-id="3"
+          >
             팀
           </S.Button>
-          <S.Button onClick={onBtnClick} color={isFourthClick} data-type="CIRCLE" data-id="4">
+          <S.Button
+            onClick={onBtnClick}
+            color={isFourthClick}
+            data-type="CIRCLE"
+            data-id="4"
+          >
             동아리
           </S.Button>
         </S.TitleLine>
