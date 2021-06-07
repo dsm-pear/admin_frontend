@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export const Api = axios.create({
-  baseURL: 'http://54.180.160.189:8000/admin',
+  baseURL: 'http://54.180.157.56:8000/admin',
 });
 export const FileApi = axios.create({
   baseURL: 'http://211.38.86.92:3001',
